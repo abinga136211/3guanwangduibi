@@ -56,7 +56,7 @@
 </section>
 
 <!-- ===== 数据安全 ===== -->
-<section class="section cmp-section cmp-section--soft" id="faq">
+<section class="section cmp-section cmp-section--soft" id="privacy">
 <div class="container">
 <div class="cmp-head">
 <span class="cmp-kicker" data-en="Data Security" data-zh="数据安全" data-tw="數據安全">数据安全</span>
