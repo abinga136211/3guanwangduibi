@@ -1,5 +1,5 @@
 <script setup>
-import { watch, nextTick } from 'vue'
+import { watch, nextTick, computed } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
@@ -10,11 +10,17 @@ const locale = useLocaleStore()
 const route = useRoute()
 const router = useRouter()
 
+const isAdmin = computed(() => route.matched.some((r) => r.meta.admin))
+
 locale.setLanguage(locale.language)
 
 watch(
-  () => [route.meta.view, locale.language, route.fullPath],
+  () => [route.meta.view, locale.language, route.fullPath, isAdmin.value],
   async () => {
+    if (isAdmin.value) {
+      document.title = 'ADG PAY Admin'
+      return
+    }
     locale.setDocumentTitle(route.meta.view || 'home')
     await nextTick()
     locale.applyDom()
@@ -51,11 +57,16 @@ function onAppClick(e) {
 
 <template>
   <div class="adg-app" @click="onAppClick">
-    <AppHeader />
-    <main>
+    <template v-if="isAdmin">
       <RouterView />
-    </main>
-    <AppFooter />
-    <CookieConsent />
+    </template>
+    <template v-else>
+      <AppHeader />
+      <main>
+        <RouterView />
+      </main>
+      <AppFooter />
+      <CookieConsent />
+    </template>
   </div>
 </template>

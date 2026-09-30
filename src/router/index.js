@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { apiFetch } from '@/api/client'
 
 const routes = [
   {
@@ -43,6 +44,45 @@ const routes = [
     component: () => import('@/views/PrivacyView.vue'),
     meta: { view: 'privacy' },
   },
+  {
+    path: '/admin/login',
+    name: 'admin-login',
+    component: () => import('@/views/admin/AdminLoginView.vue'),
+    meta: { admin: true, publicAdmin: true },
+  },
+  {
+    path: '/admin',
+    component: () => import('@/views/admin/AdminLayout.vue'),
+    meta: { admin: true, requiresAdmin: true },
+    children: [
+      { path: '', redirect: { name: 'admin-tables' } },
+      {
+        path: 'tables',
+        name: 'admin-tables',
+        component: () => import('@/views/admin/AdminTablesView.vue'),
+      },
+      {
+        path: 'config',
+        name: 'admin-config',
+        component: () => import('@/views/admin/AdminConfigView.vue'),
+      },
+      {
+        path: 'inquiries',
+        name: 'admin-inquiries',
+        component: () => import('@/views/admin/AdminInquiriesView.vue'),
+      },
+      {
+        path: 'jobs',
+        name: 'admin-jobs',
+        component: () => import('@/views/admin/AdminJobsView.vue'),
+      },
+      {
+        path: 'applications',
+        name: 'admin-applications',
+        component: () => import('@/views/admin/AdminApplicationsView.vue'),
+      },
+    ],
+  },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
@@ -59,6 +99,16 @@ const router = createRouter({
     }
     return { top: 0 }
   },
+})
+
+router.beforeEach(async (to) => {
+  if (!to.matched.some((r) => r.meta.requiresAdmin)) return true
+  try {
+    await apiFetch('/api/admin/me')
+    return true
+  } catch {
+    return { name: 'admin-login', query: { redirect: to.fullPath } }
+  }
 })
 
 export default router

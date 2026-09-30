@@ -56,11 +56,6 @@ const statusText = computed(() => T.status[lang.value] || T.status.zh)
 const placeholder = computed(() => T.placeholder[lang.value] || T.placeholder.zh)
 const titleText = computed(() => T.title[lang.value] || T.title.zh)
 
-const aiEnabled = import.meta.env.VITE_ADG_AI_ENABLED === 'true'
-const aiEndpoint = import.meta.env.VITE_ADG_AI_ENDPOINT || ''
-const aiKey = import.meta.env.VITE_ADG_AI_API_KEY || ''
-const aiModel = import.meta.env.VITE_ADG_AI_MODEL || ''
-
 function matchKb(text) {
   const t = (text || '').toLowerCase()
   let best = null
@@ -98,50 +93,12 @@ function removeAt(idx) {
   messages.value.splice(idx, 1)
 }
 
-async function llmReply(userText) {
-  const l = lang.value
-  const sys =
-    '你是 ADG PAY（持有香港 MSO 牌照的跨境支付服务商）的客服助手。仅依据以下事实作答，不确定时引导用户前往联系页留资：\n' +
-    '- 香港 MSO 金钱服务牌照，AML/KYC 合规；\n' +
-    '- 业务：多币种收款账户、货币兑换、全球付款、客户资金隔离；\n' +
-    '- 中英双语服务；\n- 开户：在线提交→KYC 核验→开通账户。' +
-    (l === 'en' ? ' 用简体中文和英文双语回答，英文为主。' : ' 用简体中文回答。')
-
-  try {
-    const r = await fetch(aiEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${aiKey}`,
-      },
-      body: JSON.stringify({
-        model: aiModel,
-        messages: [
-          { role: 'system', content: sys },
-          { role: 'user', content: userText },
-        ],
-        temperature: 0.3,
-      }),
-    })
-    const data = await r.json()
-    const ans = data.choices?.[0]?.message?.content?.trim()
-    return { text: ans || T.fallback[l], fallback: !ans }
-  } catch {
-    return { text: T.fallback[l], fallback: true }
-  }
-}
-
 async function botReply(userText) {
   const l = lang.value
   const typingIdx = addTyping()
   await new Promise((r) => setTimeout(r, 480))
   removeAt(typingIdx)
 
-  if (aiEnabled && aiKey && aiEndpoint) {
-    const { text, fallback } = await llmReply(userText)
-    addMsg('bot', text, fallback)
-    return
-  }
   const hit = matchKb(userText)
   if (hit) addMsg('bot', hit.a[l] || hit.a.zh)
   else addMsg('bot', T.fallback[l] || T.fallback.zh, true)

@@ -1,311 +1,301 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import { useLocaleStore } from '@/stores/locale'
+import { apiFetch } from '@/api/client'
+import { useAutoRefresh } from '@/composables/useAutoRefresh'
 
 const locale = useLocaleStore()
 
-/** 模拟职位数据（演示用） */
-const jobs = [
-  {
-    id: 'fe-001',
-    region: 'hk',
-    department: 'tech',
-    title: { zh: '前端工程师', tw: '前端工程師', en: 'Frontend Engineer' },
-    type: { zh: '全职', tw: '全職', en: 'Full-time' },
-    responsibilities: {
-      zh: [
-        '负责官网与商户后台的前端开发与体验优化',
-        '与产品、设计协作，落地跨境支付相关页面与交互',
-        '维护组件库与前端工程规范，保障多语言与多端适配',
-      ],
-      tw: [
-        '負責官網與商戶後臺的前端開發與體驗優化',
-        '與產品、設計協作，落地跨境支付相關頁面與交互',
-        '維護組件庫與前端工程規範，保障多語言與多端適配',
-      ],
-      en: [
-        'Build and improve the website and merchant dashboard frontend',
-        'Work with product and design on cross-border payment UX',
-        'Maintain component standards, i18n and responsive quality',
-      ],
-    },
-    requirements: {
-      zh: [
-        '熟悉 Vue 3 / TypeScript，有实际项目经验',
-        '了解前端性能、无障碍与基础安全实践',
-        '沟通清晰，能独立推进功能交付',
-      ],
-      tw: [
-        '熟悉 Vue 3 / TypeScript，有實際項目經驗',
-        '了解前端性能、無障礙與基礎安全實踐',
-        '溝通清晰，能獨立推進功能交付',
-      ],
-      en: [
-        'Solid Vue 3 / TypeScript experience',
-        'Aware of performance, accessibility and basic frontend security',
-        'Clear communicator who can ship features independently',
-      ],
-    },
-  },
-  {
-    id: 'be-002',
-    region: 'hk',
-    department: 'tech',
-    title: { zh: '后端工程师（支付系统）', tw: '後端工程師（支付系統）', en: 'Backend Engineer (Payments)' },
-    type: { zh: '全职', tw: '全職', en: 'Full-time' },
-    responsibilities: {
-      zh: [
-        '参与收款、结算与对账相关服务的设计与开发',
-        '对接银行 / 通道接口，保障交易链路稳定与可观测',
-        '编写接口文档与单元测试，参与代码评审',
-      ],
-      tw: [
-        '參與收款、結算與對賬相關服務的設計與開發',
-        '對接銀行 / 通道接口，保障交易鏈路穩定與可觀測',
-        '編寫接口文檔與單元測試，參與代碼評審',
-      ],
-      en: [
-        'Design and develop collection, settlement and reconciliation services',
-        'Integrate bank / channel APIs with reliable monitoring',
-        'Write API docs and tests; participate in code reviews',
-      ],
-    },
-    requirements: {
-      zh: [
-        '熟悉 Java 或 Node.js，了解常见数据库与消息队列',
-        '有金融 / 支付 / 清结算相关经验优先',
-        '重视数据一致性、幂等与异常处理',
-      ],
-      tw: [
-        '熟悉 Java 或 Node.js，了解常見數據庫與消息隊列',
-        '有金融 / 支付 / 清結算相關經驗優先',
-        '重視數據一致性、冪等與異常處理',
-      ],
-      en: [
-        'Strong Java or Node.js; comfortable with databases and queues',
-        'Payments / clearing experience is a plus',
-        'Care about consistency, idempotency and failure handling',
-      ],
-    },
-  },
-  {
-    id: 'aml-003',
-    region: 'hk',
-    department: 'compliance',
-    title: { zh: '合规专员（AML / KYC）', tw: '合規專員（AML / KYC）', en: 'Compliance Officer (AML / KYC)' },
-    type: { zh: '全职', tw: '全職', en: 'Full-time' },
-    responsibilities: {
-      zh: [
-        '执行客户尽职调查（CDD / EDD）与持续监控',
-        '识别可疑交易，协助提交可疑交易报告（STR）相关材料',
-        '维护 AML 政策与操作指引，配合监管检查与内部审计',
-      ],
-      tw: [
-        '執行客戶盡職調查（CDD / EDD）與持續監控',
-        '識別可疑交易，協助提交可疑交易報告（STR）相關材料',
-        '維護 AML 政策與操作指引，配合監管檢查與內部審計',
-      ],
-      en: [
-        'Perform CDD / EDD and ongoing monitoring',
-        'Escalate suspicious activity and support STR-related work',
-        'Maintain AML policies and support regulatory / audit reviews',
-      ],
-    },
-    requirements: {
-      zh: [
-        '了解香港《打击洗钱及恐怖分子资金筹集条例》及海关 MSO 监管要求',
-        '具备金融、法律或合规相关学历 / 工作经验',
-        '细心严谨，能独立完成尽调与档案留存',
-      ],
-      tw: [
-        '了解香港《打擊洗錢及恐怖分子資金籌集條例》及海關 MSO 監管要求',
-        '具備金融、法律或合規相關學歷 / 工作經驗',
-        '細心嚴謹，能獨立完成盡調與檔案留存',
-      ],
-      en: [
-        'Familiar with Hong Kong AML laws and MSO supervisory expectations',
-        'Background in finance, law or compliance preferred',
-        'Detail-oriented; able to complete CDD and maintain records',
-      ],
-    },
-  },
-  {
-    id: 'risk-004',
-    region: 'hk',
-    department: 'compliance',
-    title: { zh: '风控分析师', tw: '風控分析師', en: 'Risk Analyst' },
-    type: { zh: '全职', tw: '全職', en: 'Full-time' },
-    responsibilities: {
-      zh: [
-        '监控商户交易行为，识别异常模式与欺诈风险',
-        '制定与优化风控规则，推动系统策略落地',
-        '与合规、运营协作处理高风险案例与客户沟通',
-      ],
-      tw: [
-        '監控商戶交易行爲，識別異常模式與欺詐風險',
-        '制定與優化風控規則，推動系統策略落地',
-        '與合規、運營協作處理高風險案例與客戶溝通',
-      ],
-      en: [
-        'Monitor merchant activity and spot unusual / fraud patterns',
-        'Design and refine risk rules for system enforcement',
-        'Collaborate with compliance and operations on high-risk cases',
-      ],
-    },
-    requirements: {
-      zh: [
-        '熟悉支付风控、反欺诈或数据分析工具优先',
-        '具备 Excel / SQL 等数据处理能力',
-        '抗压能力强，能快速响应交易异常',
-      ],
-      tw: [
-        '熟悉支付風控、反欺詐或數據分析工具優先',
-        '具備 Excel / SQL 等數據處理能力',
-        '抗壓能力強，能快速響應交易異常',
-      ],
-      en: [
-        'Experience in payment risk, anti-fraud or data analysis preferred',
-        'Comfortable with Excel / SQL for investigation',
-        'Able to respond quickly under operational pressure',
-      ],
-    },
-  },
-  {
-    id: 'ops-005',
-    region: 'hk',
-    department: 'operations',
-    title: { zh: '运营专员（商户支持）', tw: '運營專員（商戶支持）', en: 'Operations Specialist (Merchant Support)' },
-    type: { zh: '全职', tw: '全職', en: 'Full-time' },
-    responsibilities: {
-      zh: [
-        '跟进商户开户、资料补件与日常业务咨询',
-        '协调对账、退款与异常交易的处理进度',
-        '整理运营报表，反馈产品改进建议',
-      ],
-      tw: [
-        '跟進商戶開戶、資料補件與日常業務諮詢',
-        '協調對賬、退款與異常交易的處理進度',
-        '整理運營報表，反饋產品改進建議',
-      ],
-      en: [
-        'Support merchant onboarding, document follow-ups and daily inquiries',
-        'Coordinate reconciliation, refunds and exception handling',
-        'Prepare ops reports and share product improvement feedback',
-      ],
-    },
-    requirements: {
-      zh: [
-        '具备客户服务或金融运营经验优先',
-        '中英双语沟通流利，工作条理清晰',
-        '熟悉跨境贸易或支付业务者优先',
-      ],
-      tw: [
-        '具備客戶服務或金融運營經驗優先',
-        '中英雙語溝通流利，工作條理清晰',
-        '熟悉跨境貿易或支付業務者優先',
-      ],
-      en: [
-        'Customer service or financial operations experience preferred',
-        'Fluent in Chinese and English; highly organized',
-        'Cross-border trade or payments exposure is a plus',
-      ],
-    },
-  },
-  {
-    id: 'ops-006',
-    region: 'hk',
-    department: 'operations',
-    title: { zh: '结算运营专员', tw: '結算運營專員', en: 'Settlement Operations Specialist' },
-    type: { zh: '全职', tw: '全職', en: 'Full-time' },
-    responsibilities: {
-      zh: [
-        '负责日终 / 周期结算流程与资金核对',
-        '跟踪通道到账情况，处理延迟与差异',
-        '维护结算台账，配合财务完成对账闭环',
-      ],
-      tw: [
-        '負責日終 / 周期結算流程與資金核對',
-        '跟蹤通道到賬情況，處理延遲與差異',
-        '維護結算臺賬，配合財務完成對賬閉環',
-      ],
-      en: [
-        'Run daily / periodic settlement and fund checks',
-        'Track channel arrivals and resolve delays or mismatches',
-        'Maintain settlement ledgers and close the loop with finance',
-      ],
-    },
-    requirements: {
-      zh: [
-        '细心、数字敏感，有财务或清算相关经验优先',
-        '熟悉 Excel，能独立排查账务差异',
-        '可接受与结算节奏相关的时效要求',
-      ],
-      tw: [
-        '細心、數字敏感，有財務或清算相關經驗優先',
-        '熟悉 Excel，能獨立排查賬務差異',
-        '可接受與結算節奏相關的時效要求',
-      ],
-      en: [
-        'Detail-oriented; finance or clearing experience preferred',
-        'Strong Excel skills for variance investigation',
-        'Comfortable with time-sensitive settlement cycles',
-      ],
-    },
-  },
-]
-
-const regionFilter = ref('all')
-const departmentFilter = ref('all')
+const jobs = ref([])
+const jobsLoading = ref(true)
+const jobsError = ref('')
 const expandedId = ref(null)
+const applyOpen = ref(false)
+const applyJobId = ref(null)
+const applySubmitting = ref(false)
+const applyMsg = ref({ show: false, text: '', ok: true })
+const resumeInputRef = ref(null)
+const resumeFile = ref(null)
 
-const filteredJobs = computed(() =>
-  jobs.filter((job) => {
-    const regionOk = regionFilter.value === 'all' || job.region === regionFilter.value
-    const deptOk = departmentFilter.value === 'all' || job.department === departmentFilter.value
-    return regionOk && deptOk
-  }),
-)
+const emptyApplyForm = () => ({
+  name: '',
+  gender: '',
+  phone: '',
+  email: '',
+  school: '',
+  location: '',
+  bio: '',
+  resumeName: '',
+})
+
+const applyForm = ref(emptyApplyForm())
 
 const lang = computed(() => locale.language)
 
 const LABEL_PACKS = {
   zh: {
-    region: '香港',
-    departments: { tech: '科技部门', compliance: '合规部门', operations: '运营部门' },
     responsibilities: '岗位职责',
     requirements: '岗位要求',
     apply: '投递意向',
-    empty: '当前筛选条件下暂无职位。可切换部门，或留下简历与意向。',
+    empty: '当前暂无开放职位。欢迎稍后再来，或通过联系页与我们沟通。',
     count: '个职位空缺',
+    experience: '经验',
+    formTitle: '招聘信息表',
+    formJob: '应聘职位',
+    formName: '姓名',
+    formGender: '性别',
+    formGenderMale: '男',
+    formGenderFemale: '女',
+    formPhone: '手机号',
+    formEmail: '邮箱',
+    formSchool: '毕业院校',
+    formLocation: '现居地',
+    formBio: '个人简介',
+    formBioHint: '限 200 字',
+    formResume: '简历',
+    formResumeHint: '仅 PDF，限 5MB',
+    formResumePick: '选择文件',
+    formResumeEmpty: '未选择文件',
+    formResumeType: '请上传 PDF 格式简历。',
+    formSubmit: '提交投递',
+    formSubmitting: '提交中…',
+    formCancel: '取消',
+    formClose: '关闭',
+    formRequired: '请完整填写必填项。',
+    formEmailInvalid: '请输入正确的邮箱格式。',
+    formBioTooLong: '个人简介不能超过 200 字。',
+    formResumeTooLarge: '简历文件不能超过 5MB。',
+    formSuccess: '已收到您的投递，我们会尽快与您联系。',
+    formFail: '提交失败，请稍后重试。',
+    loadFail: '职位加载失败，请刷新重试。',
+    phName: '请输入姓名',
+    phPhone: '请输入手机号',
+    phEmail: 'name@example.com',
+    phSchool: '请输入毕业院校',
+    phLocation: '请输入现居地',
+    phBio: '请简要介绍自己（限 200 字）',
   },
   tw: {
-    region: '香港',
-    departments: { tech: '科技部門', compliance: '合規部門', operations: '運營部門' },
     responsibilities: '崗位職責',
     requirements: '崗位要求',
     apply: '投遞意向',
-    empty: '當前篩選條件下暫無職位。可切換部門，或留下簡歷與意向。',
+    empty: '當前暫無開放職位。歡迎稍後再來，或通過聯繫頁與我們溝通。',
     count: '個職位空缺',
+    experience: '經驗',
+    formTitle: '招聘信息表',
+    formJob: '應聘職位',
+    formName: '姓名',
+    formGender: '性別',
+    formGenderMale: '男',
+    formGenderFemale: '女',
+    formPhone: '手機號',
+    formEmail: '郵箱',
+    formSchool: '畢業院校',
+    formLocation: '現居地',
+    formBio: '個人簡介',
+    formBioHint: '限 200 字',
+    formResume: '簡歷',
+    formResumeHint: '僅 PDF，限 5MB',
+    formResumePick: '選擇文件',
+    formResumeEmpty: '未選擇文件',
+    formResumeType: '請上傳 PDF 格式簡歷。',
+    formSubmit: '提交投遞',
+    formSubmitting: '提交中…',
+    formCancel: '取消',
+    formClose: '關閉',
+    formRequired: '請完整填寫必填項。',
+    formEmailInvalid: '請輸入正確的郵箱格式。',
+    formBioTooLong: '個人簡介不能超過 200 字。',
+    formResumeTooLarge: '簡歷文件不能超過 5MB。',
+    formSuccess: '已收到您的投遞，我們會盡快與您聯繫。',
+    formFail: '提交失敗，請稍後重試。',
+    loadFail: '職位加載失敗，請刷新重試。',
+    phName: '請輸入姓名',
+    phPhone: '請輸入手機號',
+    phEmail: 'name@example.com',
+    phSchool: '請輸入畢業院校',
+    phLocation: '請輸入現居地',
+    phBio: '請簡要介紹自己（限 200 字）',
   },
   en: {
-    region: 'Hong Kong',
-    departments: { tech: 'Technology', compliance: 'Compliance', operations: 'Operations' },
     responsibilities: 'Responsibilities',
     requirements: 'Requirements',
     apply: 'Apply / Express interest',
-    empty: 'No roles match the current filters. Try another department, or leave your profile with us.',
+    empty: 'No open roles right now. Please check back later or contact us.',
     count: 'open roles',
+    experience: 'Experience',
+    formTitle: 'Application Form',
+    formJob: 'Position',
+    formName: 'Full name',
+    formGender: 'Gender',
+    formGenderMale: 'Male',
+    formGenderFemale: 'Female',
+    formPhone: 'Phone',
+    formEmail: 'Email',
+    formSchool: 'Graduation school',
+    formLocation: 'Current city',
+    formBio: 'About you',
+    formBioHint: 'Max 200 characters',
+    formResume: 'Resume',
+    formResumeHint: 'PDF only, max 5MB',
+    formResumePick: 'Choose file',
+    formResumeEmpty: 'No file selected',
+    formResumeType: 'Please upload a PDF resume.',
+    formSubmit: 'Submit application',
+    formSubmitting: 'Submitting…',
+    formCancel: 'Cancel',
+    formClose: 'Close',
+    formRequired: 'Please complete all required fields.',
+    formEmailInvalid: 'Please enter a valid email address.',
+    formBioTooLong: 'About you must be 200 characters or fewer.',
+    formResumeTooLarge: 'Resume must be 5MB or smaller.',
+    formSuccess: 'Application received. We will contact you soon.',
+    formFail: 'Submission failed. Please try again later.',
+    loadFail: 'Failed to load roles. Please refresh.',
+    phName: 'Your name',
+    phPhone: 'Phone number',
+    phEmail: 'name@example.com',
+    phSchool: 'School / university',
+    phLocation: 'City / region',
+    phBio: 'Brief intro (max 200 characters)',
   },
 }
 
 const labels = computed(() => LABEL_PACKS[lang.value] || LABEL_PACKS.zh)
 
+const applyJobTitle = computed(() => {
+  if (!applyJobId.value) return ''
+  const job = jobs.value.find((j) => j.id === applyJobId.value)
+  return job?.title || ''
+})
+
+const bioLen = computed(() => applyForm.value.bio.length)
+
+async function loadJobs() {
+  try {
+    const data = await apiFetch('/api/jobs')
+    jobs.value = data.items || []
+    jobsError.value = ''
+  } catch {
+    if (jobsLoading.value) jobsError.value = labels.value.loadFail
+  } finally {
+    jobsLoading.value = false
+  }
+}
+
+useAutoRefresh(loadJobs, {
+  intervalMs: 2000,
+  paused: computed(() => applyOpen.value),
+})
+
 function toggleExpand(id) {
   expandedId.value = expandedId.value === id ? null : id
 }
 
-function t(field) {
-  return field?.[lang.value] ?? field?.zh ?? ''
+function openApply(jobId) {
+  applyJobId.value = jobId ?? null
+  applyForm.value = emptyApplyForm()
+  resumeFile.value = null
+  applyMsg.value = { show: false, text: '', ok: true }
+  if (resumeInputRef.value) resumeInputRef.value.value = ''
+  applyOpen.value = true
+  document.body.style.overflow = 'hidden'
+  window.addEventListener('keydown', onApplyKeydown)
+}
+
+function closeApply() {
+  if (!applyOpen.value) return
+  applyOpen.value = false
+  applySubmitting.value = false
+  document.body.style.overflow = ''
+  window.removeEventListener('keydown', onApplyKeydown)
+}
+
+function onApplyKeydown(e) {
+  if (e.key === 'Escape') closeApply()
+}
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', onApplyKeydown)
+  document.body.style.overflow = ''
+})
+
+function onResumeChange(e) {
+  const input = e.target
+  const file = input.files?.[0]
+  applyMsg.value = { show: false, text: '', ok: true }
+  if (!file) {
+    resumeFile.value = null
+    applyForm.value.resumeName = ''
+    return
+  }
+  if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+    resumeFile.value = null
+    applyForm.value.resumeName = ''
+    input.value = ''
+    applyMsg.value = { show: true, text: labels.value.formResumeType, ok: false }
+    return
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    resumeFile.value = null
+    applyForm.value.resumeName = ''
+    input.value = ''
+    applyMsg.value = { show: true, text: labels.value.formResumeTooLarge, ok: false }
+    return
+  }
+  resumeFile.value = file
+  applyForm.value.resumeName = file.name
+}
+
+async function onApplySubmit(e) {
+  e.preventDefault()
+  const f = applyForm.value
+  if (
+    !applyJobId.value ||
+    !f.name.trim() ||
+    !f.gender ||
+    !f.phone.trim() ||
+    !f.email.trim() ||
+    !f.school.trim() ||
+    !f.location.trim() ||
+    !f.bio.trim() ||
+    !resumeFile.value
+  ) {
+    applyMsg.value = { show: true, text: labels.value.formRequired, ok: false }
+    return
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) {
+    applyMsg.value = { show: true, text: labels.value.formEmailInvalid, ok: false }
+    return
+  }
+  if (f.bio.length > 200) {
+    applyMsg.value = { show: true, text: labels.value.formBioTooLong, ok: false }
+    return
+  }
+  applySubmitting.value = true
+  try {
+    const body = new FormData()
+    body.set('job_id', String(applyJobId.value))
+    body.set('name', f.name.trim())
+    body.set('gender', f.gender)
+    body.set('phone', f.phone.trim())
+    body.set('email', f.email.trim())
+    body.set('school', f.school.trim())
+    body.set('residence', f.location.trim())
+    body.set('bio', f.bio.trim())
+    body.set('resume', resumeFile.value)
+    await apiFetch('/api/applications', { method: 'POST', body })
+    applyMsg.value = { show: true, text: labels.value.formSuccess, ok: true }
+    window.setTimeout(() => closeApply(), 800)
+  } catch (err) {
+    applyMsg.value = {
+      show: true,
+      text: err.message || labels.value.formFail,
+      ok: false,
+    }
+  } finally {
+    applySubmitting.value = false
+  }
 }
 </script>
 
@@ -339,7 +329,6 @@ function t(field) {
 </div>
 </section>
 
-<!-- ===== 价值观 ===== -->
 <section class="section career-section">
 <div class="container">
 <div class="career-intro career-intro--left">
@@ -379,7 +368,6 @@ function t(field) {
 </div>
 </section>
 
-<!-- ===== 福利 ===== -->
 <section class="section career-section career-section--soft">
 <div class="container">
 <div class="career-head">
@@ -418,7 +406,6 @@ function t(field) {
 </div>
 </section>
 
-<!-- ===== 业务覆盖 ===== -->
 <section class="section career-section">
 <div class="container">
 <div class="career-head career-head--left">
@@ -435,53 +422,37 @@ function t(field) {
 </div>
 </section>
 
-<!-- ===== 职位空缺 ===== -->
 <section class="section career-section career-section--soft" id="openings">
 <div class="container">
 <div class="career-head career-head--left">
 <h2 data-en="Open Roles" data-zh="现有职位空缺" data-tw="現有職位空缺">现有职位空缺</h2>
 </div>
-<div class="career-filters" aria-label="筛选条件">
-<label class="career-filter">
-<span class="career-filter-label" data-en="Filters" data-zh="筛选条件" data-tw="篩選條件">筛选条件</span>
-<select v-model="regionFilter">
-<option value="all" data-en="All regions" data-zh="所有地区" data-tw="所有地區">所有地区</option>
-<option value="hk" data-en="Hong Kong" data-zh="香港" data-tw="香港">香港</option>
-</select>
-</label>
-<label class="career-filter">
-<span class="career-filter-label visually-hidden" data-en="Department" data-zh="部门" data-tw="部門">部门</span>
-<select v-model="departmentFilter">
-<option value="all" data-en="All departments" data-zh="所有部门" data-tw="所有部門">所有部门</option>
-<option value="tech" data-en="Technology" data-zh="科技部门" data-tw="科技部門">科技部门</option>
-<option value="compliance" data-en="Compliance" data-zh="合规部门" data-tw="合規部門">合规部门</option>
-<option value="operations" data-en="Operations" data-zh="运营部门" data-tw="運營部門">运营部门</option>
-</select>
-</label>
-</div>
 <div class="career-openings">
+<p v-if="jobsLoading" class="career-openings-empty">Loading…</p>
+<p v-else-if="jobsError" class="career-openings-empty">{{ jobsError }}</p>
+<template v-else>
 <p class="career-openings-count">
-<strong>{{ filteredJobs.length }}</strong>
-<span data-en="open roles" data-zh="个职位空缺" data-tw="個職位空缺">{{ labels.count }}</span>
+<strong>{{ jobs.length }}</strong>
+<span>{{ labels.count }}</span>
 </p>
 
-<template v-if="filteredJobs.length">
+<template v-if="jobs.length">
 <ul class="career-job-list">
 <li
-  v-for="job in filteredJobs"
+  v-for="job in jobs"
   :key="job.id"
   class="career-job"
   :class="{ 'is-open': expandedId === job.id }"
 >
 <button type="button" class="career-job-toggle" @click="toggleExpand(job.id)">
 <span class="career-job-main">
-<span class="career-job-title">{{ t(job.title) }}</span>
+<span class="career-job-title">{{ job.title }}</span>
 <span class="career-job-meta">
-<span>{{ labels.region }}</span>
-<span aria-hidden="true">·</span>
-<span>{{ labels.departments[job.department] }}</span>
-<span aria-hidden="true">·</span>
-<span>{{ t(job.type) }}</span>
+<span>{{ job.work_location }}</span>
+<span v-if="job.job_type" aria-hidden="true">·</span>
+<span v-if="job.job_type">{{ job.job_type }}</span>
+<span v-if="job.experience" aria-hidden="true">·</span>
+<span v-if="job.experience">{{ labels.experience }} {{ job.experience }}</span>
 </span>
 </span>
 <span class="career-job-chevron" aria-hidden="true"></span>
@@ -490,16 +461,16 @@ function t(field) {
 <div class="career-job-block">
 <h4>{{ labels.responsibilities }}</h4>
 <ul>
-<li v-for="(item, i) in t(job.responsibilities)" :key="'r-' + job.id + '-' + i">{{ item }}</li>
+<li v-for="(item, i) in job.responsibilities" :key="'r-' + job.id + '-' + i">{{ item }}</li>
 </ul>
 </div>
 <div class="career-job-block">
 <h4>{{ labels.requirements }}</h4>
 <ul>
-<li v-for="(item, i) in t(job.requirements)" :key="'q-' + job.id + '-' + i">{{ item }}</li>
+<li v-for="(item, i) in job.requirements" :key="'q-' + job.id + '-' + i">{{ item }}</li>
 </ul>
 </div>
-<a class="btn btn-primary" href="/contact">{{ labels.apply }}</a>
+<a class="btn btn-primary" href="#" @click.prevent="openApply(job.id)">{{ labels.apply }}</a>
 </div>
 </li>
 </ul>
@@ -507,10 +478,177 @@ function t(field) {
 
 <template v-else>
 <p class="career-openings-empty">{{ labels.empty }}</p>
-<a class="btn btn-primary" href="/contact" data-en="Send your profile" data-zh="投递意向" data-tw="投遞意向">投递意向</a>
+</template>
 </template>
 </div>
 </div>
 </section>
+
+<Teleport to="body">
+<div
+  v-if="applyOpen"
+  class="career-apply-overlay"
+  role="presentation"
+  @click.self="closeApply"
+>
+  <div
+    class="career-apply-modal"
+    role="dialog"
+    aria-modal="true"
+    :aria-labelledby="'career-apply-title'"
+  >
+    <div class="career-apply-modal__head">
+      <h2 id="career-apply-title">{{ labels.formTitle }}</h2>
+      <button
+        type="button"
+        class="career-apply-modal__close"
+        :aria-label="labels.formClose"
+        @click="closeApply"
+      >
+        ×
+      </button>
+    </div>
+
+    <form class="form career-apply-form" novalidate @submit="onApplySubmit">
+      <div class="career-apply-form__body">
+        <div v-if="applyJobTitle" class="career-apply-job">
+          <span class="career-apply-job__label">{{ labels.formJob }}</span>
+          <strong>{{ applyJobTitle }}</strong>
+        </div>
+
+        <div class="career-apply-grid">
+          <div class="field">
+            <label for="apply-name">{{ labels.formName }} <span class="req">*</span></label>
+            <input
+              id="apply-name"
+              v-model="applyForm.name"
+              type="text"
+              :placeholder="labels.phName"
+              required
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="field">
+            <span class="career-apply-label">{{ labels.formGender }} <span class="req">*</span></span>
+            <div class="career-apply-gender" role="radiogroup" :aria-label="labels.formGender">
+              <label class="career-apply-radio">
+                <input v-model="applyForm.gender" type="radio" name="apply-gender" value="male" />
+                <span>{{ labels.formGenderMale }}</span>
+              </label>
+              <label class="career-apply-radio">
+                <input v-model="applyForm.gender" type="radio" name="apply-gender" value="female" />
+                <span>{{ labels.formGenderFemale }}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="apply-phone">{{ labels.formPhone }} <span class="req">*</span></label>
+            <input
+              id="apply-phone"
+              v-model="applyForm.phone"
+              type="tel"
+              :placeholder="labels.phPhone"
+              required
+              autocomplete="tel"
+            />
+          </div>
+
+          <div class="field">
+            <label for="apply-email">{{ labels.formEmail }} <span class="req">*</span></label>
+            <input
+              id="apply-email"
+              v-model="applyForm.email"
+              type="email"
+              :placeholder="labels.phEmail"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="field">
+            <label for="apply-school">{{ labels.formSchool }} <span class="req">*</span></label>
+            <input
+              id="apply-school"
+              v-model="applyForm.school"
+              type="text"
+              :placeholder="labels.phSchool"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="apply-location">{{ labels.formLocation }} <span class="req">*</span></label>
+            <input
+              id="apply-location"
+              v-model="applyForm.location"
+              type="text"
+              :placeholder="labels.phLocation"
+              required
+              autocomplete="address-level2"
+            />
+          </div>
+
+          <div class="field career-apply-grid__full">
+            <label for="apply-bio">
+              {{ labels.formBio }} <span class="req">*</span>
+              <span class="career-apply-hint">（{{ labels.formBioHint }}）</span>
+            </label>
+            <textarea
+              id="apply-bio"
+              v-model="applyForm.bio"
+              :placeholder="labels.phBio"
+              maxlength="200"
+              rows="3"
+              required
+            />
+            <p class="career-apply-counter" :class="{ 'is-full': bioLen >= 200 }">{{ bioLen }} / 200</p>
+          </div>
+
+          <div class="field career-apply-grid__full">
+            <label for="apply-resume">
+              {{ labels.formResume }} <span class="req">*</span>
+              <span class="career-apply-hint">（{{ labels.formResumeHint }}）</span>
+            </label>
+            <div class="career-apply-resume">
+              <input
+                id="apply-resume"
+                ref="resumeInputRef"
+                class="career-apply-resume__input"
+                type="file"
+                accept="application/pdf,.pdf"
+                @change="onResumeChange"
+              />
+              <label for="apply-resume" class="btn btn-outline career-apply-resume__btn">{{ labels.formResumePick }}</label>
+              <span class="career-apply-resume__path" :title="applyForm.resumeName || undefined">
+                {{ applyForm.resumeName || labels.formResumeEmpty }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="career-apply-form__foot">
+        <div
+          class="form-msg"
+          :class="{ show: applyMsg.show }"
+          :style="applyMsg.ok
+            ? { background: '#e7f6ec', color: 'var(--green-500)' }
+            : { background: '#fdecec', color: 'var(--red-500)' }"
+        >
+          {{ applyMsg.text }}
+        </div>
+        <div class="career-apply-actions">
+          <button class="btn btn-outline" type="button" @click="closeApply">{{ labels.formCancel }}</button>
+          <button class="btn btn-primary" type="submit" :disabled="applySubmitting">
+            {{ applySubmitting ? labels.formSubmitting : labels.formSubmit }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</Teleport>
 
 </template>

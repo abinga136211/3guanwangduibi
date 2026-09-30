@@ -42,3 +42,8 @@ __screenshots__/
 .env
 .env.local
 .env.*.local
+
+# Server runtime data
+server/data/*.sqlite
+server/data/*.sqlite-*
+server/uploads/resumes/*

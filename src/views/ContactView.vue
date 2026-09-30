@@ -1,11 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useLocaleStore } from '@/stores/locale'
+import { apiFetch } from '@/api/client'
+import { useSiteConfig } from '@/composables/useSiteConfig'
 
 const locale = useLocaleStore()
 const formRef = ref(null)
 const submitting = ref(false)
 const msg = ref({ show: false, text: '', ok: true })
+const { config: siteConfig } = useSiteConfig({ intervalMs: 2000 })
 
 const FM = {
   zh: {
@@ -38,7 +41,6 @@ const FM = {
 }
 
 const copy = computed(() => FM[locale.language] || FM.zh)
-const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || ''
 
 async function onSubmit(e) {
   e.preventDefault()
@@ -65,26 +67,26 @@ async function onSubmit(e) {
   }
   submitting.value = true
   try {
-    const formData = new FormData(form)
-    formData.set('access_key', accessKey)
-    const res = await fetch('https://api.web3forms.com/submit', {
+    const fd = new FormData(form)
+    await apiFetch('/api/inquiries', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(formData.entries())),
+      body: {
+        name: String(fd.get('name') || '').trim(),
+        company: String(fd.get('company') || '').trim(),
+        phone: String(fd.get('phone') || '').trim(),
+        email: String(fd.get('email') || '').trim(),
+        industry: String(fd.get('industry') || '').trim(),
+        message: String(fd.get('message') || '').trim(),
+      },
     })
-    const data = await res.json()
-    if (data.success) {
-      msg.value = { show: true, text: copy.value.success, ok: true }
-      form.reset()
-    } else {
-      msg.value = {
-        show: true,
-        text: copy.value.failPrefix + (data.message || copy.value.failDefault),
-        ok: false,
-      }
+    msg.value = { show: true, text: copy.value.success, ok: true }
+    form.reset()
+  } catch (err) {
+    msg.value = {
+      show: true,
+      text: `${copy.value.failPrefix}${err.message || copy.value.failDefault}`,
+      ok: false,
     }
-  } catch {
-    msg.value = { show: true, text: copy.value.net, ok: false }
   } finally {
     submitting.value = false
   }
@@ -126,7 +128,7 @@ async function onSubmit(e) {
 <span class="contact-kicker" data-en="Customer Support" data-zh="客服支持" data-tw="客服支持">客服支持</span>
 <div class="contact-row">
 <span class="contact-label" data-en="Email" data-zh="邮箱" data-tw="郵箱">邮箱</span>
-<a class="contact-value" href="mailto:Athos.xu@adgpay.com">Athos.xu@adgpay.com</a>
+<a class="contact-value" :href="'mailto:' + siteConfig.customer_email">{{ siteConfig.customer_email }}</a>
 </div>
 <div class="contact-row">
 <span class="contact-label" data-en="Service Hours" data-zh="服务时间" data-tw="服務時間">服务时间</span>
@@ -147,11 +149,11 @@ async function onSubmit(e) {
 <span class="contact-kicker" data-en="Business Cooperation" data-zh="商务合作" data-tw="商務合作">商务合作</span>
 <div class="contact-row">
 <span class="contact-label" data-en="Partnership Email" data-zh="合作邮箱" data-tw="合作郵箱">合作邮箱</span>
-<a class="contact-value" href="mailto:Athos.xu@adgpay.com">Athos.xu@adgpay.com</a>
+<a class="contact-value" :href="'mailto:' + siteConfig.partnership_email">{{ siteConfig.partnership_email }}</a>
 </div>
 <div class="contact-row">
 <span class="contact-label" data-en="Office Address" data-zh="办公地址" data-tw="辦公地址">办公地址</span>
-<span class="contact-value contact-value--wrap">UNIT 3586, LEVEL 35, INFINITUS PLAZA, 199 DES VOEUS RD CENTRAL, SHEUNG WAN, HONG KONG</span>
+<span class="contact-value contact-value--wrap">{{ siteConfig.office_address }}</span>
 </div>
 </div>
 
@@ -160,10 +162,6 @@ async function onSubmit(e) {
 
 <div class="contact-form-wrap" id="contact-form">
 <form ref="formRef" class="form contact-form" novalidate @submit="onSubmit">
-<input name="access_key" type="hidden" :value="accessKey"/>
-<input name="subject" type="hidden" value="ADG PAY 官网 - 新咨询"/>
-<input name="from_name" type="hidden" value="ADG PAY 官网"/>
-<input name="botcheck" style="display:none" type="checkbox"/>
 <h2 data-en="Leave Your Details" data-zh="留下你的需求" data-tw="留下你的需求">留下你的需求</h2>
 <p class="contact-form-lead" data-en="Fields marked with an asterisk (*) are required." data-zh="带 * 为必填项。" data-tw="帶 * 爲必填項。">带 <span class="req">*</span> 为必填项。</p>
 <div class="field">
@@ -188,10 +186,10 @@ async function onSubmit(e) {
 <label data-en="Industry / Use Case" data-zh="行业场景" data-tw="行業場景" for="industry">行业场景</label>
 <select id="industry" name="industry">
 <option data-en="Please select" data-zh="请选择" data-tw="請選擇" value="">请选择</option>
-<option data-en="Cross-border E-commerce" data-zh="跨境电商" data-tw="跨境電商">跨境电商</option>
-<option data-en="Cross-border Trade (B2B)" data-zh="外贸出口（B2B）" data-tw="外貿出口（B2B）">外贸出口（B2B）</option>
-<option data-en="SaaS / Software" data-zh="软件服务" data-tw="軟件服務">软件服务</option>
-<option data-en="Other" data-zh="其他" data-tw="其他">其他</option>
+<option value="ecommerce" data-en="Cross-border E-commerce" data-zh="跨境电商" data-tw="跨境電商">跨境电商</option>
+<option value="trade" data-en="Cross-border Trade (B2B)" data-zh="外贸出口（B2B）" data-tw="外貿出口（B2B）">外贸出口（B2B）</option>
+<option value="saas" data-en="SaaS / Software" data-zh="软件服务" data-tw="軟件服務">软件服务</option>
+<option value="other" data-en="Other" data-zh="其他" data-tw="其他">其他</option>
 </select>
 </div>
 <div class="field">
