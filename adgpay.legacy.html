@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ADG PAY | 持牌跨境支付与收款解决方案</title>
+<meta content="ADG PAY（ADG PAY）是持有香港MSO牌照的支付服务提供商，专注为跨境企业提供跨境收款、多币种结算与虚拟账户等合规、透明的支付解决方案。" name="description"/>
+<meta content="跨境支付, 跨境收款, 香港MSO牌照, 多币种结算, 虚拟账户, 跨境支付解决方案外贸收款, 跨境电商" name="keywords"/>
+<meta content="ADG PAY" name="author"/>
+<meta content="ADG PAY | 持牌跨境支付与收款解决方案" property="og:title"/>
+<meta content="持香港MSO牌照，为跨境企业提供合规、透明的跨境支付与收款服务。" property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="zh_CN" property="og:locale"/>
+<link href="https://www.adgpay.com" rel="canonical"/>
+<style>
+/* =========================================================
+   ADG PAY 官网样式表（内联版）
+   品牌色：红（依据 ADG 品牌源文件调色板）
+   说明：基础设计系统，专业简洁、金融科技感、响应式。
+   品牌色：红（依据 ADG 品牌源文件调色板）
+   公司主体：AD GLOBAL (HONG KONG) LIMITED（BR 79746756）。
+   ========================================================= */
+
+:root {
+  /* 主色板 —— ADG 品牌红 */
+  --red-900: #7A0C1E;
+  --red-800: #9E0F25;
+  --red-700: #C8102E;   /* 深红 */
+  --red-600: #D8162F;
+  --red-500: #E1251B;   /* 主色（亮红） */
+  --red-400: #F04438;
+  --red-200: #FBD0CE;
+  --red-100: #FCEAE9;
+  --red-50:  #FFF5F4;
+
+  /* 兼容旧变量名：将 --blue-* 映射为红色系，--cyan 映射为暖橙点缀 */
+  --blue-900: #9E0F25;
+  --blue-800: #B3122B;
+  --blue-700: #C8102E;
+  --blue-600: #D8162F;
+  --blue-500: #E1251B;
+  --blue-400: #F04438;
+  --blue-200: #FBD0CE;
+  --blue-100: #FCEAE9;
+  --blue-50:  #FFF5F4;
+  --cyan-400: #F6A623;  /* 暖橙点缀，用于渐变 */
+
+  --ink:    #0F172A;
+  --gray-800: #1E293B;
+  --gray-700: #334155;
+  --gray-600: #475569;
+  --gray-500: #64748B;
+  --gray-400: #94A3B8;
+  --gray-300: #CBD5E1;
+  --gray-200: #E2E8F0;
+  --gray-100: #F1F5F9;
+  --gray-50:  #F8FAFC;
+
+  --white: #FFFFFF;
+  --bg-soft: #FFF6F5;
+  --bg-dark: #0B1020;
+
+  --green-500: #16A34A;
+  --amber-500: #F59E0B;
+  --red-alert: #DC2626;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.05);
+  --shadow: 0 4px 16px rgba(15,23,42,.08);
+  --shadow-md: 0 10px 30px rgba(15,23,42,.10);
+  --shadow-lg: 0 24px 60px rgba(11,16,32,.20);
+
+  --container: 1180px;
+  --nav-h: 68px;
+
+  --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui,
+          -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- 基础重置 ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip; /* 防止任何装饰元素造成的横向溢出，同时不破坏 sticky 导航 */
+}
+img, svg { max-width: 100%; display: block; }
+a { color: var(--red-600); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--red-500); }
+h1, h2, h3, h4 { margin: 0 0 .5em; line-height: 1.2; font-weight: 700; color: var(--ink); }
+h1 { font-size: clamp(2rem, 4.4vw, 3.25rem); letter-spacing: -.02em; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); letter-spacing: -.01em; }
+h3 { font-size: 1.25rem; }
+p { margin: 0 0 1rem; color: var(--gray-700); }
+ul { margin: 0; padding: 0; list-style: none; }
+
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 22px; }
+.section { padding: 84px 0; }
+.section-sm { padding: 56px 0; }
+.section-head { max-width: 720px; margin: 0 auto 48px; text-align: center; }
+.section-head p { color: var(--gray-600); font-size: 1.05rem; }
+.eyebrow {
+  display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--red-600);
+  background: var(--red-100); padding: 6px 14px; border-radius: var(--radius-pill);
+  margin-bottom: 16px;
+}
+.text-center { text-align: center; }
+.lead { font-size: 1.1rem; color: var(--gray-600); }
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-weight: 600; font-size: .98rem; padding: 13px 26px; border-radius: var(--radius-pill);
+  border: 1px solid transparent; cursor: pointer; transition: all .2s; white-space: nowrap;
+  font-family: inherit;
+}
+.btn-primary { background: var(--red-500); color: #fff; box-shadow: 0 8px 20px rgba(225,37,27,.30); }
+.btn-primary:hover { background: var(--red-600); color: #fff; transform: translateY(-1px); box-shadow: 0 12px 26px rgba(225,37,27,.36); }
+.btn-ghost { background: transparent; color: var(--red-600); border-color: var(--red-200); }
+.btn-ghost:hover { background: var(--red-50); color: var(--red-700); }
+.btn-outline-white { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+.btn-outline-white:hover { background: rgba(255,255,255,.12); color: #fff; }
+.btn-light { background: #fff; color: var(--red-700); }
+.btn-light:hover { background: var(--red-50); color: var(--red-700); }
+.btn-lg { padding: 15px 34px; font-size: 1.05rem; }
+.btn-sm { padding: 9px 18px; font-size: .9rem; }
+.btn-block { width: 100%; }
+
+/* ---------- 顶部导航 ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.86);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.18rem; color: var(--ink); }
+.brand .logo-mark {
+  width: 38px; height: 38px; border-radius: 9px; flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--red-500), var(--red-700));
+  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: .82rem; letter-spacing: -.03em;
+}
+.brand small { display:block; font-size:.6rem; font-weight:700; letter-spacing:.18em; color: var(--gray-500); }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links > li > a {
+  display: inline-block; padding: 9px 14px; border-radius: 10px; color: var(--gray-700);
+  font-weight: 500; font-size: .96rem;
+}
+.nav-links > li > a:hover { background: var(--red-50); color: var(--red-700); }
+.nav-links > li > a.active { color: var(--red-700); background: var(--red-50); }
+.nav-cta { display: flex; align-items: center; gap: 10px; }
+.lang-toggle {
+  min-width: 42px; height: 34px; padding: 0 11px; border: 1px solid var(--red-200); border-radius: var(--radius-pill);
+  background: #fff; color: var(--red-700); font: 700 .78rem/1 var(--font); letter-spacing: .04em; cursor: pointer; transition: .2s;
+}
+.lang-toggle:hover { background: var(--red-50); border-color: var(--red-400); transform: translateY(-1px); }
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; transition: .3s; }
+
+/* ---------- 页脚 ---------- */
+.footer { background: var(--bg-dark); color: #C7D2E8; padding: 64px 0 28px; }
+.footer a { color: #AEBFDC; }
+.footer a:hover { color: #fff; }
+.footer-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
+.footer .brand { color: #fff; }
+.footer .brand .logo-mark { width: 34px; height: 34px; font-size: .72rem; }
+.footer h4 { color: #fff; font-size: .95rem; margin-bottom: 16px; letter-spacing: .04em; }
+.footer ul li { margin-bottom: 10px; font-size: .92rem; }
+.footer-bottom {
+  margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.1);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-size: .85rem; color: #8DA0C4;
+}
+.footer-bottom .disclaimer { max-width: 720px; line-height: 1.6; }
+
+/* ---------- 通用卡片 ---------- */
+.card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius);
+  padding: 28px; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--red-200); }
+.icon-box {
+  width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+  background: var(--red-50); color: var(--red-600); margin-bottom: 16px;
+}
+.icon-box svg { width: 26px; height: 26px; }
+.grid { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.client-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.module-card {
+  position: relative; background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius);
+  padding: 24px; min-height: 216px; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--red-200); }
+.module-card .module-index { position: absolute; top: 18px; right: 20px; color: var(--red-200); font-size: 1.35rem; font-weight: 800; }
+.module-card h3 { padding-right: 28px; margin-bottom: 9px; }
+.module-card p { font-size: .94rem; margin-bottom: 12px; }
+.module-card .module-link { display: inline-flex; align-items: center; gap: 5px; font-size: .88rem; font-weight: 700; color: var(--red-600); }
+.module-flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; align-items: stretch; }
+.module-flow .flow-item { position: relative; padding: 20px 16px; background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; text-align: center; }
+.module-flow .flow-item:not(:last-child)::after { content: "→"; position: absolute; right: -11px; top: 50%; color: var(--red-400); font-weight: 800; transform: translateY(-50%); z-index: 1; pointer-events: none; }
+.module-flow strong { display: block; margin-bottom: 5px; font-size: .96rem; }
+.module-flow span { display: block; color: var(--gray-500); font-size: .8rem; line-height: 1.45; }
+.support-languages { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 18px 20px; background: var(--red-50); border: 1px solid var(--red-200); border-radius: 14px; }
+.support-languages strong { color: var(--red-700); }
+.support-languages span { color: var(--gray-700); font-size: .92rem; }
+.bilingual-note { margin-top: 14px; padding: 12px 16px; border-left: 3px solid var(--red-400); background: var(--red-50); color: var(--gray-600); font-size: .9rem; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600;
+  padding: 5px 12px; border-radius: var(--radius-pill); background: var(--red-100); color: var(--red-700);
+}
+.badge-license {
+  background: linear-gradient(135deg, var(--red-600), var(--red-400));
+  color: #fff; padding: 7px 16px; font-weight: 700; box-shadow: 0 6px 16px rgba(225,37,27,.32);
+}
+.badge-license svg { width: 16px; height: 16px; }
+.badge-green { background: #E7F6EC; color: var(--green-500); }
+.badge-outline { background: transparent; border: 1px solid var(--red-200); color: var(--red-600); }
+
+/* ---------- 页面 Hero ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(1100px 520px at 82% -8%, rgba(240,68,56,.30), transparent 60%),
+    radial-gradient(900px 480px at 8% 12%, rgba(225,37,27,.36), transparent 58%),
+    linear-gradient(160deg, #16060C 0%, #0B1020 100%);
+  color: #fff; padding: 92px 0 96px;
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 46px 46px; mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+  pointer-events: none;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero h1 { color: #fff; }
+.hero p.lead { color: #E9C9CC; font-size: 1.18rem; max-width: 640px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin: 30px 0 36px; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.hero-stats { display: flex; flex-wrap: wrap; gap: 38px; margin-top: 46px; }
+.hero-stats .stat .num { font-size: 1.05rem; font-weight: 800; color: #fff; letter-spacing: .02em; }
+.hero-stats .stat .label { font-size: .9rem; color: #AEBFDC; }
+
+.trust-bar { background: var(--bg-soft); border-bottom: 1px solid var(--gray-200); }
+.trust-bar .container { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 40px; padding: 20px 22px; }
+.trust-bar .label { font-weight: 700; color: var(--gray-700); font-size: .9rem; }
+.trust-bar .items { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; color: var(--gray-600); font-size: .92rem; }
+.trust-bar .items span { display: inline-flex; align-items: center; gap: 7px; }
+.trust-bar .items svg { width: 16px; height: 16px; color: var(--red-500); }
+
+/* ---------- 区块配色变体 ---------- */
+.bg-soft { background: var(--bg-soft); }
+.bg-dark { background: var(--bg-dark); color: #fff; }
+.bg-dark h2, .bg-dark h3 { color: #fff; }
+.bg-dark p { color: #B9C6E3; }
+
+/* ---------- 功能列表 ---------- */
+.feature-list li { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+.feature-list li svg { width: 22px; height: 22px; color: var(--green-500); flex: 0 0 auto; margin-top: 2px; }
+.feature-list li span { color: var(--gray-700); }
+
+/* ---------- 行业/产品 tabs ---------- */
+.tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+.tab {
+  padding: 10px 22px; border-radius: var(--radius-pill); border: 1px solid var(--gray-200);
+  background: #fff; color: var(--gray-700); font-weight: 600; cursor: pointer; transition: .2s; font-family: inherit; font-size: .94rem;
+}
+.tab:hover { border-color: var(--red-200); color: var(--red-700); }
+.tab.active { background: var(--red-500); color: #fff; border-color: var(--red-500); box-shadow: 0 8px 18px rgba(225,37,27,.28); }
+.panel-grid { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); }
+.panel { display: none; }
+.panel.active { display: grid; animation: fade .35s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 步骤/流程 ---------- */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: step; }
+.step { position: relative; padding: 26px 22px; background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); }
+.step .n {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--red-50); color: var(--red-600);
+  display: grid; place-items: center; font-weight: 800; margin-bottom: 14px;
+}
+.step h4 { margin-bottom: 6px; }
+.step p { font-size: .92rem; margin: 0; }
+
+/* ---------- 资质展示 ---------- */
+.license-showcase {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border-radius: var(--radius-lg);
+  overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--gray-200); background: #fff;
+}
+.license-showcase .left { padding: 48px; background: linear-gradient(160deg, var(--red-700), var(--red-900)); color: #fff; }
+.license-showcase .left h2 { color: #fff; }
+.license-showcase .left p { color: #F3D2D6; }
+.license-card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px;
+  display: flex; align-items: center; gap: 18px; margin-top: 22px;
+}
+.license-card .seal {
+  width: 64px; height: 64px; border-radius: 14px; flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--red-500), var(--red-700)); color: #fff;
+  display: grid; place-items: center; font-weight: 800; font-size: 1.4rem;
+}
+.license-showcase .right { padding: 48px; }
+.kv { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px dashed var(--gray-200); font-size: .95rem; }
+.kv:last-child { border-bottom: 0; }
+.kv .k { color: var(--gray-500); }
+.kv .v { color: var(--ink); font-weight: 600; text-align: right; }
+
+/* ---------- FAQ 手风琴 ---------- */
+.faq-cat { margin-bottom: 40px; }
+.faq-cat > h3 { font-size: 1.15rem; margin-bottom: 14px; color: var(--red-700); }
+.accordion { border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; background: #fff; }
+.acc-item { border-bottom: 1px solid var(--gray-200); }
+.acc-item:last-child { border-bottom: 0; }
+.acc-trigger {
+  width: 100%; text-align: left; background: none; border: 0; cursor: pointer; padding: 18px 22px;
+  font-size: 1rem; font-weight: 600; color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  font-family: inherit;
+}
+.acc-trigger .plus { transition: transform .25s; color: var(--red-500); flex: 0 0 auto; }
+.acc-item.open .acc-trigger .plus { transform: rotate(45deg); }
+.acc-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.acc-body-inner { padding: 0 22px 20px; color: var(--gray-600); font-size: .96rem; }
+
+/* ---------- 联系表单 ---------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.info-card { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; margin-bottom: 18px; }
+.info-card .row { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; }
+.info-card .row svg { width: 22px; height: 22px; color: var(--red-500); flex: 0 0 auto; margin-top: 2px; }
+.form { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); }
+.form label { display: block; font-size: .9rem; font-weight: 600; color: var(--gray-700); margin-bottom: 7px; }
+.form input, .form select, .form textarea {
+  width: 100%; padding: 12px 14px; border: 1px solid var(--gray-300); border-radius: 10px;
+  font-size: .96rem; font-family: inherit; color: var(--ink); background: #fff; transition: border-color .2s, box-shadow .2s;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  outline: 0; border-color: var(--red-400); box-shadow: 0 0 0 3px rgba(240,68,56,.15);
+}
+.form .field { margin-bottom: 18px; }
+.form textarea { resize: vertical; min-height: 110px; }
+.form .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form .note { font-size: .82rem; color: var(--gray-500); margin-top: 6px; }
+.form-msg { display: none; margin-top: 14px; padding: 12px 16px; border-radius: 10px; font-size: .92rem; background: #E7F6EC; color: var(--green-500); }
+.form-msg.show { display: block; }
+
+/* ---------- 面包屑 ---------- */
+.breadcrumb { font-size: .86rem; color: var(--gray-500); padding: 18px 0 0; }
+.breadcrumb a { color: var(--gray-500); }
+.breadcrumb span { margin: 0 8px; }
+
+/* ---------- CTA 区 ---------- */
+.cta-band {
+  background: linear-gradient(135deg, var(--red-600), var(--red-400));
+  border-radius: var(--radius-lg); padding: 56px 48px; text-align: center; color: #fff;
+  box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+}
+.cta-band h2 { color: #fff; }
+.cta-band p { color: #FBE3E1; font-size: 1.1rem; }
+.cta-band .hero-cta { justify-content: center; }
+
+/* ---------- 数据/指标小卡 ---------- */
+.metric { text-align: center; padding: 26px 18px; background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); }
+.metric .num { font-size: 2.1rem; font-weight: 800; color: var(--red-600); letter-spacing: -.02em; }
+.metric .label { color: var(--gray-600); font-size: .92rem; margin-top: 4px; }
+
+/* ---------- SPA 视图切换 ---------- */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 980px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .panel-grid { grid-template-columns: repeat(2, 1fr); }
+  .client-map { grid-template-columns: repeat(2, 1fr); }
+  .license-showcase, .contact-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 760px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav.open .nav-links {
+    display: flex; flex-direction: column; align-items: stretch; gap: 2px;
+    position: absolute; top: var(--nav-h); left: 0; right: 0; background: #fff;
+    padding: 12px 18px 20px; box-shadow: var(--shadow-md); border-bottom: 1px solid var(--gray-200);
+  }
+  .nav.open .nav-links > li > a { padding: 12px 10px; }
+  .nav.open .nav-links > li > a.active { background: var(--red-50); }
+  .section { padding: 60px 0; }
+  .grid-2, .grid-3, .grid-4, .panel-grid, .steps, .client-map { grid-template-columns: 1fr; }
+  .module-flow { grid-template-columns: 1fr; }
+  .module-flow .flow-item:not(:last-child)::after { content: "↓"; left: 50%; right: auto; top: auto; bottom: -17px; transform: translateX(-50%); }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero { padding: 64px 0 72px; }
+  .license-showcase .left, .license-showcase .right { padding: 32px 24px; }
+  .cta-band { padding: 40px 24px; }
+  .form .row-2 { grid-template-columns: 1fr; }
+  .hero-stats { gap: 24px; }
+}
+@media (max-width: 460px) {
+  .container { padding: 0 16px; }
+  .hero-cta .btn { width: 100%; }
+}
+
+/* 可访问性：减少动画 */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+  /* ===== ADG PAY 智能助手插件 ===== */
+  .adg-chat { position: fixed; right: 22px; bottom: 22px; z-index: 9999; font-family: var(--font); }
+  .adg-chat-fab {
+    width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--red-500), var(--red-700));
+    color: #fff; box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .adg-chat-fab:hover { transform: translateY(-2px) scale(1.04); }
+  .adg-chat-fab svg { width: 28px; height: 28px; }
+  .adg-chat-panel {
+    position: absolute; right: 0; bottom: 76px; width: 360px; max-width: calc(100vw - 32px);
+    height: 520px; max-height: calc(100vh - 120px);
+    background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+    display: flex; flex-direction: column; overflow: hidden;
+    opacity: 0; transform: translateY(12px) scale(.98); pointer-events: none;
+    transition: opacity .22s ease, transform .22s ease;
+  }
+  .adg-chat.open .adg-chat-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .adg-chat.open .adg-chat-fab { display: none; }
+  .adg-chat-header {
+    background: linear-gradient(135deg, var(--red-600), var(--red-800));
+    color: #fff; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .adg-chat-title { display: flex; align-items: center; gap: 10px; }
+  .adg-chat-avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.18);
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;
+  }
+  .adg-chat-title strong { display: block; font-size: 15px; }
+  .adg-chat-title small { display: block; font-size: 11px; opacity: .85; }
+  .adg-chat-close {
+    background: rgba(255,255,255,.15); border: none; color: #fff; width: 30px; height: 30px;
+    border-radius: 50%; cursor: pointer; font-size: 20px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .adg-chat-close:hover { background: rgba(255,255,255,.28); }
+  .adg-chat-body { flex: 1; overflow-y: auto; padding: 14px; background: var(--gray-50); }
+  .adg-msg { display: flex; margin-bottom: 12px; }
+  .adg-msg.user { justify-content: flex-end; }
+  .adg-bubble {
+    max-width: 82%; padding: 9px 12px; border-radius: 14px; font-size: 13.5px; line-height: 1.5;
+    box-shadow: var(--shadow-sm); white-space: pre-wrap; word-break: break-word;
+  }
+  .adg-msg.bot .adg-bubble { background: #fff; color: var(--gray-800); border-bottom-left-radius: 4px; }
+  .adg-msg.user .adg-bubble { background: var(--red-500); color: #fff; border-bottom-right-radius: 4px; }
+  .adg-typing .adg-bubble { background: #fff; }
+  .adg-typing span {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--gray-400);
+    margin: 0 1px; animation: adgblink 1.2s infinite;
+  }
+  .adg-typing span:nth-child(2) { animation-delay: .2s; }
+  .adg-typing span:nth-child(3) { animation-delay: .4s; }
+  @keyframes adgblink { 0%, 60%, 100% { opacity: .3; } 30% { opacity: 1; } }
+  .adg-action { margin: 0 0 12px; }
+  .adg-action button {
+    background: var(--red-50); color: var(--red-700); border: 1px solid var(--red-200);
+    padding: 8px 12px; border-radius: var(--radius-pill); font-size: 13px; cursor: pointer; font-family: var(--font);
+  }
+  .adg-action button:hover { background: var(--red-100); }
+  .adg-chat-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 10px; background: var(--gray-50); }
+  .adg-chip {
+    background: #fff; border: 1px solid var(--gray-200); color: var(--gray-700);
+    padding: 6px 10px; border-radius: var(--radius-pill); font-size: 12px; cursor: pointer; font-family: var(--font);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .adg-chip:hover { border-color: var(--red-400); color: var(--red-600); }
+  .adg-chat-input { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--gray-200); background: #fff; }
+  .adg-chat-input input {
+    flex: 1; border: 1px solid var(--gray-300); border-radius: var(--radius-pill); padding: 10px 14px;
+    font-size: 13.5px; font-family: var(--font); outline: none; color: var(--gray-800);
+  }
+  .adg-chat-input input:focus { border-color: var(--red-400); }
+  .adg-chat-send {
+    background: var(--red-500); color: #fff; border: none; border-radius: var(--radius-pill);
+    padding: 0 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .adg-chat-send:hover { background: var(--red-600); }
+  .adg-chat-send svg { width: 18px; height: 18px; }
+  @media (max-width: 480px) {
+    .adg-chat { right: 14px; bottom: 14px; }
+    .adg-chat-panel { width: calc(100vw - 28px); height: calc(100vh - 90px); bottom: 72px; }
+  }
+
+  /* ---------- 隐私政策页 ---------- */
+  .pp-body { max-width: 940px; }
+  .pp-body h2 { font-size: 1.16rem; margin: 30px 0 10px; color: var(--gray-800); }
+  .pp-body h3 { font-size: 1rem; margin: 16px 0 6px; color: var(--gray-800); }
+  .pp-body p { color: var(--gray-600); line-height: 1.78; margin-bottom: 12px; font-size: .95rem; }
+  .pp-body ul { margin: 0 0 12px 22px; color: var(--gray-600); font-size: .95rem; }
+  .pp-body li { margin-bottom: 6px; line-height: 1.65; }
+  .pp-body .pp-meta { color: var(--gray-500); font-size: .9rem; }
+  .pp-lang { }
+
+  </style>
+</head>
+<body>
+<!-- ===== 顶部导航（共享） ===== -->
+<header class="nav" id="nav">
+<div class="container nav-inner">
+<a aria-label="ADG PAY首页" class="brand" href="#view-home">
+<span class="logo-mark">ADG</span>
+<span>ADG PAY<small data-en="Cross-border Payment" data-zh="跨境支付">跨境支付</small></span>
+</a>
+<nav aria-label="主导航">
+<ul class="nav-links">
+<li><a class="active" data-view="home" href="#view-home">首页</a></li>
+<li><a data-view="products" href="#view-products">产品与解决方案</a></li>
+<li><a data-view="about" href="#view-about">关于我们</a></li>
+<li><a data-view="compliance" href="#view-compliance">合规与安全</a></li>
+<li><a data-view="faq" href="#view-faq">帮助中心</a></li>
+<li><a data-view="contact" href="#view-contact">联系我们</a></li>
+<li><a data-view="privacy" href="#view-privacy">隐私政策</a></li>
+</ul>
+</nav>
+<div class="nav-cta">
+<button aria-label="切换中文与英文" class="lang-toggle" id="langToggle" type="button">EN</button>
+<a class="btn btn-primary btn-sm" href="#view-contact">免费咨询</a>
+<button aria-expanded="false" aria-label="打开菜单" class="nav-toggle" id="navToggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- ==================== 首页 ==================== -->
+<section class="view active" data-view="home">
+<!-- ===== 信任条 ===== -->
+<div class="trust-bar">
+<div class="container">
+<span class="label" data-en="Regulatory Assurance" data-zh="资质保障">资质保障</span>
+<div class="items">
+<span data-en='Hong Kong MSO Money Service Licence&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+            香港 MSO牌照
+          '>
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+            香港 MSO 金钱服务牌照
+          </span>
+<span data-en='Client Funds Segregated Custody&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+            客户资金隔离存放
+          '>
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+            客户资金隔离存放
+          </span>
+<span data-en='AML / KYC Compliance &amp; Risk Control&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="9"&gt;&lt;/circle&gt;&lt;path d="M9 12l2 2 4-4"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="9"&gt;&lt;/circle&gt;&lt;path d="M9 12l2 2 4-4"&gt;&lt;/path&gt;&lt;/svg&gt;
+            AML / KYC 合规风控
+          '>
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
+            AML / KYC 合规风控
+          </span>
+<span data-en='Bank-grade Data Encryption&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;rect height="10" rx="2" width="16" x="4" y="10"&gt;&lt;/rect&gt;&lt;path d="M8 10V7a4 4 0 018 0v3"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;rect height="10" rx="2" width="16" x="4" y="10"&gt;&lt;/rect&gt;&lt;path d="M8 10V7a4 4 0 018 0v3"&gt;&lt;/path&gt;&lt;/svg&gt;
+            银行级数据加密
+          '>
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="10" rx="2" width="16" x="4" y="10"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg>
+            银行级数据加密
+          </span>
+</div>
+</div>
+</div>
+<!-- ===== Hero ===== -->
+<section class="hero">
+<div class="container">
+<span class="badge-license" data-en='Hong Kong MSO Licensed Institution&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+          香港 MSO持牌机构
+        ' style="margin-bottom:20px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+          香港 MSO 持牌机构
+        </span>
+<h1 data-en="Licensed Cross-border Payment&lt;br&gt;Making Global Collections Easier for Cross-border Businesses&lt;br/&gt;" data-zh="持牌跨境支付&lt;br/&gt;让跨境企业全球收款更简单">持牌跨境支付<br/>让跨境企业全球收款更简单</h1>
+<p class="lead" data-en="ADG PAY holds a Hong Kong Money Service Operator (MSO) licence and focuses on providing compliant, transparent and efficient cross-border collection and multi-currency settlement services for cross-border enterprises such as e-commerce, trade and SaaS. Local team, companion-style service." data-zh="ADG PAY持有香港MSO牌照，专注为电商、外贸与 SaaS 等跨境企业提供合规、透明、高效的跨境收款与多币种结算服务。本地团队，陪伴式服务。">ADG PAY持有香港MSO牌照，专注为电商、外贸与 SaaS 等跨境企业提供合规、透明、高效的跨境收款与多币种结算服务。本地团队，陪伴式服务。</p>
+<div class="hero-cta">
+<a class="btn btn-primary btn-lg" data-en="Open Account Consultation" data-zh="免费咨询开户" href="#view-contact">免费咨询开户</a>
+<a class="btn btn-outline-white btn-lg" data-en="View Product Solutions" data-zh="查看产品方案" href="#view-products">查看产品方案</a>
+</div>
+<div class="hero-badges">
+<span class="badge badge-outline" data-en="Multi-currency Accounts" data-zh="多币种账户" style="border-color:rgba(255,255,255,.4);color:#fff;">多币种账户</span>
+<span class="badge badge-outline" data-en="Transparent Fees" data-zh="费率透明" style="border-color:rgba(255,255,255,.4);color:#fff;">费率透明</span>
+<span class="badge badge-outline" data-en="Localized Support" data-zh="本地化支持" style="border-color:rgba(255,255,255,.4);color:#fff;">本地化支持</span>
+</div>
+<div class="hero-stats">
+<div class="stat"><div class="num" data-en="Multi-currency Accounts" data-zh="多币种账户">多币种账户</div><div class="label" data-en="Local-currency Collection &amp; Settlement" data-zh="本地币种收款与结算">本地币种收款与结算</div></div>
+<div class="stat"><div class="num" data-en="Transparent Fees" data-zh="费率透明">费率透明</div><div class="label" data-en="No Hidden Fees" data-zh="无隐藏费用">无隐藏费用</div></div>
+<div class="stat"><div class="num" data-en="Licensed &amp; Compliant" data-zh="持牌合规">持牌合规</div><div class="label" data-en="Regulated Fund Services" data-zh="受监管资金服务">受监管资金服务</div></div>
+<div class="stat"><div class="num" data-en="Localized Support" data-zh="本地化支持">本地化支持</div><div class="label" data-en="Chinese-speaking Team Service" data-zh="中文团队服务">中文团队服务</div></div>
+</div>
+</div>
+</section>
+<!-- ===== 核心产品 ===== -->
+<section class="section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Core Products" data-zh="核心产品">核心产品</span>
+<h2 data-en="One-stop Cross-border Pay-in &amp; Pay-out" data-zh="一站式的跨境收付能力">一站式的跨境收付能力</h2>
+<p data-en="Built around real cross-border trade scenarios — practical, easy to use, and free of unnecessary complexity." data-zh="围绕跨境企业真实贸易场景打造，功能务实、上手简单，不堆砌复杂概念。">围绕跨境企业真实贸易场景打造，功能务实、上手简单，不堆砌复杂概念。</p>
+</div>
+<div class="grid grid-4">
+<div class="card">
+<div class="icon-box">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 7h18v10H3z"></path><path d="M3 11h18"></path></svg>
+</div>
+<h3 data-en="Cross-border Collection" data-zh="跨境收款">跨境收款</h3>
+<p data-en="Provide local collection accounts for global buyers to receive funds in local currencies, reducing intermediaries and FX loss." data-zh="为全球买家提供本地收款账户，用本地币种收款，减少中转与汇损。">为全球买家提供本地收款账户，用本地币种收款，减少中转与汇损。</p>
+<a class="btn btn-ghost btn-sm" data-en="Learn more →" data-zh="了解详情 →" href="#receive">了解详情 →</a>
+</div>
+<div class="card">
+<div class="icon-box">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"></path></svg>
+</div>
+<h3 data-en="Multi-currency Settlement" data-zh="多币种结算">多币种结算</h3>
+<p data-en="Hold and manage multiple currency balances, settle on demand, and flexibly time your currency exchange." data-zh="持有并管理多种币种余额，按需结算，灵活把握换汇时点。">持有并管理多种币种余额，按需结算，灵活把握换汇时点。</p>
+<a class="btn btn-ghost btn-sm" data-en="Learn more →" data-zh="了解详情 →" href="#settle">了解详情 →</a>
+</div>
+<div class="card">
+<div class="icon-box">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="6"></rect><path d="M3 10h18M7 15h4"></path></svg>
+</div>
+<h3 data-en="Virtual Accounts" data-zh="虚拟账户">虚拟账户</h3>
+<p data-en="Open independent virtual accounts for each business line, keeping funds clearly separable and reconciliation more efficient." data-zh="为每个业务线开立独立虚拟账户，资金清晰可分，对账更高效。">为每个业务线开立独立虚拟账户，资金清晰可分，对账更高效。</p>
+<a class="btn btn-ghost btn-sm" data-en="Learn more →" data-zh="了解详情 →" href="#va">了解详情 →</a>
+</div>
+<div class="card">
+<div class="icon-box">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 12h14"></path><path d="M13 7l5 5-5 5"></path><path d="M20 6v12"></path></svg>
+</div>
+<h3 data-en="Supplier Payments" data-zh="供应商付款">供应商付款</h3>
+<p data-en="Make batch payments to overseas suppliers in multiple currencies, with traceable processes and compliant records." data-zh="向海外供应商批量付款，支持多币种，流程留痕、合规可查。">向海外供应商批量付款，支持多币种，流程留痕、合规可查。</p>
+<a class="btn btn-ghost btn-sm" data-en="Learn more →" data-zh="了解详情 →" href="#pay">了解详情 →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 行业解决方案 ===== -->
+<section class="section bg-soft">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Choose by Scenario" data-zh="按场景选择">按场景选择</span>
+<h2 data-en="Tailored for Different Industries" data-zh="为不同行业量身设计">为不同行业量身设计</h2>
+<p data-en="Whether you are a cross-border e-commerce seller, a trade exporter or a SaaS going global, you can find a suitable collection and settlement solution." data-zh="无论你是跨境电商、外贸出口还是 SaaS 出海，都能找到合适的收款与结算方案。">无论你是跨境电商、外贸出口还是 SaaS 出海，都能找到合适的收款与结算方案。</p>
+</div>
+<div class="grid grid-3">
+<div class="card">
+<span class="badge badge-outline" data-en="Cross-border E-commerce" data-zh="跨境电商">跨境电商</span>
+<h3 data-en="Platform Collection &amp; Payout" data-zh="平台收款与回款" style="margin-top:14px;">平台收款与回款</h3>
+<p data-en="Connect with major e-commerce platforms for collection, credit in local currency, and smoother repatriation settlement." data-zh="对接主流电商平台收款，本地币种入账，回国结算更顺。">对接主流电商平台收款，本地币种入账，回国结算更顺。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Unified Multi-store Aggregation" data-zh="多店铺统一归集">多店铺统一归集</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Local Collection Account" data-zh="本地收款账户">本地收款账户</span></li>
+</ul>
+</div>
+<div class="card">
+<span class="badge badge-outline" data-en="Cross-border Trade / Export" data-zh="外贸出口">外贸出口</span>
+<h3 data-en="Cross-border Trade B2B" data-zh="B2B 贸易收付款" style="margin-top:14px;">B2B 贸易收付款</h3>
+<p data-en="Wire collection from overseas buyers and supplier payments, with clear documents and transaction records." data-zh="面向海外买家的电汇收款与供应商付款，单证与流水清晰可查。">面向海外买家的电汇收款与供应商付款，单证与流水清晰可查。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Wire Collection" data-zh="电汇收款">电汇收款</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Batch Supplier Payments" data-zh="批量付供应商">批量付供应商</span></li>
+</ul>
+</div>
+<div class="card">
+<span class="badge badge-outline" data-en="SaaS / Software" data-zh="软件服务">SaaS / 软件</span>
+<h3 data-en="Subscriptions &amp; Global Collection" data-zh="订阅与全球收款" style="margin-top:14px;">订阅与全球收款</h3>
+<p data-en="Let global users pay locally, with funds unified into multi-currency accounts." data-zh="支持全球用户以本地方式付费，统一归集到多币种账户。">支持全球用户以本地方式付费，统一归集到多币种账户。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Subscription Collection" data-zh="订阅收款">订阅收款</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Automated Reconciliation" data-zh="自动化对账">自动化对账</span></li>
+</ul>
+</div>
+</div>
+<div class="text-center" style="margin-top:36px;">
+<a class="btn btn-primary" data-en="Browse All Products &amp; Solutions" data-zh="浏览全部产品与方案" href="#view-products">浏览全部产品与方案</a>
+</div>
+</div>
+</section>
+<!-- ===== 双语支持 ===== -->
+<section class="section-sm" id="bilingual-support">
+<div class="container">
+<div class="support-languages">
+<strong data-en="Bilingual Support" data-zh="中英双语支持">中英双语支持 · Bilingual Support</strong>
+<span data-en="Account onboarding, KYC document communication, transaction status follow-up and exception assistance are all available in Chinese / English." data-zh="开户咨询、KYC 资料沟通、交易状态跟进与异常协助，均可提供中文 / 英文 服务。">开户咨询、KYC 资料沟通、交易状态跟进与异常协助，均可提供中文 / English 服务。</span>
+<a class="btn btn-ghost btn-sm" data-en="Learn about support →" data-zh="了解支持方案 →" href="#bilingual">了解支持方案 →</a>
+</div>
+</div>
+</section>
+<!-- ===== 为什么选择我们 ===== -->
+<section class="section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Why Choose ADG PAY" data-zh="为什么选择 ADG PAY">为什么选择 ADG PAY</span>
+<h2 data-en="Focused on Cross-border Enterprises, We Understand Your Business" data-zh="专注跨境企业，更懂你的业务">专注跨境企业，更懂你的业务</h2>
+<p data-en="We turn compliance, transparency and localized service into cross-border pay-in/pay-out capabilities that cross-border enterprises can afford." data-zh="我们把合规、透明与本地化服务，做成跨境企业用得起的跨境收付能力。">我们把合规、透明与本地化服务，做成跨境企业用得起的跨境收付能力。</p>
+</div>
+<div class="grid grid-4">
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg></div>
+<h3 data-en="Licensed &amp; Compliant" data-zh="持牌合规">持牌合规</h3>
+<p data-en="The Hong Kong MSO licence is supervised by Customs; regulated operations make funds more trustworthy." data-zh="香港 MSO牌照受海关监管，经营受约束、资金更可信。">香港 MSO 牌照受海关监管，经营受约束、资金更可信。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2v20M2 12h20"></path></svg></div>
+<h3 data-en="Transparent Fees" data-zh="费率透明">费率透明</h3>
+<p data-en="No hidden fees — rates and FX are clearly disclosed before account opening." data-zh="无隐藏费用，费率与汇率在开户前清晰告知。">无隐藏费用，费率与汇率在开户前清晰告知。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg></div>
+<h3 data-en="Local Service" data-zh="本地服务">本地服务</h3>
+<p data-en="Chinese / English support team following a unified process for clear, barrier-free communication." data-zh="中文 / 英文 支持团队，按统一流程跟进，沟通清晰无隔阂。">中文 / English 支持团队，按统一流程跟进，沟通清晰无隔阂。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7z"></path></svg></div>
+<h3 data-en="Fast Response" data-zh="快速响应">快速响应</h3>
+<p data-en="Short decision chains mean faster responses for onboarding and issue resolution." data-zh="决策链路短，开户与问题处理响应更快。">决策链路短，开户与问题处理响应更快。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 牌照展示 ===== -->
+<section class="section bg-soft">
+<div class="container">
+<div class="license-showcase">
+<div class="left">
+<span class="badge-license" data-en='Hong Kong MSO Licence&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+              香港 MSO牌照
+            ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+              香港 MSO 牌照
+            </span>
+<h2 data-en="Regulated Fund Services" data-zh="受监管的资金服务">受监管的资金服务</h2>
+<p data-en="We hold a Money Service Operator licence issued by Hong Kong Customs (MSO), regulated for anti-money laundering and customer due diligence, providing institutional safeguards for client fund security." data-zh="我们持有香港海关发出的MSO牌照，在反洗黑钱与客户尽职审查方面受监管约束，为客户资金安全提供制度性保障。">我们持有香港海关发出的MSO牌照(MSO)，在反洗黑钱与客户尽职审查方面受监管约束，为客户资金安全提供制度性保障。</p>
+<a class="btn btn-light btn-sm" data-en="View Licence Details" data-zh="查看资质详情" href="#license" style="margin-top:8px;">查看资质详情</a>
+</div>
+<div class="right">
+<div class="license-card">
+<div class="seal" data-en="MSO" data-zh="MSO">MSO</div>
+<div>
+<div data-en="Money Service Operator Licence" data-zh="MSO牌照" style="font-weight:700;">MSO牌照</div>
+<div data-en="Money Service Operator Licence · Regulated by Hong Kong Customs" data-zh="MSO牌照 · 香港海关监管" style="color:var(--gray-500);font-size:.9rem;">MSO牌照 · 香港海关监管</div>
+</div>
+</div>
+<div class="kv"><span class="k" data-en="Regulatory Authority" data-zh="监管机构">监管机构</span><span class="v" data-en="Customs &amp; Excise Department" data-zh="香港海关">香港海关（Customs &amp; Excise Department）</span></div>
+<div class="kv"><span class="k" data-en="Scope of Services" data-zh="服务范围">服务范围</span><span class="v" data-en="Currency Exchange / Remittance" data-zh="货币兑换 / 汇款">货币兑换 / 汇款</span></div>
+<div class="kv"><span class="k" data-en="Fund Arrangement" data-zh="资金安排">资金安排</span><span class="v" data-en="Client Funds Segregated Custody" data-zh="客户资金隔离存放">客户资金隔离存放</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 如何开始 ===== -->
+<section class="section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Get Started in Four Steps" data-zh="四步开始">四步开始</span>
+<h2 data-en="A Simple Onboarding &amp; Usage Flow" data-zh="开户与使用的简单流程">开户与使用的简单流程</h2>
+<p data-en="Submit online, documents reviewed, and you can start collecting in as few as a few business days." data-zh="线上提交，资料审核，最快数个工作日内即可开始收款。">线上提交，资料审核，最快数个工作日内即可开始收款。</p>
+</div>
+<div class="steps">
+<div class="step"><div class="n">1</div><h4 data-en="Submit Application" data-zh="提交申请">提交申请</h4><p data-en="Fill in company details online and select target currencies and services." data-zh="在线填写企业资料，选择目标币种与服务。">在线填写企业资料，选择目标币种与服务。</p></div>
+<div class="step"><div class="n">2</div><h4 data-en="Verification" data-zh="资质审核">资质审核</h4><p data-en="Complete KYC and business due diligence; complete documents speed up review." data-zh="完成 KYC 与业务尽调，资料齐全审核更快。">完成 KYC 与业务尽调，资料齐全审核更快。</p></div>
+<div class="step"><div class="n">3</div><h4 data-en="Account Opening" data-zh="开通账户">开通账户</h4><p data-en="Get multi-currency virtual accounts and immediately provide collection details to clients." data-zh="获取多币种虚拟账户，可立即向客户提供收款信息。">获取多币种虚拟账户，可立即向客户提供收款信息。</p></div>
+<div class="step"><div class="n">4</div><h4 data-en="Collection &amp; Settlement" data-zh="收款结算">收款结算</h4><p data-en="Collect, hold or settle, with a dedicated manager assisting throughout." data-zh="收款、持有或结算，专属经理全程协助。">收款、持有或结算，专属经理全程协助。</p></div>
+</div>
+</div>
+</section>
+<!-- ===== CTA ===== -->
+<section class="section-sm">
+<div class="container">
+<div class="cta-band">
+<h2 data-en="Ready to Make Cross-border Collection Easier?" data-zh="准备好让跨境收款更省心了吗？">准备好让跨境收款更省心了吗？</h2>
+<p data-en="Talk to our local team to get a compliant payment solution tailored to your business." data-zh="与我们的本地团队聊聊，获取适合你业务的合规支付方案。">与我们的本地团队聊聊，获取适合你业务的合规支付方案。</p>
+<div class="hero-cta">
+<a class="btn btn-light btn-lg" data-en="Free Consultation" data-zh="免费咨询" href="#view-contact">免费咨询</a>
+<a class="btn btn-outline-white btn-lg" data-en="FAQ" data-zh="常见问题" href="#view-faq">常见问题</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- ==================== 产品与解决方案 ==================== -->
+<section class="view" data-view="products">
+<section class="hero" style="padding:72px 0 76px;">
+<div class="container">
+<span class="badge-license" data-en='Hong Kong MSO Licensed Institution&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+          香港 MSO持牌机构
+        ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+          香港 MSO 持牌机构
+        </span>
+<h1 data-en="Products &amp; Solutions" data-zh="产品与解决方案">产品与解决方案</h1>
+<p class="lead" data-en="From collection to settlement, covering the core fund flows of cross-border business. Choose the solution that fits your industry scenario." data-zh="从收款到结算，覆盖跨境业务的核心资金环节。按行业场景选择适合你的方案。">从收款到结算，覆盖跨境业务的核心资金环节。按行业场景选择适合你的方案。</p>
+</div>
+</section>
+<div class="container">
+<nav aria-label="面包屑" class="breadcrumb">
+<a data-en="Home" data-zh="首页" href="#view-home">首页</a><span>›</span><a data-en="Products &amp; Solutions" data-zh="产品与解决方案" href="#view-products">产品与解决方案</a>
+</nav>
+</div>
+<!-- ===== 按行业筛选 ===== -->
+<section class="section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="By Industry Scenario" data-zh="按行业场景">按行业场景</span>
+<h2 data-en="Choose the Right Solution for You" data-zh="选择适合你的方案">选择适合你的方案</h2>
+<p data-en="Different industries face different collection and settlement pain points, so we organize our product portfolio accordingly." data-zh="不同行业的收款与结算痛点不同，我们据此组织产品组合。">不同行业的收款与结算痛点不同，我们据此组织产品组合。</p>
+</div>
+<div class="tabs" role="tablist">
+<button class="tab active" data-en="Cross-border E-commerce" data-tab="ecom" data-zh="跨境电商">跨境电商</button>
+<button class="tab" data-en="Cross-border Trade / Export" data-tab="trade" data-zh="外贸出口">外贸出口</button>
+<button class="tab" data-en="SaaS / Software" data-tab="saas" data-zh="软件服务">SaaS / 软件</button>
+<button class="tab" data-en="All Capabilities" data-tab="all" data-zh="全部能力">全部能力</button>
+</div>
+<!-- 跨境电商 -->
+<div class="panel active" data-panel="ecom">
+<div class="card">
+<span class="badge badge-outline" data-en="Local Collection" data-zh="本地收款">本地收款</span>
+<h3 data-en="Platform Local Collection Account" data-zh="平台本地收款账户" style="margin-top:12px;">平台本地收款账户</h3>
+<p data-en="Provide local-currency collection accounts for stores; buyers pay locally, reducing intermediary steps." data-zh="为店铺提供本地币种收款账户，买家以本地方式付款，减少中转环节。">为店铺提供本地币种收款账户，买家以本地方式付款，减少中转环节。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Multi-store Fund Aggregation" data-zh="多店铺资金归集">多店铺资金归集</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Traceable Payouts" data-zh="回款可追踪">回款可追踪</span></li>
+</ul>
+</div>
+<div class="card">
+<span class="badge badge-outline" data-en="Settlement" data-zh="结算">结算</span>
+<h3 data-en="Multi-currency Hold &amp; Settlement" data-zh="多币种持有与结算" style="margin-top:12px;">多币种持有与结算</h3>
+<p data-en="Choose settlement timing to your business rhythm, reducing unnecessary FX loss." data-zh="按业务节奏选择结算时点，减少不必要的换汇损耗。">按业务节奏选择结算时点，减少不必要的换汇损耗。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Exchange on Demand" data-zh="按需换汇">按需换汇</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Transparent Fees" data-zh="费率透明">费率透明</span></li>
+</ul>
+</div>
+<div class="card">
+<span class="badge badge-outline" data-en="Reconciliation" data-zh="对账">对账</span>
+<h3 data-en="Automated Reconciliation" data-zh="自动对账" style="margin-top:12px;">自动对账</h3>
+<p data-en="Clear, exportable statements lighten the finance reconciliation burden." data-zh="流水清晰可导出，减轻财务对账负担。">流水清晰可导出，减轻财务对账负担。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Exportable Details" data-zh="明细可导出">明细可导出</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Multi-account View" data-zh="多账户视图">多账户视图</span></li>
+</ul>
+</div>
+</div>
+<!-- 外贸出口 -->
+<div class="panel" data-panel="trade">
+<div class="card" id="receive">
+<span class="badge badge-outline" data-en="Collection" data-zh="收款">收款</span>
+<h3 data-en="Wire Collection" data-zh="电汇收款" style="margin-top:12px;">电汇收款</h3>
+<p data-en="Cross-border wire collection from overseas buyers, with clear collection details and traceable records." data-zh="面向海外买家的跨境电汇收款，提供清晰收款信息，流水留痕。">面向海外买家的跨境电汇收款，提供清晰收款信息，流水留痕。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Multi-currency Credit" data-zh="多币种入账">多币种入账</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Arrival Notification" data-zh="到账通知">到账通知</span></li>
+</ul>
+</div>
+<div class="card" id="pay">
+<span class="badge badge-outline" data-en="Payment" data-zh="付款">付款</span>
+<h3 data-en="Batch Supplier Payments" data-zh="供应商批量付款" style="margin-top:12px;">供应商批量付款</h3>
+<p data-en="Batch payments to overseas suppliers with compliant processes, complete documents and easy audit." data-zh="向海外供应商批量付款，流程合规、单据齐全、便于审计。">向海外供应商批量付款，流程合规、单据齐全、便于审计。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Batch Processing" data-zh="批量处理">批量处理</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Traceable Payments" data-zh="付款留痕">付款留痕</span></li>
+</ul>
+</div>
+<div class="card">
+<span class="badge badge-outline" data-en="Compliance" data-zh="合规">合规</span>
+<h3 data-en="Trade Background Review" data-zh="贸易背景审核" style="margin-top:12px;">贸易背景审核</h3>
+<p data-en="Verify trade authenticity per regulatory requirements to ensure compliant fund flows." data-zh="依据监管要求完成贸易真实性核验，保障资金合规流动。">依据监管要求完成贸易真实性核验，保障资金合规流动。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="KYC / Due Diligence" data-zh="KYC / 业务尽调">KYC / 尽调</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Risk Monitoring" data-zh="风控监控">风控监控</span></li>
+</ul>
+</div>
+</div>
+<!-- SaaS -->
+<div class="panel" data-panel="saas">
+<div class="card">
+<span class="badge badge-outline" data-en="Subscription" data-zh="订阅">订阅</span>
+<h3 data-en="Global Subscription Collection" data-zh="全球订阅收款" style="margin-top:12px;">全球订阅收款</h3>
+<p data-en="Let global users pay locally, with funds unified into multi-currency accounts." data-zh="支持全球用户以本地方式付费，资金统一归集到多币种账户。">支持全球用户以本地方式付费，资金统一归集到多币种账户。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Local Collection Experience" data-zh="本地收款体验">本地收款体验</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Unified Aggregation" data-zh="统一归集">统一归集</span></li>
+</ul>
+</div>
+<div class="card" id="va">
+<span class="badge badge-outline" data-en="Account" data-zh="账户">账户</span>
+<h3 data-en="Virtual Account Splitting" data-zh="虚拟账户分账" style="margin-top:12px;">虚拟账户分账</h3>
+<p data-en="Open virtual accounts by product or region for clear revenue visibility and easy split accounting." data-zh="按产品或区域开立虚拟账户，收入一目了然，便于分账核算。">按产品或区域开立虚拟账户，收入一目了然，便于分账核算。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Multi-account Management" data-zh="多账户管理">多账户管理</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Clear Split Accounting" data-zh="清晰分账">清晰分账</span></li>
+</ul>
+</div>
+<div class="card">
+<span class="badge badge-outline" data-en="Settlement" data-zh="结算">结算</span>
+<h3 data-en="Multi-currency Settlement" data-zh="多币种结算" style="margin-top:12px;">多币种结算</h3>
+<p data-en="Hold subscription income and settle to local currency on demand, smoothing FX volatility." data-zh="持有订阅收入，按需结算为本币，平滑汇率波动。">持有订阅收入，按需结算为本币，平滑汇率波动。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Settle on Demand" data-zh="按需结算">按需结算</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Transparent FX Rates" data-zh="汇率透明">汇率透明</span></li>
+</ul>
+</div>
+</div>
+<!-- 全部能力 -->
+<div class="panel" data-panel="all">
+<div class="card"><div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 7h18v10H3z"></path><path d="M3 11h18"></path></svg></div><h3 data-en="Cross-border Collection" data-zh="跨境收款" id="settle">跨境收款</h3><p data-en="Local-currency collection accounts reduce intermediaries and FX loss." data-zh="本地币种收款账户，减少中转与汇损。">本地币种收款账户，减少中转与汇损。</p></div>
+<div class="card"><div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path></svg></div><h3 data-en="Multi-currency Settlement" data-zh="多币种结算">多币种结算</h3><p data-en="Hold and settle multiple currencies, flexibly timing your exchange." data-zh="持有与结算多币种，灵活把握换汇时点。">持有与结算多币种，灵活把握换汇时点。</p></div>
+<div class="card"><div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="6"></rect><path d="M3 10h18"></path></svg></div><h3 data-en="Virtual Accounts" data-zh="虚拟账户">虚拟账户</h3><p data-en="Independent virtual accounts keep funds clearly separable." data-zh="独立虚拟账户，资金清晰可分。">独立虚拟账户，资金清晰可分。</p></div>
+<div class="card"><div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 12h14"></path><path d="M13 7l5 5-5 5"></path></svg></div><h3 data-en="Supplier Payments" data-zh="供应商付款">供应商付款</h3><p data-en="Multi-currency batch payments, compliant and traceable." data-zh="多币种批量付款，合规可查。">多币种批量付款，合规可查。</p></div>
+<div class="card"><div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2v20M2 12h20"></path></svg></div><h3 data-en="Currency Exchange" data-zh="货币兑换">货币兑换</h3><p data-en="Currency exchange services within licence scope." data-zh="牌照范围内的货币兑换服务。">牌照范围内的货币兑换服务。</p></div>
+<div class="card"><div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 3h18v18H3z"></path><path d="M3 9h18M9 21V9"></path></svg></div><h3 data-en="Reconciliation &amp; Reporting" data-zh="对账与报表">对账与报表</h3><p data-en="Statement export and detail lookup facilitate financial accounting." data-zh="流水导出、明细可查，便于财务核算。">流水导出、明细可查，便于财务核算。</p></div>
+</div>
+</div>
+</section>
+<!-- ===== 业务流转 ===== -->
+<section class="section bg-soft" id="workflow">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="How It Works" data-zh="业务流转">业务流转 · How it works</span>
+<h2 data-en="From account opening to fund settlement, one clear fund chain" data-zh="从开户到资金结算，一条清晰的资金链路">从开户到资金结算，一条清晰的资金链路</h2>
+<p data-en="Around the core of cross-border pay-in/out, ADG PAY provides enterprises with coherent services from collection and holding to payment settlement." data-zh="围绕跨境收付的核心环节，ADG PAY 为企业提供从收款、持币到付款结算的连贯服务。">围绕跨境收付的核心环节，ADG PAY 为企业提供从收款、持币到付款结算的连贯服务。</p>
+</div>
+<div class="module-flow">
+<div class="flow-item"><strong data-en="Account Opening" data-zh="开通账户">开通账户</strong><span data-en="Submit documents and complete KYC review" data-zh="提交资料并完成 KYC 审核">提交资料并完成 KYC 审核</span></div>
+<div class="flow-item"><strong data-en="Collect Funds" data-zh="收取款项">收取款项</strong><span data-en="Receive cross-border payments via local collection account" data-zh="通过本地收款账户接收跨境货款">通过本地收款账户接收跨境货款</span></div>
+<div class="flow-item"><strong data-en="Multi-currency Holding" data-zh="多币种持有">多币种持有</strong><span data-en="Hold settlement currencies on demand, reducing FX loss" data-zh="按需持有结算币种，减少汇兑损耗">按需持有结算币种，减少汇兑损耗</span></div>
+<div class="flow-item"><strong data-en="Currency Exchange" data-zh="币种兑换">币种兑换</strong><span data-en="Exchange balances into the required settlement currency" data-zh="将余额兑换为所需结算币种">将余额兑换为所需结算币种</span></div>
+<div class="flow-item"><strong data-en="Outbound Payment" data-zh="对外付款">对外付款</strong><span data-en="Pay suppliers or counterparties" data-zh="向供应商或交易对手付款">向供应商或交易对手付款</span></div>
+</div>
+</div>
+</section>
+<!-- ===== 双语支持落地方式 ===== -->
+<section class="section-sm" id="bilingual-support">
+<div class="container">
+<div class="support-languages"><strong data-en="Chinese &amp; English" data-zh="中英双语服务">中英双语服务 · Chinese &amp; English</strong><span data-en="Supports account opening, KYC, collection verification, exchange and payment exception communication; help center and key notices are recommended to be provided bilingually." data-zh="支持开户、KYC、收款核对、兑换与付款异常沟通；帮助中心与关键通知建议同步提供双语版本。">支持开户、KYC、收款核对、兑换与付款异常沟通；帮助中心与关键通知建议同步提供双语版本。</span><a class="btn btn-ghost btn-sm" data-en="Contact support team →" data-zh="联系支持团队 →" href="#bilingual">联系支持团队 →</a></div>
+</div>
+</section>
+<!-- ===== 产品能力总览 ===== -->
+<section class="section bg-soft">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Capability Overview" data-zh="能力总览">能力总览</span>
+<h2 data-en="One account suite covering major fund flows" data-zh="一套账户，覆盖主要资金环节">一套账户，覆盖主要资金环节</h2>
+</div>
+<div class="grid grid-3">
+<div class="card">
+<h3 data-en="Collection" data-zh="收款">收款</h3>
+<p data-en="Local collection accounts, wire collection and subscription collection cover major inbound scenarios." data-zh="本地收款账户、电汇收款、订阅收款，覆盖主要进账场景。">本地收款账户、电汇收款、订阅收款，覆盖主要进账场景。</p>
+</div>
+<div class="card">
+<h3 data-en="Holding" data-zh="持有">持有</h3>
+<p data-en="Multi-currency balance management with on-demand exchange, reducing losses from frequent settlement." data-zh="多币种余额管理，按需换汇，减少频繁结算带来的损耗。">多币种余额管理，按需换汇，减少频繁结算带来的损耗。</p>
+</div>
+<div class="card">
+<h3 data-en="Payment" data-zh="付款">付款</h3>
+<p data-en="Supplier and batch payments with traceable processes, easing audit and reconciliation." data-zh="供应商付款、批量付款，流程留痕，便于审计与对账。">供应商付款、批量付款，流程留痕，便于审计与对账。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section-sm">
+<div class="container">
+<div class="cta-band">
+<h2 data-en="Not sure which solution fits you?" data-zh="不确定哪套方案适合你？">不确定哪套方案适合你？</h2>
+<p data-en="Tell us about your business and collection scenario, and our local team will match one for you." data-zh="告诉我们你的业务与收款场景，由本地团队为你匹配。">告诉我们你的业务与收款场景，由本地团队为你匹配。</p>
+<div class="hero-cta">
+<a class="btn btn-light btn-lg" data-en="Contact an Advisor" data-zh="联系顾问" href="#view-contact">联系顾问</a>
+<a class="btn btn-outline-white btn-lg" data-en="View FAQ" data-zh="先看看 常见问题" href="#view-faq">先看看 FAQ</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- ==================== 关于我们 ==================== -->
+<section class="view" data-view="about">
+<section class="hero" style="padding:72px 0 76px;">
+<div class="container">
+<span class="badge-license" data-en='Hong Kong MSO Licensed Institution&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+          香港 MSO持牌机构
+        ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+          香港 MSO 持牌机构
+        </span>
+<h1 data-en="About ADG PAY" data-zh="关于ADG PAY">关于ADG PAY</h1>
+<p class="lead" data-en="A focused and pragmatic licensed payment provider that turns compliance and localized service into cross-border pay-in/out capabilities affordable for cross-border enterprises." data-zh="专注而务实的持牌支付服务商，把合规与本地化服务，做成跨境企业用得起的跨境收付能力。">专注而务实的持牌支付服务商，把合规与本地化服务，做成跨境企业用得起的跨境收付能力。</p>
+</div>
+</section>
+<div class="container">
+<nav aria-label="面包屑" class="breadcrumb">
+<a data-en="Home" data-zh="首页" href="#view-home">首页</a><span>›</span><a data-en="About Us" data-zh="关于我们" href="#view-about">关于我们</a>
+</nav>
+</div>
+<!-- ===== 公司简介 ===== -->
+<section class="section">
+<div class="container">
+<div class="grid grid-2" style="align-items:center;gap:48px;">
+<div>
+<span class="eyebrow" data-en="Our Positioning" data-zh="我们的定位">我们的定位</span>
+<h2 data-en="A Cross-border Payment Partner Born for Cross-border Enterprises" data-zh="为跨境企业而生的跨境支付伙伴">为跨境企业而生的跨境支付伙伴</h2>
+<p data-en="ADG PAY holds a Hong Kong Money Service Operator (MSO) licence and serves cross-border enterprises such as e-commerce, trade export and SaaS with cross-border collection, multi-currency settlement and virtual accounts." data-zh="ADG PAY 持有香港MSO牌照，面向跨境电商、外贸出口与 SaaS 等跨境企业，提供跨境收款、多币种结算与虚拟账户等服务。">ADG PAY 持有香港MSO牌照，面向跨境电商、外贸出口与 SaaS 等跨境企业，提供跨境收款、多币种结算与虚拟账户等服务。</p>
+<p data-en="We believe compliant financial services should not be exclusive to large enterprises. So we combine licence advantages, transparent fees and localized service to make them accessible, affordable and trustworthy for cross-border enterprises." data-zh="我们相信，合规的金融服务不应只是大企业的专属。所以我们把牌照优势、透明费率与本地化服务结合起来，让跨境企业也能用得上、用得起、用得放心。">我们相信，合规的金融服务不应只是大企业的专属。所以我们把牌照优势、透明费率与本地化服务结合起来，让跨境企业也能用得上、用得起、用得放心。</p>
+<ul class="feature-list">
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Licensed operations, supervised by Hong Kong Customs" data-zh="持牌经营，受香港海关监管">持牌经营，受香港海关监管</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Focused on real cross-border enterprise scenarios" data-zh="聚焦跨境企业真实场景">聚焦跨境企业真实场景</span></li>
+<li><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l4 4 10-10"></path></svg><span data-en="Chinese-speaking team, same-time-zone service" data-zh="中文团队，时区一致的服务">中文团队，时区一致的服务</span></li>
+</ul>
+</div>
+<div class="license-showcase" style="box-shadow:var(--shadow-md);">
+<div class="left" style="padding:36px;">
+<h2 data-en="Licensed, Focused, Localized" data-zh="持牌、专注、本地化" style="font-size:1.4rem;">持牌、专注、本地化</h2>
+<p data-en="We focus on serving cross-border enterprises, putting compliance, transparency and localized support into practice." data-zh="我们专注服务跨境企业，把合规、透明与本地化支持做到实处。">我们专注服务跨境企业，把合规、透明与本地化支持做到实处。</p>
+<a class="btn btn-light btn-sm" data-en="Talk to Us" data-zh="与我们聊聊" href="#view-contact">与我们聊聊</a>
+</div>
+<div class="right" style="padding:36px;">
+<div class="metric" style="margin-bottom:14px;"><div class="num" data-en="MSO" data-zh="MSO">MSO</div><div class="label" data-en="Hong Kong Money Service Licence" data-zh="香港金钱服务牌照">香港金钱服务牌照</div></div>
+<div class="metric"><div class="num" data-en="SMEs" data-zh="中小企">中小企</div><div class="label" data-en="Core Client Segment" data-zh="核心服务客群">核心服务客群</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 里程碑 ===== -->
+<section class="section bg-soft">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Our Journey" data-zh="发展足迹">发展足迹</span>
+<h2 data-en="A Steady Path Forward" data-zh="稳健前行的一路">稳健前行的一路</h2>
+</div>
+<div class="steps">
+<div class="step"><div class="n">·</div><h4 data-en="Company Founded" data-zh="公司成立">公司成立</h4><p data-en="Established in Hong Kong, positioned for cross-border enterprise payment services." data-zh="于香港设立，定位跨境企业跨境支付服务。">于香港设立，定位跨境企业跨境支付服务。</p></div>
+<div class="step"><div class="n">·</div><h4 data-en="Obtained MSO Licence" data-zh="取得 MSO牌照">取得 MSO牌照</h4><p data-en="Granted the Money Service Operator licence by Hong Kong Customs." data-zh="获香港海关发出MSO牌照。">获香港海关发出MSO牌照。</p></div>
+<div class="step"><div class="n">·</div><h4 data-en="Products Launched" data-zh="产品上线">产品上线</h4><p data-en="Cross-border collection and multi-currency settlement capabilities launched." data-zh="跨境收款与多币种结算能力对外提供服务。">跨境收款与多币种结算能力对外提供服务。</p></div>
+<div class="step"><div class="n">·</div><h4 data-en="Ongoing Service" data-zh="持续服务">持续服务</h4><p data-en="Serving more industry clients and refining the localized experience." data-zh="服务更多行业客户，打磨本地化体验。">服务更多行业客户，打磨本地化体验。</p></div>
+</div>
+</div>
+</section>
+<!-- ===== 团队 ===== -->
+<section class="section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Core Team" data-zh="核心团队">核心团队</span>
+<h2 data-en="A Pragmatic and Experienced Team" data-zh="务实而有经验的团队">务实而有经验的团队</h2>
+<p data-en="Core members come from payments, risk control and cross-border trade, with first-hand understanding of cross-border enterprises' pain points." data-zh="核心成员来自支付、风控与跨境贸易领域，对跨境企业的经营痛点有切身体会。">核心成员来自支付、风控与跨境贸易领域，对跨境企业的经营痛点有切身体会。</p>
+</div>
+<div class="grid grid-4">
+<div class="card text-center">
+<div class="icon-box" data-en="M" data-zh="管" style="margin:0 auto 14px;width:64px;height:64px;border-radius:50%;font-weight:800;font-size:1.3rem;">管</div>
+<h3 data-en="Management / Strategy" data-zh="管理 / 战略">管理 / 战略</h3>
+<p data-en="Responsible for compliance direction and overall operations, ensuring the business runs steadily within the regulatory framework." data-zh="负责合规方向与整体经营，确保业务在监管框架内稳健运行。" style="font-size:.9rem;">负责合规方向与整体经营，确保业务在监管框架内稳健运行。</p>
+</div>
+<div class="card text-center">
+<div class="icon-box" data-en="R" data-zh="风" style="margin:0 auto 14px;width:64px;height:64px;border-radius:50%;font-weight:800;font-size:1.3rem;">风</div>
+<h3 data-en="Risk Control / Compliance" data-zh="风控 / 合规">风控 / 合规</h3>
+<p data-en="Coordinates KYC, AML and transaction monitoring, safeguarding the bottom line of funds and compliance." data-zh="统筹 KYC、AML 与交易监控，守住资金与合规底线。" style="font-size:.9rem;">统筹 KYC、AML 与交易监控，守住资金与合规底线。</p>
+</div>
+<div class="card text-center">
+<div class="icon-box" data-en="T" data-zh="技" style="margin:0 auto 14px;width:64px;height:64px;border-radius:50%;font-weight:800;font-size:1.3rem;">技</div>
+<h3 data-en="Technology &amp; Product" data-zh="技术与产品">技术与产品</h3>
+<p data-en="Refines the collection, settlement and reconciliation experience, keeping the system stable and easy to use." data-zh="打磨收款、结算与对账体验，让系统稳定好用。" style="font-size:.9rem;">打磨收款、结算与对账体验，让系统稳定好用。</p>
+</div>
+<div class="card text-center">
+<div class="icon-box" data-en="C" data-zh="客" style="margin:0 auto 14px;width:64px;height:64px;border-radius:50%;font-weight:800;font-size:1.3rem;">客</div>
+<h3 data-en="Customer Success" data-zh="客户成功">客户成功</h3>
+<p data-en="1v1 account manager accompanying the entire onboarding and daily usage process." data-zh="一对一 客户经理，陪伴开户与日常使用全过程。" style="font-size:.9rem;">1v1 客户经理，陪伴开户与日常使用全过程。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 监管资质 / MSO ===== -->
+<section class="section bg-soft" id="license">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Regulatory Qualifications" data-zh="监管资质">监管资质</span>
+<h2 data-en="Hong Kong MSO Licence" data-zh="香港 MSO牌照">香港 MSO 牌照</h2>
+<p data-en="The Money Service Operator licence is issued by Hong Kong Customs, covering currency exchange and remittance services." data-zh="MSO牌照由香港海关发出，涵盖货币兑换与汇款服务。">MSO牌照由香港海关发出，涵盖货币兑换与汇款服务。</p>
+</div>
+<div class="license-showcase">
+<div class="left">
+<span class="badge-license" data-en='MSO Licensed&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+              MSO持牌
+            ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+              MSO 持牌
+            </span>
+<h2 data-en="Operating Under Regulation" data-zh="在监管之下开展业务">在监管之下开展业务</h2>
+<p data-en="Being licensed means we must comply with anti-money laundering, customer due diligence and client fund handling rules, and accept regulator supervision. This is the foundation of our compliance commitment to clients." data-zh="持牌意味着我们须遵守AML、客户尽职审查与客户资金处理等相关规定，并接受监管机构的监督。这是我们向客户承诺合规的基础。">持牌意味着我们须遵守AML、客户尽职审查与客户资金处理等相关规定，并接受监管机构的监督。这是我们向客户承诺合规的基础。</p>
+<a class="btn btn-light btn-sm" data-en="Learn about Compliance &amp; Security" data-zh="了解合规与安全" href="#view-compliance" style="margin-top:8px;">了解合规与安全</a>
+</div>
+<div class="right">
+<div class="license-card">
+<div class="seal" data-en="MSO" data-zh="MSO">MSO</div>
+<div>
+<div data-en="Money Service Operator Licence" data-zh="MSO牌照" style="font-weight:700;">MSO牌照</div>
+<div data-en="Regulated by Hong Kong Customs" data-zh="香港海关监管" style="color:var(--gray-500);font-size:.9rem;">香港海关监管</div>
+</div>
+</div>
+<div class="kv"><span class="k" data-en="Company Name" data-zh="公司名称">公司名称</span><span class="v" data-en="AD GLOBAL (HONG KONG) LIMITED" data-zh="AD GLOBAL (HONG KONG) LIMITED">AD GLOBAL (HONG KONG) LIMITED</span></div>
+<div class="kv"><span class="k" data-en="Regulatory Authority" data-zh="监管机构">监管机构</span><span class="v" data-en="Hong Kong Customs" data-zh="香港海关">香港海关</span></div>
+<div class="kv"><span class="k" data-en="Scope of Services" data-zh="服务范围">服务范围</span><span class="v" data-en="Currency Exchange / Remittance" data-zh="货币兑换 / 汇款">货币兑换 / 汇款</span></div>
+<div class="kv"><span class="k" data-en="Registration Region" data-zh="注册地区">注册地区</span><span class="v" data-en="Hong Kong, China" data-zh="中国香港">中国香港</span></div>
+<div class="kv"><span class="k" data-en="Fund Arrangement" data-zh="资金安排">资金安排</span><span class="v" data-en="Client Funds Segregated Custody" data-zh="客户资金隔离存放">客户资金隔离存放</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section-sm">
+<div class="container">
+<div class="cta-band">
+<h2 data-en="Want to learn more about our qualifications and services?" data-zh="想进一步了解我们的资质与服务？">想进一步了解我们的资质与服务？</h2>
+<p data-en="Feel free to contact us for materials or to schedule a one-on-one discussion." data-zh="欢迎联系我们，获取资料或预约一对一沟通。">欢迎联系我们，获取资料或预约一对一沟通。</p>
+<div class="hero-cta">
+<a class="btn btn-light btn-lg" data-en="Contact Us" data-zh="联系我们" href="#view-contact">联系我们</a>
+<a class="btn btn-outline-white btn-lg" data-en="Compliance &amp; Security" data-zh="合规与安全" href="#view-compliance">合规与安全</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- ==================== 合规与安全 ==================== -->
+<section class="view" data-view="compliance">
+<section class="hero" style="padding:72px 0 76px;">
+<div class="container">
+<span class="badge-license" data-en='Regulated Operations&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+          受监管经营
+        ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+          受监管经营
+        </span>
+<h1 data-en="Compliance &amp; Security" data-zh="合规与安全">合规与安全</h1>
+<p class="lead" data-en="Compliance is not a slogan but the premise of every transaction we conduct. Below are our real commitments to clients." data-zh="合规不是口号，而是我们开展每一笔业务的前提。以下是我们对客户的真实承诺。">合规不是口号，而是我们开展每一笔业务的前提。以下是我们对客户的真实承诺。</p>
+</div>
+</section>
+<div class="container">
+<nav aria-label="面包屑" class="breadcrumb">
+<a data-en="Home" data-zh="首页" href="#view-home">首页</a><span>›</span><a data-en="Compliance &amp; Security" data-zh="合规与安全" href="#view-compliance">合规与安全</a>
+</nav>
+</div>
+<!-- ===== 合规框架 ===== -->
+<section class="section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Compliance Framework" data-zh="合规框架">合规框架</span>
+<h2 data-en="Operating Under Regulation" data-zh="在监管之下开展业务">在监管之下开展业务</h2>
+<p data-en="We hold a Hong Kong MSO licence, supervised by Hong Kong Customs, and comply with anti-money laundering and customer due diligence rules." data-zh="我们持有香港 MSO牌照，受香港海关监管，遵守AML与客户尽职审查等相关规定。">我们持有香港 MSO 牌照，受香港海关监管，遵守AML与客户尽职审查等相关规定。</p>
+</div>
+<div class="grid grid-3">
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg></div>
+<h3 data-en="Licensed Operations" data-zh="持牌经营">持牌经营</h3>
+<p data-en="The Money Service Operator licence is issued by Hong Kong Customs; operations are regulated and supervised." data-zh="MSO牌照由香港海关发出，经营受监管约束，并接受监督。">MSO牌照由香港海关发出，经营受监管约束，并接受监督。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4-4"></path></svg></div>
+<h3 data-en="KYC Client Due Diligence" data-zh="KYC尽调">KYC 客户尽调</h3>
+<p data-en="Complete customer identity and business background verification before onboarding to reduce risk at the source." data-zh="开户前完成客户身份与业务背景核验，从源头降低风险。">开户前完成客户身份与业务背景核验，从源头降低风险。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2v20M2 12h20"></path></svg></div>
+<h3 data-en="Anti-Money Laundering" data-zh="AML">AML</h3>
+<p data-en="Establish an anti-money laundering system and suspicious transaction identification process, reporting per regulatory requirements." data-zh="建立AML制度与可疑交易识别流程，配合监管要求报送。">建立AML制度与可疑交易识别流程，配合监管要求报送。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 数据安全 ===== -->
+<section class="section bg-soft" id="faq">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Data Security" data-zh="数据安全">数据安全</span>
+<h2 data-en="Protect Your Data &amp; Privacy" data-zh="保护你的数据与隐私">保护你的数据与隐私</h2>
+</div>
+<div class="grid grid-2" style="gap:24px;">
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="10" rx="2" width="16" x="4" y="10"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg></div>
+<h3 data-en="Encryption in Transit &amp; Storage" data-zh="传输与存储加密">传输与存储加密</h3>
+<p data-en="Use industry-standard encryption to protect data in transit and at rest, reducing information leakage risk." data-zh="采用行业通用的加密技术保护数据传输与存储，降低信息泄露风险。">采用行业通用的加密技术保护数据传输与存储，降低信息泄露风险。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg></div>
+<h3 data-en="Least-privilege Access" data-zh="最小权限访问">最小权限访问</h3>
+<p data-en="Role-based internal access control ensures only authorized personnel access data within necessary scope." data-zh="内部采用基于角色的访问控制，仅授权人员在必要范围内接触数据。">内部采用基于角色的访问控制，仅授权人员在必要范围内接触数据。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 3h18v18H3z"></path><path d="M3 9h18M9 21V9"></path></svg></div>
+<h3 data-en="Operation Logging" data-zh="操作留痕">操作留痕</h3>
+<p data-en="Key operations are logged for audit and traceability, improving overall accountability." data-zh="关键操作记录日志，便于审计与追溯，提升整体可问责性。">关键操作记录日志，便于审计与追溯，提升整体可问责性。</p>
+</div>
+<div class="card">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12a9 9 0 11-6-8"></path><path d="M21 4v5h-5"></path></svg></div>
+<h3 data-en="Continuous Monitoring" data-zh="持续监测">持续监测</h3>
+<p data-en="Continuously monitor and periodically assess the system to detect and handle anomalies promptly." data-zh="对系统进行安全监测与定期评估，及时发现并处置异常。">对系统进行安全监测与定期评估，及时发现并处置异常。</p>
+</div>
+</div>
+<p class="text-center" data-en="Note: The above describes general security practices. If your company holds specific certifications (e.g., ISO 27001, SOC 2), please add them here with certificates." data-zh="说明：以上为通用安全实践描述。如贵司已取得具体认证（如 ISO 27001、SOC 2 等），请在此处如实补充并附证书。" style="color:var(--gray-500);font-size:.85rem;margin-top:22px;">说明：以上为通用安全实践描述。如贵司已取得具体认证（如 ISO 27001、SOC 2 等），请在此处如实补充并附证书。</p>
+</div>
+</section>
+<!-- ===== 风控体系 ===== -->
+<section class="section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow" data-en="Risk Control System" data-zh="风控体系">风控体系</span>
+<h2 data-en="Multi-layer Risk Control, Safeguarding Every Fund" data-zh="多层风控，守护每笔资金">多层风控，守护每笔资金</h2>
+<p data-en="From onboarding to transactions, corresponding controls are set at key stages." data-zh="从开户到交易，关键环节设置相应控制措施。">从开户到交易，关键环节设置相应控制措施。</p>
+</div>
+<div class="steps">
+<div class="step"><div class="n">1</div><h4 data-en="Access Review" data-zh="准入审核">准入审核</h4><p data-en="Onboarding KYC and business background checks filter out high-risk entities." data-zh="开户 KYC 与业务背景核验，筛除高风险主体。">开户 KYC 与业务背景核验，筛除高风险主体。</p></div>
+<div class="step"><div class="n">2</div><h4 data-en="Transaction Monitoring" data-zh="交易监控">交易监控</h4><p data-en="Combine rule-based and manual risk identification for transactions." data-zh="对交易进行规则与人工结合的风险识别。">对交易进行规则与人工结合的风险识别。</p></div>
+<div class="step"><div class="n">3</div><h4 data-en="Exception Review" data-zh="异常复核">异常复核</h4><p data-en="Initiate review and necessary restrictions for suspicious transactions." data-zh="对可疑交易启动复核与必要的限制措施。">对可疑交易启动复核与必要的限制措施。</p></div>
+<div class="step"><div class="n">4</div><h4 data-en="Compliance Reporting" data-zh="合规报送">合规报送</h4><p data-en="Fulfill suspicious transaction identification and reporting obligations per regulatory requirements." data-zh="依监管要求履行可疑交易识别与报送义务。">依监管要求履行可疑交易识别与报送义务。</p></div>
+</div>
+</div>
+</section>
+<!-- ===== 资金安全 ===== -->
+<section class="section bg-soft">
+<div class="container">
+<div class="license-showcase">
+<div class="left">
+<span class="badge-license" data-en='Fund Segregation&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;rect height="10" rx="2" width="16" x="4" y="10"&gt;&lt;/rect&gt;&lt;path d="M8 10V7a4 4 0 018 0v3"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;rect height="10" rx="2" width="16" x="4" y="10"&gt;&lt;/rect&gt;&lt;path d="M8 10V7a4 4 0 018 0v3"&gt;&lt;/path&gt;&lt;/svg&gt;
+              资金隔离
+            ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="10" rx="2" width="16" x="4" y="10"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg>
+              资金隔离
+            </span>
+<h2 data-en="Client Funds Segregated Custody" data-zh="客户资金隔离存放">客户资金隔离存放</h2>
+<p data-en="Client funds are managed separately from company own funds and held in segregated custody per licence and regulatory requirements, reducing misappropriation risk." data-zh="客户资金与公司自有资金分离管理，按牌照与监管要求以隔离方式存放，降低资金被挪用的风险。">客户资金与公司自有资金分离管理，按牌照与监管要求以隔离方式存放，降低资金被挪用的风险。</p>
+</div>
+<div class="right">
+<div class="kv"><span class="k" data-en="Account Segregation" data-zh="账户隔离">账户隔离</span><span class="v" data-en="Client / Own Funds Separated" data-zh="客户 / 自有分离">客户 / 自有分离</span></div>
+<div class="kv"><span class="k" data-en="Custody Method" data-zh="存放方式">存放方式</span><span class="v" data-en="Segregated Custody (Regulated)" data-zh="隔离存放（受监管）">隔离存放（受监管）</span></div>
+<div class="kv"><span class="k" data-en="Usage Restriction" data-zh="用途限制">用途限制</span><span class="v" data-en="Used Only for Client Instructions" data-zh="仅用于客户指令">仅用于客户指令</span></div>
+<div class="kv"><span class="k" data-en="Audit" data-zh="审计">审计</span><span class="v" data-en="Periodic Reconciliation &amp; Retention" data-zh="定期核对与留存">定期核对与留存</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section-sm">
+<div class="container">
+<div class="cta-band">
+<h2 data-en="Still have questions about compliance and security?" data-zh="对合规与安全还有疑问？">对合规与安全还有疑问？</h2>
+<p data-en="We are happy to discuss specific arrangements with clients." data-zh="我们乐于就具体安排与客户沟通说明。">我们乐于就具体安排与客户沟通说明。</p>
+<div class="hero-cta">
+<a class="btn btn-light btn-lg" data-en="View FAQ" data-zh="查看 常见问题" href="#view-faq">查看 FAQ</a>
+<a class="btn btn-outline-white btn-lg" data-en="Contact Us" data-zh="联系我们" href="#view-contact">联系我们</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- ==================== 帮助中心 / FAQ ==================== -->
+<section class="view" data-view="faq">
+<section class="hero" style="padding:72px 0 76px;">
+<div class="container">
+<h1 data-en="Help Center" data-zh="帮助中心">帮助中心 / FAQ</h1>
+<p class="lead" data-en="Common questions about onboarding, fees, collection and compliance are all here. Can't find an answer? Contact us anytime." data-zh="关于开户、费率、收款与合规的常见问题都在这里。没找到答案？随时联系我们。">关于开户、费率、收款与合规的常见问题都在这里。没找到答案？随时联系我们。</p>
+</div>
+</section>
+<div class="container">
+<nav aria-label="面包屑" class="breadcrumb">
+<a data-en="Home" data-zh="首页" href="#view-home">首页</a><span>›</span><a data-en="Help Center" data-zh="帮助中心" href="#view-faq">帮助中心</a>
+</nav>
+</div>
+<!-- ===== 使用指南入口 ===== -->
+<section class="section-sm" id="guide">
+<div class="container">
+<div class="grid grid-3">
+<a class="card" href="#view-contact" style="text-decoration:none;color:inherit;">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4h16v16H4z"></path><path d="M8 9h8M8 13h8M8 17h5"></path></svg></div>
+<h3 data-en="Account Opening Guide" data-zh="开户指南">开户指南</h3>
+<p data-en="Required documents, review process and estimated timeline at a glance." data-zh="所需资料、审核流程与预计时长一览。">所需资料、审核流程与预计时长一览。</p>
+<span class="btn btn-ghost btn-sm" data-en="View →" data-zh="查看 →" style="pointer-events:none;">查看 →</span>
+</a>
+<a class="card" href="#view-products" style="text-decoration:none;color:inherit;">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 7h18v10H3z"></path><path d="M3 11h18"></path></svg></div>
+<h3 data-en="Collection Guide" data-zh="收款操作指引">收款操作指引</h3>
+<p data-en="How to get a collection account, initiate and reconcile collections." data-zh="如何获取收款账户、发起与核对收款。">如何获取收款账户、发起与核对收款。</p>
+<span class="btn btn-ghost btn-sm" data-en="View →" data-zh="查看 →" style="pointer-events:none;">查看 →</span>
+</a>
+<a class="card" href="#view-compliance" style="text-decoration:none;color:inherit;">
+<div class="icon-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg></div>
+<h3 data-en="Security &amp; Compliance" data-zh="安全与合规说明">安全与合规说明</h3>
+<p data-en="Learn about our compliance framework and fund security measures." data-zh="了解我们的合规框架与资金安全措施。">了解我们的合规框架与资金安全措施。</p>
+<span class="btn btn-ghost btn-sm" data-en="View →" data-zh="查看 →" style="pointer-events:none;">查看 →</span>
+</a>
+</div>
+</div>
+</section>
+<section class="section-sm" id="bilingual-support">
+<div class="container">
+<div class="support-languages"><strong data-en="Bilingual help" data-zh="中英双语帮助">中英双语帮助 · Bilingual help</strong><span data-en="For key onboarding, KYC, account application, collection records, exchange and payment questions, Chinese and English explanations are supported; for manual assistance, contact the support team directly." data-zh="关键开户、KYC、账户申请、收款记录、兑换与付款问题，支持中文和 英文 说明；需要人工协助时可直接联系支持团队。">关键开户、KYC、账户申请、收款记录、兑换与付款问题，支持中文和 English 说明；需要人工协助时可直接联系支持团队。</span><a class="btn btn-ghost btn-sm" data-en="Contact support team →" data-zh="联系支持团队 →" href="#bilingual">联系支持团队 →</a></div>
+</div>
+</section>
+<!-- ===== FAQ 分类 ===== -->
+<section class="section">
+<div class="container" style="max-width:880px;">
+<div class="section-head">
+<span class="eyebrow" data-en="FAQ" data-zh="常见问题">常见问题</span>
+<h2 data-en="Things You May Want to Know" data-zh="你可能想了解">你可能想了解</h2>
+</div>
+<div class="faq-cat">
+<h3 data-en="Account Opening" data-zh="开户相关">开户相关</h3>
+<div class="accordion">
+<div class="acc-item">
+<button class="acc-trigger" data-en='What documents are required to open an account?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='开通账户需要哪些资料？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>开通账户需要哪些资料？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Usually corporate registration documents, beneficial owner information, business description and bank account details, etc. The exact list depends on the onboarding form and KYC requirements; more complete documents mean faster review." data-zh="通常需要企业注册文件、受益所有人信息、业务说明与银行账户资料等。具体清单以开户表单与 KYC 要求为准，资料越齐全审核越快。">通常需要企业注册文件、受益所有人信息、业务说明与银行账户资料等。具体清单以开户表单与 KYC 要求为准，资料越齐全审核越快。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='How long does account review take?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='开户审核需要多久？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>开户审核需要多久？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="With complete documents, usually within a few business days. Complex cases or those needing supplemental materials take longer; the account manager will keep you updated." data-zh="在资料完整的情况下，通常数个工作日内完成。复杂或需补充材料的个案会相应延长，客户经理会同步进度。">在资料完整的情况下，通常数个工作日内完成。复杂或需补充材料的个案会相应延长，客户经理会同步进度。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='Can individuals open an account?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='个人可以开户吗？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>个人可以开户吗？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Current services mainly target corporate clients (e.g., cross-border e-commerce, trade and SaaS companies). Individual services are subject to official notice." data-zh="当前服务主要面向企业客户（如跨境电商、外贸与 SaaS 公司）。个人业务以正式说明为准。">当前服务主要面向企业客户（如跨境电商、外贸与 SaaS 公司）。个人业务以正式说明为准。</div></div>
+</div>
+</div>
+</div>
+<div class="faq-cat">
+<h3 data-en="Fees &amp; Settlement" data-zh="费率与结算">费率与结算</h3>
+<div class="accordion">
+<div class="acc-item">
+<button class="acc-trigger" data-en='How are fees calculated?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='费率是如何计算的？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>费率是如何计算的？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Fees usually consist of collection/payment handling fees and FX spread. We disclose them transparently before onboarding; specifics depend on your industry, currency and volume." data-zh="费率通常由收款/付款手续费与换汇点差组成。我们以透明方式在开户前告知，具体以你的行业、币种与交易量为准。">费率通常由收款/付款手续费与换汇点差组成。我们以透明方式在开户前告知，具体以你的行业、币种与交易量为准。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='Which currencies can be settled?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='支持哪些币种结算？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>支持哪些币种结算？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Multiple major settlement currencies are supported (e.g., USD, EUR, GBP, HKD); the exact settlable currencies depend on the service scope at account opening." data-zh="支持多种主流结算币种（如 USD、EUR、GBP、HKD 等），具体可结算币种以账户开通时的服务范围为准。">支持多种主流结算币种（如 USD、EUR、GBP、HKD 等），具体可结算币种以账户开通时的服务范围为准。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='How long does funding usually take to arrive?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='资金一般多久到账？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>资金一般多久到账？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Arrival time depends on currency, channel and compliance review; some channels are faster. Actual timing is per the transaction prompt and agreement." data-zh="到账时间取决于币种、通道与合规审核，部分通道可较快到账。实际时效以交易时的提示与协议约定为准。">到账时间取决于币种、通道与合规审核，部分通道可较快到账。实际时效以交易时的提示与协议约定为准。</div></div>
+</div>
+</div>
+</div>
+<div class="faq-cat">
+<h3 data-en="Global Account &amp; Operations" data-zh="全球账户与操作">全球账户与操作</h3>
+<div class="accordion">
+<div class="acc-item">
+<button class="acc-trigger" data-en='What information can I view after applying for a global account?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='全球账户申请后可以查看哪些信息？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>全球账户申请后可以查看哪些信息？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Within the activated service scope you can view account region, currency, account number and current status; application records track onboarding progress; actual features are per the account page." data-zh="可以在已开通的服务范围内查看账户地区、币种、账号信息和当前状态；申请记录用于跟进开通进度，具体可用功能以账户页面实际展示为准。">可以在已开通的服务范围内查看账户地区、币种、账号信息和当前状态；申请记录用于跟进开通进度，具体可用功能以账户页面实际展示为准。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='How do I reconcile collections and entry vouchers?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='如何核对收款和入账凭证？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>如何核对收款和入账凭证？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Filter transactions by account, currency or time in collection records; after confirming credit, view or retain the corresponding voucher in voucher management; actual download rights depend on account service scope." data-zh="在收款记录中按账户、币种或时间筛选交易，确认入账后可在入账凭证管理中查看或留存对应凭证，实际下载权限以账户服务范围为准。">在收款记录中按账户、币种或时间筛选交易，确认入账后可在入账凭证管理中查看或留存对应凭证，实际下载权限以账户服务范围为准。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='Can the support team communicate in English?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='支持团队可以用英文沟通吗？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>支持团队可以用英文沟通吗？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Yes. The support team can handle onboarding, KYC, account application, collection verification, exchange and payment status follow-up in Chinese and English. Please indicate your preferred language when submitting an inquiry." data-zh="可以。支持团队可使用中文和 英文 处理开户、KYC、账户申请、收款核对、兑换和付款状态跟进。提交咨询时请注明偏好语言。">可以。支持团队可使用中文和 English 处理开户、KYC、账户申请、收款核对、兑换和付款状态跟进。提交咨询时请注明偏好语言。</div></div>
+</div>
+</div>
+</div>
+<div class="faq-cat">
+<h3 data-en="Compliance &amp; Security" data-zh="合规与安全">合规与安全</h3>
+<div class="accordion">
+<div class="acc-item">
+<button class="acc-trigger" data-en='Do you have a payment licence?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='你们有支付牌照吗？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>你们有支付牌照吗？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="We hold a Hong Kong Money Service Operator (MSO) licence, supervised by Hong Kong Customs. Licence number and registration details are on the 'About Us – Licence' page." data-zh="我们持有香港MSO牌照，受香港海关监管。牌照编号与登记信息见「关于我们 - 牌照资质」页面。">我们持有香港MSO牌照，受香港海关监管。牌照编号与登记信息见「关于我们 - 牌照资质」页面。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='How is my fund security ensured?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='我的资金安全如何保障？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>我的资金安全如何保障？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="Client funds are segregated from company own funds, and the system uses encryption and access control. See the 'Compliance &amp; Security' page." data-zh="客户资金与公司自有资金隔离存放，系统采用加密与访问控制等安全措施。详见「合规与安全」页面。">客户资金与公司自有资金隔离存放，系统采用加密与访问控制等安全措施。详见「合规与安全」页面。</div></div>
+</div>
+<div class="acc-item">
+<button class="acc-trigger" data-en='Why are supplemental documents sometimes required?&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;' data-zh='为什么有时需要补充材料？&lt;span class="plus"&gt;&lt;svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"&gt;&lt;path d="M12 5v14M5 12h14"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;'>为什么有时需要补充材料？<span class="plus"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+<div class="acc-body"><div class="acc-body-inner" data-en="To meet KYC and anti-money laundering obligations, we verify transaction backgrounds. Supplemental documents are part of compliance, protecting both parties' fund security." data-zh="为履行 KYC 与AML义务，我们会就交易背景进行核验。补充材料是合规流程的一部分，旨在保护双方资金安全。">为履行 KYC 与AML义务，我们会就交易背景进行核验。补充材料是合规流程的一部分，旨在保护双方资金安全。</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section-sm">
+<div class="container">
+<div class="cta-band">
+<h2 data-en="Any other questions?" data-zh="还有其他问题？">还有其他问题？</h2>
+<p data-en="Our team is ready to answer anytime." data-zh="我们的团队随时为你解答。">我们的团队随时为你解答。</p>
+<div class="hero-cta">
+<a class="btn btn-light btn-lg" data-en="Contact Support" data-zh="联系客服" href="#view-contact">联系客服</a>
+<a class="btn btn-outline-white btn-lg" data-en="Browse Products" data-zh="浏览产品" href="#view-products">浏览产品</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- ==================== 联系我们 ==================== -->
+<section class="view" data-view="contact">
+<section class="hero" style="padding:72px 0 76px;">
+<div class="container">
+<span class="badge-license" data-en='Local Team Service&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+          本地团队服务
+        ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+          本地团队服务
+        </span>
+<h1 data-en="Contact Us" data-zh="联系我们">联系我们</h1>
+<p class="lead" data-en="Whether for onboarding consultation or business cooperation, leave your information and our team will contact you soon." data-zh="无论是开户咨询还是商务合作，留下信息，我们的团队会尽快与你联系。">无论是开户咨询还是商务合作，留下信息，我们的团队会尽快与你联系。</p>
+</div>
+</section>
+<div class="container">
+<nav aria-label="面包屑" class="breadcrumb">
+<a data-en="Home" data-zh="首页" href="#view-home">首页</a><span>›</span><a data-en="Contact Us" data-zh="联系我们" href="#view-contact">联系我们</a>
+</nav>
+</div>
+<section class="section">
+<div class="container">
+<div class="contact-grid">
+<!-- 左侧：联系方式 -->
+<div>
+<div class="info-card">
+<h3 data-en="Customer Support" data-zh="客服支持" style="margin-bottom:14px;">客服支持</h3>
+<div class="row">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4h16v16H4z"></path><path d="M4 6l8 6 8-6"></path></svg>
+<div><div data-en="Email" data-zh="邮箱" style="font-weight:600;">邮箱</div><div data-en="Athos.xu@adgpay.com" data-zh="Athos.xu@adgpay.com" style="color:var(--gray-600);font-size:.94rem;">Athos.xu@adgpay.com</div></div>
+</div>
+<div class="row">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h4l2 5-2 1a12 12 0 005 5l1-2 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"></path></svg>
+<div class="row">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+<div><div data-en="Service Hours" data-zh="服务时间" style="font-weight:600;">服务时间</div><div data-en="Monday to Friday 9:00–18:00 (Hong Kong Time)" data-zh="周一至周五 9:00–18:00（香港时间）" style="color:var(--gray-600);font-size:.94rem;">周一至周五 9:00–18:00（香港时间）</div></div>
+</div>
+</div>
+<div class="info-card" id="bilingual">
+<h3 data-en="Bilingual support" data-zh="中英双语支持" style="margin-bottom:14px;">中英双语支持 / Bilingual support</h3>
+<p data-en="The support team can handle onboarding consultation, KYC document communication, global account application, collection verification, currency exchange and payment status follow-up in Chinese and English." data-zh="支持团队可使用中文与 英文 处理开户咨询、KYC 资料沟通、全球账户申请、收款核对、币种兑换及付款状态跟进。" style="font-size:.94rem;">支持团队可使用中文与 English 处理开户咨询、KYC 资料沟通、全球账户申请、收款核对、币种兑换及付款状态跟进。</p>
+<div class="support-languages" style="padding:12px 14px;margin-top:14px;"><strong data-en="Service Method" data-zh="服务方式">服务方式</strong><span data-en="Chinese / English Email &amp; Online Communication" data-zh="中文 / 英文 邮件与在线沟通">中文 / English 邮件与在线沟通</span></div>
+<p class="bilingual-note" data-en="We recommend splitting the support inbox into 'Support / Compliance / Business' categories at launch and tagging each ticket with language preference and business module." data-zh="建议上线时将支持邮箱分流为“客服 / 合规 / 商务”三类，并为每个工单保留语言偏好与业务模块标签。">建议上线时将支持邮箱分流为“客服 / 合规 / 商务”三类，并为每个工单保留语言偏好与业务模块标签。</p>
+</div>
+<div class="info-card">
+<h3 data-en="Business Cooperation" data-zh="商务合作" style="margin-bottom:14px;">商务合作</h3>
+<div class="row">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4h16v16H4z"></path><path d="M4 6l8 6 8-6"></path></svg>
+<div><div data-en="Partnership Email" data-zh="合作邮箱" style="font-weight:600;">合作邮箱</div><div data-en="Athos.xu@adgpay.com" data-zh="Athos.xu@adgpay.com" style="color:var(--gray-600);font-size:.94rem;">Athos.xu@adgpay.com</div></div>
+</div>
+<div class="row">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+<div><div data-en="Office Address" data-zh="办公地址" style="font-weight:600;">办公地址</div><div data-en="UNIT 3586, LEVEL 35, INFINITUS PLAZA, 199 DES VOEUS RD CENTRAL, SHEUNG WAN, HONG KONG" data-zh="UNIT 3586, LEVEL 35, INFINITUS PLAZA, 199 DES VOEUS RD CENTRAL, SHEUNG WAN, HONG KONG" style="color:var(--gray-600);font-size:.94rem;">UNIT 3586, LEVEL 35, INFINITUS PLAZA, 199 DES VOEUS RD CENTRAL, SHEUNG WAN, HONG KONG</div></div>
+</div>
+</div>
+<p data-en="The above are our common contact details; feel free to write or visit anytime." data-zh="以上为我们的常用联系方式，欢迎随时来信或到访。" style="color:var(--gray-500);font-size:.85rem;">以上为我们的常用联系方式，欢迎随时来信或到访。</p>
+</div>
+<!-- 右侧：表单 -->
+<div>
+<form action="https://api.web3forms.com/submit" class="form" id="contactForm" method="POST" novalidate="">
+<input name="access_key" type="hidden" value="4ac497d8-17e9-48e5-9180-48bc2d5fb25d"/>
+<input name="subject" type="hidden" value="ADG PAY 官网 - 新咨询"/>
+<input name="from_name" type="hidden" value="ADG PAY 官网"/>
+<input name="botcheck" style="display:none" type="checkbox"/>
+<h3 data-en="Leave Your Details" data-zh="留下你的需求" style="margin-bottom:6px;">留下你的需求</h3>
+<p data-en="Fields marked with an asterisk (*) are required." data-zh="带 * 为必填项。" style="color:var(--gray-500);font-size:.92rem;margin-bottom:20px;">带 <span style="color:var(--red-500);">*</span> 为必填项。</p>
+<div class="field">
+<label for="name"><span data-en="Name" data-zh="姓名">姓名</span> <span style="color:var(--red-500);">*</span></label>
+<input data-en-ph="Your name" data-zh-ph="您的称呼" id="name" name="name" placeholder="您的称呼" required="" type="text"/>
+</div>
+<div class="row-2">
+<div class="field">
+<label for="company"><span data-en="Company Name" data-zh="公司名称">公司名称</span> <span style="color:var(--red-500);">*</span></label>
+<input data-en-ph="Company legal name" data-zh-ph="企业全称" id="company" name="company" placeholder="企业全称" required="" type="text"/>
+</div>
+<div class="field">
+<label for="phone"><span data-en="Phone" data-zh="联系电话">联系电话</span> <span style="color:var(--red-500);">*</span></label>
+<input data-en-ph="Include country code" data-zh-ph="含区号" id="phone" name="phone" placeholder="含区号" required="" type="tel"/>
+</div>
+</div>
+<div class="field">
+<label for="email"><span data-en="Email" data-zh="邮箱">邮箱</span> <span style="color:var(--red-500);">*</span></label>
+<input data-en-ph="name@company.com" data-zh-ph="请输入邮箱地址" id="email" name="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+<div class="field">
+<label data-en="Industry / Use Case" data-zh="行业场景" for="industry">行业场景</label>
+<select id="industry" name="industry">
+<option data-en="Please select" data-zh="请选择" value="">请选择</option>
+<option data-en="Cross-border E-commerce" data-zh="跨境电商">跨境电商</option>
+<option data-en="Cross-border Trade (B2B)" data-zh="外贸出口（B2B）">外贸出口（B2B）</option>
+<option data-en="SaaS / Software" data-zh="软件服务">软件服务</option>
+<option data-en="Other" data-zh="其他">其他</option>
+</select>
+</div>
+<div class="field">
+<label for="message"><span data-en="Inquiry Details" data-zh="需求说明">需求说明</span> <span style="color:var(--red-500);">*</span></label>
+<textarea data-en-ph="Briefly describe your collection/payment scenario and needs" data-zh-ph="请简要描述您的收款/付款场景与需求" id="message" name="message" placeholder="请简要描述您的收款/付款场景与需求" required=""></textarea>
+</div>
+<button class="btn btn-primary btn-block btn-lg" data-en="Submit Inquiry" data-zh="提交咨询" type="submit">提交咨询</button>
+<p class="note" data-en="By submitting, you agree that we may contact you about this inquiry. We will not use your information for other purposes." data-zh="提交即表示您同意我们就此次咨询与您联系。我们不会将您的信息用于其他用途。">提交即表示您同意我们就此次咨询与您联系。我们不会将您的信息用于其他用途。</p>
+<div class="form-msg" data-en="We have received your information and will contact you shortly!" data-zh="已收到您的信息，我们会尽快与您联系！" id="formMsg">已收到您的信息，我们会尽快与您联系！</div>
+</form>
+<p data-en="Submission is sent to your company email via Web3Forms. Please ensure the site is hosted over http (not opened locally) so the form submits correctly." data-zh="提交将通过 Web3Forms 发送至贵司邮箱。请确保网站通过网页服务器访问（而非本地双击打开），以保证表单正常提交。" style="color:var(--gray-500);font-size:.82rem;margin-top:12px;">提交将通过 Web3Forms 发送至贵司邮箱。请确保网站经 http 托管（非本地双击打开），以保证表单正常提交。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section-sm">
+<div class="container">
+<div class="cta-band">
+<h2 data-en="You can also explore on your own first" data-zh="也可以先自助了解">也可以先自助了解</h2>
+<p data-en="Check the FAQ and guides — the answer may be there." data-zh="查看常见问题与使用指南，也许答案就在其中。">查看常见问题与使用指南，也许答案就在其中。</p>
+<div class="hero-cta">
+<a class="btn btn-light btn-lg" data-en="Help Center" data-zh="帮助中心" href="#view-faq">帮助中心</a>
+<a class="btn btn-outline-white btn-lg" data-en="Product Solutions" data-zh="产品方案" href="#view-products">产品方案</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- ==================== 隐私政策 Privacy Policy ==================== -->
+<section class="view" data-view="privacy">
+<section class="hero" style="padding:72px 0 76px;">
+<div class="container">
+<span class="badge-license" data-en='Privacy &amp; Compliance&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;' data-zh='
+&lt;svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"&gt;&lt;path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+          隐私与合规
+        ' style="margin-bottom:18px;">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"></path></svg>
+          隐私与合规
+        </span>
+<h1 data-en="Privacy Policy" data-zh="隐私政策">隐私政策 · Privacy Policy</h1>
+<p class="lead pp-meta" data-en="AD GLOBAL (HONG KONG) LIMITED | BR Number: 79746756&lt;br&gt;Effective: 12/31/2025 · Last updated: 12/31/2025&lt;br/&gt;" data-zh="AD GLOBAL (HONG KONG) LIMITED | 商业登记号: 79746756&lt;br/&gt;生效日期: 12/31/2025 · 最近更新: 12/31/2025">AD GLOBAL (HONG KONG) LIMITED　|　BR Number: 79746756<br/>生效日期 / Effective: 12/31/2025　·　最近更新 / Last updated: 12/31/2025</p>
+</div>
+</section>
+<div class="container">
+<nav aria-label="breadcrumb" class="breadcrumb">
+<a data-en="Home" data-zh="首页" href="#view-home">首页 / Home</a><span>›</span><a data-en="Privacy" data-zh="隐私政策" href="#view-privacy">隐私政策 / Privacy</a>
+</nav>
+</div>
+<section class="section">
+<div class="container pp-body">
+<!-- ===== 中文 ===== -->
+<div class="pp-lang pp-zh">
+<h2>1. 关于本隐私政策</h2>
+<p>AD GLOBAL (HONG KONG) LIMITED（"本公司"、"我们"）重视您的隐私。本隐私政策说明，在您访问或使用我们的网站、应用程序、平台、产品与服务，与我们沟通，申请账户，或以其他方式与我们互动（统称"服务"）时，我们如何收集、使用、披露、传输、保留及保护个人资料。本政策应与在收集时提供的任何隐私通知或个人信息收集声明，以及规范相关服务的条款一并阅读；若某服务特定通知与本政策冲突，以该服务特定通知为准。当本公司决定个人资料处理的目的与方式时，本公司对其中所述个人资料负责；若由其他集团公司或持牌实体提供特定服务并在相关条款或收集通知中列明，该实体可能就相应处理另行负责。</p>
+<h2>2. 适用范围</h2>
+<p>本隐私政策适用于客户、潜在客户、授权用户、董事、受益所有人、控制人、企业客户的员工与代表、付款人、收款人、交易对手、网站访客、求职者，以及其他我们因服务而处理其个人资料的个人。本政策不约束银行、支付网络、卡组织、代理行、数字资产服务商或其他您直接使用的第三方的独立隐私实践，其处理适用其各自的隐私通知。</p>
+<h2>3. 我们收集的个人资料</h2>
+<h3>3.1 账户与联系资料</h3>
+<p>姓名、出生日期、国籍、住宅或营业地址、电子邮件地址、电话号码、职业、职位与签名；账户标识、登录凭证、沟通偏好，以及与我们的互动记录。</p>
+<h3>3.2 身份核验与合规资料</h3>
+<p>政府签发的身份证件及其所载信息、照片、视频、活体检测结果及用于身份核验的人脸图像或模板；税务识别编号、移民或居留信息、资金来源与财富来源信息及相关证明文件；制裁、政治公众人物、负面媒体、欺诈及其他风险筛查结果（含来自公开记录与专业数据库的信息）；有关涉嫌、企图或已发生的违法、欺诈或异常活动的信息及内部评估。</p>
+<h3>3.3 业务与所有权资料</h3>
+<p>法律名称与商号、注册编号、注册办事处与营业地址、成立文件、牌照、经营活动与财务信息；董事、股东、受益所有人、控制人、授权签署人、员工与代表的信息；合同、发票、营业证明、预期交易活动、客户或供应商信息及其他尽职调查材料。</p>
+<h3>3.4 交易与支付资料</h3>
+<p>银行账户、支付账户与钱包信息；相关时的支付卡信息；受益人与交易对手资料；交易金额、币种、日期、用途、参考号、来源、去向、状态、费用、汇率与结算信息；支付指令、发票、汇款报文、拒付、退款、争议及相关证明文件中所载信息。</p>
+<h3>3.5 技术、设备与使用资料</h3>
+<p>IP 地址、设备标识、浏览器与操作系统、语言、时区、大致位置、登录与安全日志、Cookie 标识与平台活动；用于检测账户接管、机器人、恶意软件、未授权访问及其他安全威胁的信息。</p>
+<h3>3.6 特殊或敏感资料</h3>
+<p>部分身份、生物识别、财务、刑事指控或政府标识信息，在法律下可能被视为敏感或受特别保护。我们仅在为下述目的所必需、并采取适当保障措施时处理此类信息。</p>
+<h2>4. 我们如何收集个人资料</h2>
+<p>直接来自您、您的雇主、您所代表的业务，或其他获授权提供该资料的人；来自身份核验服务商（包括 Sumsub）以及防欺诈、制裁筛查、征信与合规服务商；来自银行、支付机构、卡组织、代理行、出款伙伴、商户、交易对手及交易的其他参与方；来自公司登记处、法院、监管机构、执法机关、制裁名单、公开记录、网站及其他公开来源；通过服务、Cookie、软件开发工具包、日志与安全技术的自动收集。</p>
+<h2>5. 我们如何使用及为何使用个人资料</h2>
+<p>提供、管理与支持服务，包括开户、收款、付款、汇款、外汇、结算、对账、退款与争议处理；核验身份、权限、所有权与业务合法性，开展客户与交易对手尽职调查，并保持核验记录更新；预防、侦测、调查及举报洗钱、恐怖融资、制裁规避、扩散融资、欺诈、贿赂、腐败、税务违法、网络犯罪及其他违法或受禁活动；遵守法律、牌照条件、监管指示、法院命令、申报、记录保存与审计要求，并回应主管机关；评估交易、客户、地域、产品与渠道风险，于合理时施加限额、加强审查、冻结、限制或关闭账户；保障服务安全、认证用户、监控系统表现、排除故障及防止滥用；发送服务、安全、法律与运营通知，回应咨询与投诉，管理与您的关系；在可行时以受限、聚合或去标识化数据开发、测试与改进产品、控制、模型与用户体验；确立、行使或抗辩法律请求，保护我们的权利、客户、员工与公众；在法律允许且符合您偏好的前提下发送营销信息。</p>
+<h2>6. 法律依据与同意</h2>
+<p>我们所依赖的法律依据或许可取决于司法管辖区与处理活动，可能包括：履行合同或合同前所需的步骤；遵守法律或监管义务；我们或他人的正当利益（与您的权利相平衡）；同意；保护重大利益；确立或抗辩法律请求；以及适用法律许可的其他依据。如需同意，您可随时撤回，且不影响此前合法进行的处理；当相关资料为提供服务或法律合规所必需时，撤回可能限制我们提供该服务的能力。</p>
+<h2>7. 身份核验、Sumsub 与自动化筛查</h2>
+<p>我们使用 Sumsub，并可能使用其他专业服务商，以收集与核验身份及业务信息、进行文件真伪与活体检测、比对人脸图像、筛查制裁与政治公众人物信息、侦测欺诈并支持持续监控。视服务配置与适用法律，此类服务商可能按我们的指示、为其自身法律许可目的，或以其他在其隐私文件中披露的角色处理个人资料。核验与风险工具可能产生匹配、评分、警报或建议，这些输出支持我们的合规与风险决策，但不一定具决定性。我们可能要求补充信息、进行人工复核、延迟或拒绝开户或交易、限制账户，或于法律要求或允许时作出申报。若适用法律赋予您就仅基于自动化处理且产生法律或类似重大影响的决定相关的权利，您可联系我们索取信息、要求人工复核或提出异议（受法律豁免与限制约束）。</p>
+<h2>8. 我们何时共享个人资料</h2>
+<p>在必要且相称时，我们可能向以下方披露个人资料：我们的集团公司及负责提供相关服务的实体；Sumsub 及其他身份核验、筛查、防欺诈、网络安全、云、托管、分析、通信、客户支持与专业服务商；银行、支付机构、卡组织、代理行、流动性或外汇提供方、结算与出款伙伴、商户、受益人与交易对手及其他交易参与方；监管机构、金融情报机构、税务机关、法院、执法机关、政府机关及其他主管机关；审计师、 insurer、律师、会计师、顾问，以及潜在或实际的投资者、买家或交易对手（受适当保密保障）；以及您指示下、经您同意，或法律另行要求或允许的任何其他方。我们不会为金钱出售个人资料；若某项活动在适用隐私法下被视为"出售"、"共享"或定向广告，我们将提供该法所要求的任何通知与选择。</p>
+<h2>9. 国际传输</h2>
+<p>我们的业务与服务商跨国运营，因此个人资料可能在收集地以外被访问、存储或处理，包括数据保护法律可能与您所在地不同的司法管辖区。在需要时，我们采用适当的传输机制与保障措施，如合同保护、传输评估、访问控制、加密、数据最小化与供应商尽职调查。为履行合同、完成您请求的交易、遵守法律、确立或抗辩法律请求、保护重大利益，或在允许时经有效同意，个人资料亦可能被传输。</p>
+<h2>10. 资料保留</h2>
+<p>我们仅在为本政策所述目的（包括提供服务，以及履行AML、制裁、税务、会计、牌照、审计与记录保存义务，解决争议，执行协议，确立或抗辩法律请求）合理必要的期间内保留个人资料。保留期限因资料类型、相关服务、所涉司法管辖区、损害风险、时效期间及主管机关合法指示而异。当资料不再需要时，我们将其删除、匿名化或安全隔离，除非法律要求或允许进一步保留。账户关闭不必然要求立即删除。</p>
+<h2>11. 安全</h2>
+<p>我们维持行政、技术与物理保障措施，旨在保护个人资料免遭未授权或意外的访问、处理、删除、丢失、使用或披露。措施可能包括访问控制、认证、加密、日志、监控、安全开发、员工保密义务、事件响应、供应商审查与业务连续性控制。没有任何系统或传输绝对安全；您有责任保护自己的凭证与设备，并在怀疑未授权访问或滥用时及时通知我们。</p>
+<h2>12. 您的权利与选择</h2>
+<p>视您的所在地与具体情况，您可能享有请求访问、更正、删除、限制或反对处理个人资料的权利；以可携格式获取某些资料；撤回同意；退出某些营销、"出售"、共享或定向广告；要求复核某些自动化决定；以及向主管隐私或数据保护机关投诉。这些权利并非绝对；我们可能需要核验您的身份与权限，并可在法律允许时拒绝或限制请求（包括资料须为AML、防欺诈、法律请求、监管申报、安全或他人权利而保留的情形），并在法律允许时说明任何适用限制。行使权利请使用第 17 节的联系方式；在法律允许时您可任用授权代理人。我们不会因您行使隐私权利而对您进行非法歧视。</p>
+<h2>13. Cookie 与类似技术</h2>
+<p>我们可能使用 Cookie、本地存储、像素、软件开发工具包及类似技术来运行服务、记住偏好、保障账户安全、防止欺诈、衡量表现及了解使用情况。在需要时，我们将就非必要技术征求同意，并提供 Cookie 通知或偏好工具。浏览器设置亦允许您屏蔽或删除 Cookie，但部分服务功能可能因此不可用。</p>
+<h2>14. 营销</h2>
+<p>在法律允许时，我们可能发送有关产品或服务的资讯；您可通过通信中的退订方式或联系我们选择退出。我们就您的账户、交易、安全、法律条款或服务变更发送的非营销信息仍可能照常发送。</p>
+<h2>15. 未成年人</h2>
+<p>服务不面向儿童，仅可由具有法律行为能力和符合适用条款规定最低年龄的人士使用。除法律允许且必要（如由授权成人提供的未成年受益人的信息）外，我们不会故意收集儿童个人资料。若您认为儿童不当提供了个人资料，请联系我们。</p>
+<h2>16. 本隐私政策的变更</h2>
+<p>我们可能更新本隐私政策，以反映服务、处理实践、法律要求或组织安排的变化。我们将发布更新版本并修订"最近更新"日期。在需要时，我们会在重大变更生效前提供额外通知或取得同意。</p>
+<h2>17. 联系我们</h2>
+<p>有关隐私的问题、请求或投诉，请联系：</p>
+<ul>
+<li>AD GLOBAL (HONG KONG) LIMITED</li>
+<li>BR Number: 79746756</li>
+<li>地址：UNIT 3586, LEVEL 35, INFINITUS PLAZA, 199 DES VOEUS RD CENTRAL, SHEUNG WAN, HONG KONG</li>
+<li>邮箱：Athos.xu@adgpay.com</li>
+</ul>
+<p>您亦可能有权向您居住地、工作地或涉嫌侵权地的隐私或数据保护机关投诉；我们鼓励您先联系我们，以便我们寻求解决。</p>
+</div>
+<!-- ===== English ===== -->
+<div class="pp-lang pp-en">
+<h2>1. About this Privacy Policy</h2>
+<p>AD GLOBAL (HONG KONG) LIMITED (the "Company", "we", "us" or "our") respects your privacy. This Privacy Policy explains how we collect, use, disclose, transfer, retain and protect personal data when you visit or use our websites, applications, platforms, products and services, communicate with us, apply for an account, or otherwise interact with us (collectively, the "Services"). This Privacy Policy should be read together with any privacy notice or personal information collection statement presented at the point of collection, and with the terms governing the relevant Service. If a service-specific notice conflicts with this Privacy Policy, the service-specific notice will apply to that processing. The Company is responsible for the personal data described in this Privacy Policy where it determines why and how that data is processed. Where another group company or licensed entity provides a particular Service and is identified in the relevant terms or collection notice, that entity may be separately responsible for the corresponding processing.</p>
+<h2>2. Scope</h2>
+<p>This Privacy Policy applies to customers, prospective customers, authorised users, directors, beneficial owners, controllers, employees and representatives of business customers, payers, payees, counterparties, website visitors, job applicants and other individuals whose personal data we process in connection with the Services. It does not govern the independent privacy practices of banks, payment networks, card schemes, correspondent institutions, digital asset service providers or other third parties whose services you use directly. Their own privacy notices apply to their processing.</p>
+<h2>3. Personal Data We Collect</h2>
+<h3>3.1 Account and contact data</h3>
+<p>Name, date of birth, nationality, residential or business address, email address, telephone number, occupation, job title and signature. Account identifiers, login credentials, communication preferences and records of your interactions with us.</p>
+<h3>3.2 Identity verification and compliance data</h3>
+<p>Government-issued identity documents and the information shown on them, photographs, video, liveness results and facial images or templates used to verify identity. Tax identification numbers, immigration or residency information, source of funds and source of wealth information, and supporting documents. Sanctions, politically exposed person, adverse media, fraud and other risk-screening results, including information obtained from public records and specialist databases. Information about suspected, attempted or completed unlawful, fraudulent or unusual activity and related internal assessments.</p>
+<h3>3.3 Business and ownership data</h3>
+<p>Legal and trading names, registration numbers, registered office and operating addresses, incorporation records, licences, business activities and financial information. Information about directors, shareholders, beneficial owners, controllers, authorised signatories, employees and representatives. Contracts, invoices, proof of business, expected transaction activity, customer or supplier information and other due-diligence materials.</p>
+<h3>3.4 Transaction and payment data</h3>
+<p>Bank account, payment account and wallet details; payment card information where relevant; beneficiary and counterparty details. Transaction amount, currency, date, purpose, reference, origin, destination, status, fees, exchange rate and settlement information. Information contained in payment instructions, invoices, remittance messages, chargebacks, refunds, disputes and supporting documents.</p>
+<h3>3.5 Technical, device and usage data</h3>
+<p>IP address, device identifiers, browser and operating system, language, time zone, approximate location, login and security logs, cookie identifiers and platform activity. Information used to detect account takeover, bots, malware, unauthorised access and other security threats.</p>
+<h3>3.6 Special or sensitive data</h3>
+<p>Some identity, biometric, financial, criminal-allegation or government-identifier information may be treated as sensitive or specially protected under applicable law. We process it only where necessary for the purposes described below and with appropriate safeguards.</p>
+<h2>4. How We Collect Personal Data</h2>
+<p>Directly from you, your employer, the business you represent, or another person authorised to provide it. From identity-verification providers, including Sumsub, and from fraud-prevention, sanctions-screening, credit-reference and compliance service providers. From banks, payment institutions, card networks, correspondent institutions, payout partners, merchants, counterparties and other participants in a transaction. From company registries, courts, regulators, law-enforcement bodies, sanctions lists, public records, websites and other publicly available sources. Automatically through the Services, cookies, software development kits, logs and security technologies.</p>
+<h2>5. How and Why We Use Personal Data</h2>
+<p>Provide, administer and support the Services, including account opening, collections, payments, remittances, foreign exchange, settlement, reconciliation, refunds and dispute handling. Verify identity, authority, ownership and business legitimacy; conduct customer and counterparty due diligence; and keep verification records current. Prevent, detect, investigate and report money laundering, terrorist financing, sanctions evasion, proliferation financing, fraud, bribery, corruption, tax offences, cybercrime and other unlawful or prohibited activity. Comply with laws, licence conditions, regulatory directions, court orders, reporting, recordkeeping and audit requirements, and respond to competent authorities. Assess transaction, customer, geographic, product and channel risk; apply limits, enhanced review, holds, restrictions or account closure where justified. Secure the Services, authenticate users, monitor system performance, troubleshoot faults and prevent misuse. Communicate service, security, legal and operational notices; respond to enquiries and complaints; and manage our relationship with you. Develop, test and improve products, controls, models and user experience using appropriately restricted, aggregated or de-identified data where practicable. Establish, exercise or defend legal claims and protect our rights, customers, personnel and the public. Send marketing communications where permitted by law and in accordance with your preferences.</p>
+<h2>6. Legal Grounds and Permissions</h2>
+<p>The legal basis or permission on which we rely depends on the jurisdiction and the processing activity. It may include performance of a contract or steps requested before entering a contract; compliance with legal or regulatory obligations; our legitimate interests or those of another person, balanced against your rights; consent; protection of vital interests; establishment or defence of legal claims; and other grounds permitted by applicable law. Where consent is required, you may withdraw it at any time, without affecting processing already carried out lawfully. Withdrawal may limit our ability to provide a Service where the relevant data is necessary for that Service or for legal compliance.</p>
+<h2>7. Identity Verification, Sumsub and Automated Screening</h2>
+<p>We use Sumsub and may use other specialist providers to collect and verify identity and business information, perform document authenticity and liveness checks, compare facial images, screen sanctions and politically exposed person information, detect fraud, and support ongoing monitoring. Depending on the service configuration and applicable law, such providers may process personal data on our instructions, for their own legally permitted purposes, or in another role disclosed in their privacy documentation. Verification and risk tools may generate matches, scores, alerts or recommendations. These outputs support our compliance and risk decisions but may not be conclusive. We may request further information, conduct human review, delay or reject onboarding or transactions, restrict an account, or make reports where required or permitted by law. Where applicable law gives you rights relating to a decision based solely on automated processing that produces legal or similarly significant effects, you may contact us to request information, human review or to challenge the decision, subject to lawful exemptions and restrictions.</p>
+<h2>8. When We Share Personal Data</h2>
+<p>We may disclose personal data where necessary and proportionate to: Our group companies and the entity responsible for providing the relevant Service. Sumsub and other identity-verification, screening, fraud-prevention, cybersecurity, cloud, hosting, analytics, communications, customer-support and professional service providers. Banks, payment institutions, card schemes, correspondent institutions, liquidity or foreign-exchange providers, settlement and payout partners, merchants, beneficiaries, counterparties and other transaction participants. Regulators, financial intelligence units, tax authorities, courts, law-enforcement bodies, governmental agencies and other competent authorities. Auditors, insurers, lawyers, accountants, consultants and prospective or actual investors, purchasers or transaction counterparties, subject to appropriate confidentiality safeguards. Any other person at your direction, with your consent, or where disclosure is otherwise required or permitted by law. We do not sell personal data for money. If any activity is treated as a "sale", "sharing" or targeted advertising under an applicable privacy law, we will provide any notice and choice required by that law.</p>
+<h2>9. International Transfers</h2>
+<p>Our business and service providers operate internationally. Personal data may therefore be accessed, stored or processed outside the place where it was collected, including in jurisdictions whose data-protection laws may differ from those in your location. Where required, we use appropriate transfer mechanisms and safeguards, such as contractual protections, transfer assessments, access controls, encryption, data minimisation and vendor due diligence. Personal data may also be transferred where necessary to perform a contract, complete a transaction requested by you, comply with law, establish or defend legal claims, protect vital interests, or with valid consent where permitted.</p>
+<h2>10. Data Retention</h2>
+<p>We retain personal data only for as long as reasonably necessary for the purposes described in this Privacy Policy, including to provide the Services, meet anti-money laundering, sanctions, tax, accounting, licensing, audit and recordkeeping obligations, resolve disputes, enforce agreements and establish or defend legal claims. Retention periods vary according to the type of data, the relevant Service, the jurisdictions involved, the risk of harm, limitation periods and lawful instructions from authorities. When data is no longer required, we delete it, anonymise it or securely isolate it, unless further retention is required or permitted by law. Closure of an account does not necessarily require immediate deletion.</p>
+<h2>11. Security</h2>
+<p>We maintain administrative, technical and physical safeguards designed to protect personal data against unauthorised or accidental access, processing, erasure, loss, use or disclosure. Measures may include access controls, authentication, encryption, logging, monitoring, secure development, staff confidentiality duties, incident response, vendor review and business-continuity controls. No system or transmission is completely secure. You are responsible for protecting your credentials and devices and for notifying us promptly if you suspect unauthorised access or misuse.</p>
+<h2>12. Your Rights and Choices</h2>
+<p>Depending on your location and the circumstances, you may have rights to request access to, correction of, deletion of, restriction of or objection to processing of personal data; receive certain data in a portable format; withdraw consent; opt out of certain marketing, sale, sharing or targeted advertising; request review of certain automated decisions; and complain to a competent privacy or data-protection authority. These rights are not absolute. We may need to verify your identity and authority, and may refuse or limit a request where permitted by law, including where data must be retained for anti-money laundering, fraud prevention, legal claims, regulatory reporting, security or the rights of others. We will explain any applicable restriction where we are legally permitted to do so. To exercise a right, contact us using the details in Section 17. You may use an authorised agent where allowed by law. We will not unlawfully discriminate against you for exercising a privacy right.</p>
+<h2>13. Cookies and Similar Technologies</h2>
+<p>We may use cookies, local storage, pixels, software development kits and similar technologies to operate the Services, remember preferences, secure accounts, prevent fraud, measure performance and understand use. Where required, we will request consent for non-essential technologies and provide a cookie notice or preference tool. Browser settings may also allow you to block or delete cookies, although some Service functions may then be unavailable.</p>
+<h2>14. Marketing</h2>
+<p>We may send information about our products or services where permitted by law. You may opt out by using the unsubscribe method in the communication or contacting us. We may still send non-marketing messages concerning your account, transactions, security, legal terms or service changes.</p>
+<h2>15. Children</h2>
+<p>The Services are not intended for children and may be used only by persons who have legal capacity and meet the minimum age stated in the applicable terms. We do not knowingly collect personal data from children except where lawful and necessary, such as information about a minor beneficiary supplied by an authorised adult. If you believe a child has provided personal data improperly, please contact us.</p>
+<h2>16. Changes to this Privacy Policy</h2>
+<p>We may update this Privacy Policy to reflect changes in our Services, processing practices, legal requirements or organisational arrangements. We will publish the updated version and revise the "Last updated" date. Where required, we will provide additional notice or obtain consent before a material change takes effect.</p>
+<h2>17. Contact Us</h2>
+<p>For privacy questions, requests or complaints, contact:</p>
+<ul>
+<li>AD GLOBAL (HONG KONG) LIMITED</li>
+<li>BR Number: 79746756</li>
+<li>Address: UNIT 3586, LEVEL 35, INFINITUS PLAZA, 199 DES VOEUS RD CENTRAL, SHEUNG WAN, HONG KONG</li>
+<li>Email: Athos.xu@adgpay.com</li>
+</ul>
+<p>You may also have the right to complain to the privacy or data-protection authority in your place of residence, work or the alleged infringement. We encourage you to contact us first so that we can seek to resolve the matter.</p>
+</div>
+</div>
+</section>
+<section class="section-sm">
+<div class="container">
+<div class="cta-band">
+<h2 data-en="Questions about privacy?" data-zh="有关于隐私的疑问？">有关于隐私的疑问？</h2>
+<p data-en="Feel free to contact us about privacy policy matters." data-zh="欢迎就隐私政策相关问题与我们联系。">欢迎就隐私政策相关问题与我们联系。</p>
+<div class="hero-cta">
+<a class="btn btn-light btn-lg" data-en="Contact" data-zh="联系我们" href="#view-contact">联系我们 · Contact</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+</main>
+<!-- ===== 页脚（共享） ===== -->
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div>
+<a class="brand" href="#view-home" style="margin-bottom:14px;">
+<span class="logo-mark">ADG</span><span>ADG PAY<small data-en="Cross-border Payment" data-zh="跨境支付">跨境支付</small></span>
+</a>
+<p data-en="A payment service provider holding a Hong Kong MSO licence, focused on compliant and transparent cross-border payment and collection solutions for cross-border enterprises." data-zh="持有香港 MSO牌照的支付服务提供商，专注为跨境企业提供合规、透明的跨境支付与收款方案。" style="color:#aebfdc;font-size:.92rem;max-width:320px;">持有香港 MSO 牌照的支付服务提供商，专注为跨境企业提供合规、透明的跨境支付与收款方案。</p>
+</div>
+<div>
+<h4 data-en="Products" data-zh="产品">产品</h4>
+<ul>
+<li><a data-en="Cross-border Collection" data-zh="跨境收款" href="#receive">跨境收款</a></li>
+<li><a data-en="Multi-currency Settlement" data-zh="多币种结算" href="#settle">多币种结算</a></li>
+<li><a data-en="Virtual Accounts" data-zh="虚拟账户" href="#va">虚拟账户</a></li>
+<li><a data-en="Supplier Payments" data-zh="供应商付款" href="#pay">供应商付款</a></li>
+</ul>
+</div>
+<div>
+<h4 data-en="Company" data-zh="公司">公司</h4>
+<ul>
+<li><a data-en="About Us" data-zh="关于我们" href="#view-about">关于我们</a></li>
+<li><a data-en="Licence &amp; Qualifications" data-zh="牌照资质" href="#license">牌照资质</a></li>
+<li><a data-en="Compliance &amp; Security" data-zh="合规与安全" href="#view-compliance">合规与安全</a></li>
+<li><a data-en="Contact Us" data-zh="联系我们" href="#view-contact">联系我们</a></li>
+</ul>
+</div>
+<div>
+<h4 data-en="Support" data-zh="支持">支持</h4>
+<ul>
+<li><a data-en="Help Center" data-zh="帮助中心" href="#view-faq">帮助中心 / FAQ</a></li>
+<li><a data-en="User Guides" data-zh="使用指南" href="#guide">使用指南</a></li>
+<li><a data-en="Security Notes" data-zh="安全说明" href="#view-compliance">安全说明</a></li>
+<li><a data-en="Business Cooperation" data-zh="商务合作" href="#view-contact">商务合作</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span data-en="© 2026 AD GLOBAL (HONG KONG) LIMITED. All rights reserved." data-zh="© 2026 AD GLOBAL (HONG KONG) LIMITED. 保留所有权利。">© 2026 AD GLOBAL (HONG KONG) LIMITED. 保留所有权利。</span>
+<span class="disclaimer" data-en="Risk notice: Information on this website is subject to the formal agreement and local regulations; please confirm the specific availability, fees and arrival times of payment services with our team." data-zh="风险提示：本网站所示信息以正式协议及当地监管规定为准；支付服务的具体可用范围、费率与到账时间，请与我们的团队确认。">风险提示：本网站所示信息以正式协议及当地监管规定为准；支付服务的具体可用范围、费率与到账时间，请与我们的团队确认。</span>
+</div>
+</div>
+</footer>
+<script>
+/* ADG PAY 官网 - 单文件交互脚本（原生 JS，无外部依赖） */
+(function () {
+  "use strict";
+
+  /* ---------- 当前视图（供标题/双语使用） ---------- */
+  var currentView = "home";
+
+  var titles = {
+    home:       { zh: "ADG PAY | 持牌跨境支付与收款解决方案",     en: "ADG PAY | Licensed cross-border payment solutions" },
+    products:   { zh: "产品与解决方案 | ADG PAY",                 en: "Products & Solutions | ADG PAY" },
+    about:      { zh: "关于我们 | ADG PAY",                       en: "About us | ADG PAY" },
+    compliance: { zh: "合规与安全 | ADG PAY",                     en: "Compliance & Security | ADG PAY" },
+    faq:        { zh: "帮助中心 / 常见问题 | ADG PAY",            en: "Help Center / FAQ | ADG PAY" },
+    contact:    { zh: "联系我们 | ADG PAY",                       en: "Contact | ADG PAY" },
+    privacy:    { zh: "隐私政策 | ADG PAY",                       en: "Privacy Policy | ADG PAY" }
+  };
+
+  /* ---------- 中英双语切换 ---------- */
+  var languageToggle = document.getElementById("langToggle");
+  var language = localStorage.getItem("adgpay-language") || "zh";
+  var pageText = {
+    zh: {
+      nav: { "首页": "首页", "产品与解决方案": "产品与解决方案", "关于我们": "关于我们", "合规与安全": "合规与安全", "帮助中心": "帮助中心", "联系我们": "联系我们", "隐私政策": "隐私政策" },
+      contact: "免费咨询", brand: "跨境支付"
+    },
+    en: {
+      nav: { "首页": "Home", "产品与解决方案": "Products & Solutions", "关于我们": "About us", "合规与安全": "Compliance & Security", "帮助中心": "Help Center", "联系我们": "Contact", "隐私政策": "Privacy Policy" },
+      contact: "Get in touch", brand: "Cross-border payments"
+    }
+  };
+
+  function setTitle() {
+    var t = titles[currentView] || titles.home;
+    document.title = (language === "en") ? t.en : t.zh;
+  }
+
+  function applyLanguage(nextLanguage) {
+    language = nextLanguage;
+    var copy = pageText[language];
+    document.documentElement.lang = (language === "en") ? "en" : "zh-CN";
+    document.querySelectorAll(".nav-links a").forEach(function (link) {
+      var key = link.textContent.trim();
+      if (copy.nav[key]) link.textContent = copy.nav[key];
+      else if (language === "zh") {
+        Object.keys(pageText.en.nav).some(function (enKey) {
+          if (pageText.en.nav[enKey] === key) { link.textContent = pageText.zh.nav[enKey]; return true; }
+          return false;
+        });
+      }
+    });
+    /* 全站内容双语切换（data-en / data-zh） */
+    document.querySelectorAll("[data-en]").forEach(function (el) {
+      if (!el.dataset.zh) el.dataset.zh = el.innerHTML;
+      el.innerHTML = (language === "en") ? el.dataset.en : el.dataset.zh;
+    });
+    document.querySelectorAll("[data-en-ph]").forEach(function (el) {
+      if (!el.dataset.zhPh) el.dataset.zhPh = el.getAttribute("placeholder") || "";
+      el.setAttribute("placeholder", (language === "en") ? el.dataset.enPh : el.dataset.zhPh);
+    });
+    var ppZh = document.querySelector(".pp-zh");
+    var ppEn = document.querySelector(".pp-en");
+    if (ppZh) ppZh.style.display = (language === "zh") ? "" : "none";
+    if (ppEn) ppEn.style.display = (language === "en") ? "" : "none";
+    if (languageToggle) {
+      languageToggle.textContent = (language === "en") ? "中文" : "EN";
+      languageToggle.setAttribute("aria-label", (language === "en") ? "Switch to Chinese" : "切换中文与英文");
+      languageToggle.setAttribute("aria-pressed", (language === "en") ? "true" : "false");
+    }
+    localStorage.setItem("adgpay-language", language);
+    setTitle();
+  }
+
+  if (languageToggle) {
+    languageToggle.addEventListener("click", function () {
+      applyLanguage(language === "zh" ? "en" : "zh");
+    });
+  }
+
+  /* ---------- 视图路由（hash 切换） ---------- */
+  var views = document.querySelectorAll(".view");
+  var navLinks = document.querySelectorAll(".nav-links a");
+  var nav = document.getElementById("nav");
+
+  function showView() {
+    var hash = location.hash || "";
+    var view = null;
+    var anchorId = null;
+
+    if (hash.indexOf("#view-") === 0) {
+      view = hash.slice(6);
+    } else if (hash.length > 1) {
+      var raw = hash.slice(1);
+      var target = document.getElementById(raw);
+      if (target) {
+        var vEl = target.closest("[data-view]");
+        if (vEl) view = vEl.getAttribute("data-view");
+        anchorId = raw;
+      }
+    }
+    if (!view) view = "home";
+
+    currentView = view;
+    views.forEach(function (v) {
+      v.classList.toggle("active", v.getAttribute("data-view") === view);
+    });
+    navLinks.forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("data-view") === view);
+    });
+    if (nav) nav.classList.remove("open");
+
+    if (anchorId) {
+      var el = document.getElementById(anchorId);
+      if (el) {
+        requestAnimationFrame(function () {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+    setTitle();
+  }
+
+  window.addEventListener("hashchange", showView);
+
+  /* ---------- 移动端导航 ---------- */
+  var navToggle = document.getElementById("navToggle");
+  if (navToggle && nav) {
+    navToggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    nav.querySelectorAll(".nav-links a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        nav.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  /* ---------- 行业标签切换 ---------- */
+  var tabs = document.querySelectorAll(".tab");
+  var panels = document.querySelectorAll(".panel");
+  if (tabs.length && panels.length) {
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var key = tab.getAttribute("data-tab");
+        tabs.forEach(function (t) { t.classList.remove("active"); });
+        tab.classList.add("active");
+        panels.forEach(function (p) {
+          p.classList.toggle("active", p.getAttribute("data-panel") === key);
+        });
+      });
+    });
+  }
+
+  /* ---------- FAQ 手风琴 ---------- */
+  document.querySelectorAll(".acc-trigger").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var item = btn.parentElement;
+      var body = item.querySelector(".acc-body");
+      var isOpen = item.classList.contains("open");
+      var siblings = item.parentElement.querySelectorAll(".acc-item");
+      siblings.forEach(function (s) {
+        s.classList.remove("open");
+        s.querySelector(".acc-body").style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        body.style.maxHeight = body.scrollHeight + "px";
+      }
+    });
+  });
+
+  /* ---------- 联系表单（Web3Forms 真实提交） ---------- */
+  var form = document.getElementById("contactForm");
+  var FM = {
+    zh: { err: "请完整填写带 * 的必填项，并确保邮箱格式正确。", submitting: "提交中…", success: "已收到您的信息，我们会尽快与您联系！", submit: "提交咨询", failPrefix: "提交失败：", failDefault: "请稍后重试，或直接邮件联系我们。", net: "网络异常，提交未成功。请稍后重试，或直接邮件联系我们。" },
+    en: { err: "Please complete all required fields (*) and ensure the email format is correct.", submitting: "Submitting…", success: "We have received your information and will contact you shortly!", submit: "Submit Inquiry", failPrefix: "Submission failed: ", failDefault: "Please try again later, or email us directly.", net: "Network error, submission failed. Please try again later, or email us directly." }
+  };
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var required = form.querySelectorAll("[required]");
+      var ok = true;
+      required.forEach(function (el) {
+        if (!el.value.trim()) {
+          ok = false;
+          el.style.borderColor = "var(--red-500)";
+        } else {
+          el.style.borderColor = "";
+        }
+      });
+      var email = form.querySelector("#email");
+      if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        ok = false;
+        email.style.borderColor = "var(--red-500)";
+      }
+      var msg = document.getElementById("formMsg");
+      if (!ok) {
+        if (msg) { msg.textContent = FM[language].err; msg.style.background = "#fdecec"; msg.style.color = "var(--red-500)"; msg.classList.add("show"); }
+        return;
+      }
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = FM[language].submitting; }
+      var formData = new FormData(form);
+      var object = Object.fromEntries(formData.entries());
+      var json = JSON.stringify(object);
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: json
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (btn) { btn.disabled = false; btn.textContent = FM[language].submit; }
+          if (data.success) {
+            if (msg) { msg.textContent = FM[language].success; msg.style.background = "#e7f6ec"; msg.style.color = "var(--green-500)"; msg.classList.add("show"); }
+            form.reset();
+          } else {
+            if (msg) { msg.textContent = FM[language].failPrefix + (data.message || FM[language].failDefault); msg.style.background = "#fdecec"; msg.style.color = "var(--red-500)"; msg.classList.add("show"); }
+          }
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; btn.textContent = FM[language].submit; }
+          if (msg) { msg.textContent = FM[language].net; msg.style.background = "#fdecec"; msg.style.color = "var(--red-500)"; msg.classList.add("show"); }
+        });
+    });
+  }
+
+  /* ---------- 初始化 ---------- */
+  applyLanguage(language);
+  showView();
+})();
+
+/* =========================================================
+   ADG PAY 智能助手（本地知识库版，零外部依赖）
+   说明：基于官网内容的关键词意图匹配，即时回复客户常见问题。
+   升级为真·大模型：将 ADG_AI.enabled 设为 true 并填入支持浏览器
+   跨域(CORS)的 API（如 DeepSeek / OpenAI 兼容接口）的 key 即可。
+   ========================================================= */
+(function () {
+  "use strict";
+  function init() {
+  var root = document.getElementById("adgChat");
+  if (!root) return;
+  var fab = document.getElementById("adgChatFab");
+  var panel = document.getElementById("adgChatPanel");
+  var closeBtn = document.getElementById("adgChatClose");
+  var body = document.getElementById("adgChatBody");
+  var quick = document.getElementById("adgChatQuick");
+  var form = document.getElementById("adgChatForm");
+  var input = document.getElementById("adgChatText");
+  var status = document.getElementById("adgChatStatus");
+
+  /* —— 可选：接入真大模型（默认关闭，保持零依赖）—— */
+  var ADG_AI = {
+    enabled: true,
+    endpoint: "https://api.siliconflow.cn/v1/chat/completions",
+    apiKey: "sk-kwkiwqmwpizkugxpypmxowzbnsigysqkcjjzeujxczyyodiu",
+    model: "deepseek-ai/DeepSeek-V4-Flash"
+  };
+
+  function lang() {
+    return (localStorage.getItem("adgpay-language") || "zh") === "en" ? "en" : "zh";
+  }
+
+  var T = {
+    placeholder: { zh: "输入您的问题…", en: "Type your question…" },
+    status: { zh: "在线 · 即时回复", en: "Online · Instant reply" },
+    welcome: {
+      zh: "您好！我是 ADG PAY 智能助手 👋\n我可以帮您了解牌照资质、开户流程、收款付款、多币种与合规安全等常见问题。您想了解什么？",
+      en: "Hi! I'm the ADG PAY assistant 👋\nI can help with licensing, onboarding, collection & payments, multi-currency and compliance. What would you like to know?"
+    },
+    quick: {
+      zh: ["如何开户？", "持有哪类牌照？", "支持哪些币种？", "怎么联系你们？"],
+      en: ["How to open an account?", "What license do you hold?", "Which currencies?", "How to contact you?"]
+    },
+    contactLabel: { zh: "前往「联系我们」留资", en: "Go to Contact page" },
+    fallback: {
+      zh: "这个问题我暂时无法直接解答。您可以点击下方按钮留下联系方式，或前往「联系我们」页面，我们的团队会尽快为您详细回复。",
+      en: "I can't answer that one automatically yet. Tap the button below to leave your details, or visit the Contact page — our team will follow up shortly."
+    }
+  };
+
+  /* 关键词意图知识库（中英文关键词，覆盖官网核心业务） */
+  var KB = [
+    { k: ["牌照", "mso", "金钱服务", "监管", "合规", "license", "licensed", "regulated", "regulatory", "legal", "海关"],
+      a: { zh: "ADG PAY 持有香港海关发出的MSO牌照，受《打击洗钱及恐怖分子资金筹集条例》规管，提供货币兑换与汇款服务，并执行严格的AML与KYC审查及交易监控。",
+           en: "ADG PAY holds a Hong Kong Customs & Excise Department Money Service Operator (MSO) license, regulated under the Anti-Money Laundering and Counter-Terrorist Financing Ordinance, providing money changing and remittance with strict AML/KYC due diligence and transaction monitoring." } },
+    { k: ["开户", "注册", "申请", "onboard", "open account", "register", "sign up", "申请账户", "开通", "入驻"],
+      a: { zh: "开户流程很简单：① 在线提交企业资料与申请；② 完成KYC与业务核验；③ 审核通过后开通多币种账户。全程在线办理，合规团队会协助您准备材料。",
+           en: "Onboarding is simple: 1) Submit your company details and application online; 2) Complete KYC identity and business verification; 3) Your multi-currency account is activated after approval. Our compliance team assists with the documents." } },
+    { k: ["收款", "收钱", "收取", "collection", "receive", "收款账户", "收汇", "collect", "收款项"],
+      a: { zh: "您可通过 ADG PAY 开立多币种收款账户，向合作方提供本地收款信息以收取跨境款项，资金隔离存放、安全持有。",
+           en: "Open multi-currency collection accounts with ADG PAY and share local receiving details with partners to collect cross-border payments, held safely in segregated funds." } },
+    { k: ["付款", "打款", "支付", "pay", "send", "disburse", "付款给", "global pay", "汇款", "remit", "转账"],
+      a: { zh: "ADG PAY 支持向全球供应商、员工与合作伙伴付款，覆盖主流币种，流程为：持有币种 → 按需兑换 → 发起对外付款。",
+           en: "ADG PAY supports paying suppliers, employees and partners worldwide across major currencies: hold funds → exchange as needed → send outward payments." } },
+    { k: ["币种", "货币", "多币种", "currency", "fx", "foreign exchange", "换汇", "兑换", "exchange", "多货币", "持有"],
+      a: { zh: "我们提供多币种持有与货币兑换服务，您可在同一账户内持有多种货币，并按需进行兑换，降低汇兑成本。",
+           en: "We provide multi-currency holding and exchange — hold several currencies in one account and convert on demand to reduce FX costs." } },
+    { k: ["费率", "手续费", "收费", "fee", "charge", "cost", "price", "价格", "多少钱", "报价", "费用"],
+      a: { zh: "具体费率根据您的业务规模与币种组合定制。请留下联系方式，我们的商务团队会为您一对一提供透明报价。",
+           en: "Pricing is tailored to your business volume and currency mix. Leave your contact details and our team will share a transparent quote with you." } },
+    { k: ["到账", "多久", "时间", "speed", "settle", "settlement", "时效", "几天", "处理时间"],
+      a: { zh: "到账时间取决于币种与通道，多数主流币种付款可在 1–2 个工作日内处理。具体时效建议您联系我们按场景确认。",
+           en: "Settlement depends on currency and corridor; most major-currency payments are processed within 1–2 business days. Contact us for timing on your scenario." } },
+    { k: ["安全", "资金", "隔离", "security", "safe", "segregat", "资金安全", "加密", "保护", "风控"],
+      a: { zh: "客户资金隔离存放于受监管金融机构账户，与平台自有资金分离；全链路采用银行级加密与访问控制，保障资金与数据安全。",
+           en: "Client funds are held in segregated accounts at regulated financial institutions, separate from company funds. Bank-grade encryption and access controls protect funds and data." } },
+    { k: ["语言", "双语", "中英文", "chinese", "english", "language", "bilingual", "中文", "英文"],
+      a: { zh: "我们提供中英双语服务，网站与客服团队均支持中文与英文沟通，方便不同地区合作伙伴对接。",
+           en: "We provide bilingual (Chinese & English) service — both the website and our support team communicate in Chinese and English." } },
+    { k: ["客户", "行业", "谁", "适合", "industry", "who", "partner", "适用", "电商", "外贸", "业务"],
+      a: { zh: "ADG PAY 服务于有跨境收款、付款与换汇需求的企业，覆盖电商、外贸、服务贸易、数字业务等多种行业。",
+           en: "ADG PAY serves businesses with cross-border collection, payment and FX needs — e-commerce, trade, service export, digital businesses and more." } },
+    { k: ["联系", "客服", "电话", "邮箱", "contact", "email", "phone", "reach", "怎么找", "人工", "沟通"],
+      a: { zh: "您可访问「联系我们」页面提交咨询，我们会尽快与您取得联系；需要人工协助时也可直接邮件沟通。",
+           en: "Visit the Contact page to submit an inquiry and we'll get back to you promptly; email is also available for direct assistance." } },
+    { k: ["公司", "关于", "介绍", "about", "company", "你们是", "who are you", "是什么", "做什么"],
+      a: { zh: "ADG PAY 是持有香港MSO牌照的跨境支付服务提供商，专注为企业的全球收款、多币种持有、货币兑换与对外付款提供合规、稳定的金融基础设施。",
+           en: "ADG PAY is a Hong Kong MSO-licensed cross-border payment provider, offering compliant and reliable infrastructure for global collection, multi-currency holding, FX and outbound payments." } }
+  ];
+
+  function match(text) {
+    var t = (text || "").toLowerCase();
+    var best = null, bestScore = 0;
+    for (var i = 0; i < KB.length; i++) {
+      var score = 0;
+      for (var j = 0; j < KB[i].k.length; j++) {
+        if (t.indexOf(KB[i].k[j].toLowerCase()) !== -1) score++;
+      }
+      if (score > bestScore) { bestScore = score; best = KB[i]; }
+    }
+    return bestScore > 0 ? best : null;
+  }
+
+  function addMsg(role, text, actionLabel) {
+    var wrap = document.createElement("div");
+    wrap.className = "adg-msg " + role;
+    var bubble = document.createElement("div");
+    bubble.className = "adg-bubble";
+    if (text) bubble.textContent = text;
+    wrap.appendChild(bubble);
+    body.appendChild(wrap);
+    if (actionLabel) {
+      var act = document.createElement("div");
+      act.className = "adg-action";
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = actionLabel;
+      btn.addEventListener("click", function () {
+        location.hash = "#view-contact";
+        closePanel();
+      });
+      act.appendChild(btn);
+      body.appendChild(act);
+    }
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function addTyping() {
+    var wrap = document.createElement("div");
+    wrap.className = "adg-msg bot adg-typing";
+    wrap.innerHTML = '<div class="adg-bubble"><span></span><span></span><span></span></div>';
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function llmReply(userText, l, done) {
+    var sys = "你是 ADG PAY（持有香港 MSO 牌照的跨境支付服务商）的客服助手。仅依据以下事实作答，不确定时引导用户前往联系页留资：\n" +
+      "- 香港 MSO 金钱服务牌照，AML/KYC 合规；\n" +
+      "- 业务：多币种收款账户、货币兑换、全球付款、客户资金隔离；\n" +
+      "- 中英双语服务；\n- 开户：在线提交→KYC 核验→开通账户。" +
+      (l === "en" ? " 用简体中文和英文双语回答，英文为主。" : " 用简体中文回答。");
+    fetch(ADG_AI.endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + ADG_AI.apiKey },
+      body: JSON.stringify({
+        model: ADG_AI.model,
+        messages: [
+          { role: "system", content: sys },
+          { role: "user", content: userText }
+        ],
+        temperature: 0.3
+      })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var ans = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
+          ? data.choices[0].message.content.trim()
+          : T.fallback[l];
+        done(ans, false);
+      })
+      .catch(function () { done(T.fallback[l], true); });
+  }
+
+  function botReply(userText) {
+    var l = lang();
+    var typing = addTyping();
+    setTimeout(function () {
+      if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+      if (ADG_AI.enabled && ADG_AI.apiKey) {
+        llmReply(userText, l, function (ans, isFallback) {
+          if (isFallback) addMsg("bot", ans, T.contactLabel[l]);
+          else addMsg("bot", ans);
+        });
+        return;
+      }
+      var hit = match(userText);
+      if (hit) {
+        addMsg("bot", hit.a[l]);
+      } else {
+        addMsg("bot", T.fallback[l], T.contactLabel[l]);
+      }
+    }, 480);
+  }
+
+  function send(text) {
+    text = (text || "").trim();
+    if (!text) return;
+    addMsg("user", text);
+    input.value = "";
+    botReply(text);
+  }
+
+  function renderQuick() {
+    var l = lang();
+    quick.innerHTML = "";
+    T.quick[l].forEach(function (q) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "adg-chip";
+      b.textContent = q;
+      b.addEventListener("click", function () { send(q); });
+      quick.appendChild(b);
+    });
+    if (status) status.textContent = T.status[l];
+    if (input) input.placeholder = T.placeholder[l];
+  }
+
+  function renderWelcome() {
+    body.innerHTML = "";
+    addMsg("bot", T.welcome[lang()]);
+  }
+
+  function openPanel() {
+    root.classList.add("open");
+    if (!body.childElementCount) renderWelcome();
+    if (input) setTimeout(function () { input.focus(); }, 50);
+  }
+  function closePanel() {
+    root.classList.remove("open");
+  }
+
+  fab.addEventListener("click", openPanel);
+  closeBtn.addEventListener("click", closePanel);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    send(input.value);
+  });
+
+  /* 跟随全局语言切换，刷新快捷问题与占位符 */
+  var lt = document.getElementById("langToggle");
+  if (lt) lt.addEventListener("click", function () {
+    setTimeout(renderQuick, 0);
+  });
+
+  renderQuick();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+<!-- ===== ADG PAY 智能助手插件 ===== -->
+<div class="adg-chat" id="adgChat">
+<button aria-label="打开智能助手" class="adg-chat-fab" id="adgChatFab" type="button">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.6-.8L3 21l1.8-5.4A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"></path></svg>
+</button>
+<div aria-label="ADG PAY 智能助手" class="adg-chat-panel" id="adgChatPanel" role="dialog">
+<div class="adg-chat-header">
+<div class="adg-chat-title">
+<span class="adg-chat-avatar" data-en="AI" data-zh="智能">AI</span>
+<div>
+<strong data-en="ADG PAY Assistant" data-zh="ADG PAY 智能助手">ADG PAY 智能助手</strong>
+<small data-en="Online · Instant Reply" data-zh="在线 · 即时回复" id="adgChatStatus">在线 · 即时回复</small>
+</div>
+</div>
+<button aria-label="关闭" class="adg-chat-close" id="adgChatClose" type="button">×</button>
+</div>
+<div class="adg-chat-body" id="adgChatBody"></div>
+<div class="adg-chat-quick" id="adgChatQuick"></div>
+<form class="adg-chat-input" id="adgChatForm">
+<input aria-label="输入您的问题" autocomplete="off" id="adgChatText" placeholder="输入您的问题…" type="text"/>
+<button aria-label="发送" class="adg-chat-send" type="submit">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg>
+</button>
+</form>
+</div>
+</div>
+</body>
+</html>
