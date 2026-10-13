@@ -16,7 +16,9 @@ const LONG_COLS = new Set([
   'responsibilities',
   'requirements',
   'bio',
-  'office_address',
+  'value_zh',
+  'value_en',
+  'value_tw',
 ])
 const DATE_COLS = new Set(['created_at', 'updated_at'])
 
@@ -43,9 +45,13 @@ const colLabels = {
   is_deleted: '已删',
   created_at: '创建时间',
   updated_at: '更新时间',
-  customer_email: '客户邮箱',
-  partnership_email: '合作邮箱',
-  office_address: '办公地址',
+  name_zh: '名称(简)',
+  name_en: '名称(英)',
+  name_tw: '名称(繁)',
+  value_zh: '内容(简)',
+  value_en: '内容(英)',
+  value_tw: '内容(繁)',
+  sort_order: '排序',
   title: '岗位名称',
   job_type: '类型',
   experience: '经验',
@@ -162,15 +168,6 @@ useAutoRefresh(load, { intervalMs: 2000 })
     </div>
 
     <div v-if="current" class="admin-table-scroll">
-      <p
-        v-if="active === 'system_config' && current.effective"
-        class="admin-muted"
-        style="margin-bottom: 0.75rem"
-      >
-        官网生效：{{ current.effective.customer_email }} ／
-        {{ current.effective.partnership_email }} ／
-        {{ current.effective.office_address }}
-      </p>
       <table class="admin-table admin-table--browse">
         <thead>
           <tr>

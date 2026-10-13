@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { apiFetch } from '@/api/client'
 import { formatDateTime } from '@/utils/formatAdmin'
@@ -7,7 +7,9 @@ import { useAutoRefresh } from '@/composables/useAutoRefresh'
 
 const router = useRouter()
 const items = ref([])
-const includeDeleted = ref(false)
+const searchInput = ref('')
+const searchQuery = ref('')
+const statusFilter = ref('all')
 const msg = ref('')
 const editing = ref(null)
 const form = ref(emptyForm())
@@ -24,9 +26,42 @@ function emptyForm() {
   }
 }
 
+const filteredItems = computed(() => {
+  let list = items.value
+  if (statusFilter.value === 'deleted') {
+    list = list.filter((r) => r.is_deleted)
+  } else if (statusFilter.value !== 'all_deleted') {
+    list = list.filter((r) => !r.is_deleted)
+    if (statusFilter.value === 'published') {
+      list = list.filter((r) => r.status === 'published')
+    }
+    if (statusFilter.value === 'draft') {
+      list = list.filter((r) => r.status !== 'published')
+    }
+  }
+  const q = searchQuery.value.trim().toLowerCase()
+  if (!q) return list
+  return list.filter((row) => {
+    const hay = [
+      row.id,
+      row.title,
+      row.job_type,
+      row.experience,
+      row.work_location,
+      row.responsibilities,
+      row.requirements,
+    ]
+      .map((v) => String(v ?? '').toLowerCase())
+      .join(' ')
+    return hay.includes(q)
+  })
+})
+
 async function load() {
   try {
-    const q = includeDeleted.value ? '?include_deleted=1' : ''
+    const includeDeleted =
+      statusFilter.value === 'deleted' || statusFilter.value === 'all_deleted'
+    const q = includeDeleted ? '?include_deleted=1' : ''
     const data = await apiFetch(`/api/admin/jobs${q}`)
     items.value = data.items || []
   } catch (err) {
@@ -34,10 +69,25 @@ async function load() {
   }
 }
 
+watch(statusFilter, () => {
+  load()
+})
+
 useAutoRefresh(load, {
   intervalMs: 2000,
   paused: computed(() => editing.value !== null),
 })
+
+function applySearch() {
+  searchQuery.value = searchInput.value.trim()
+}
+
+function onSearchKeydown(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    applySearch()
+  }
+}
 
 function viewResumes(row) {
   router.push({ name: 'admin-applications', query: { job_id: String(row.id) } })
@@ -107,11 +157,24 @@ async function remove(row) {
     <h1>岗位管理</h1>
     <div class="admin-toolbar">
       <button class="admin-btn admin-btn-primary" type="button" @click="startCreate">新建岗位</button>
-      <label class="admin-check">
-        <input v-model="includeDeleted" type="checkbox" @change="load" />
-        含已删除
-      </label>
+      <input
+        v-model="searchInput"
+        class="admin-toolbar-input"
+        type="search"
+        placeholder="搜索岗位名称、类型、地点…"
+        aria-label="搜索岗位"
+        @keydown="onSearchKeydown"
+      />
+      <button class="admin-btn" type="button" @click="applySearch">搜索</button>
+      <select v-model="statusFilter" class="admin-toolbar-select" aria-label="筛选状态">
+        <option value="all">全部</option>
+        <option value="published">上架</option>
+        <option value="draft">下架</option>
+        <option value="deleted">仅已删除</option>
+        <option value="all_deleted">全部（含已删除）</option>
+      </select>
       <span class="admin-spacer" />
+      <span class="admin-muted">共 {{ filteredItems.length }} 条</span>
       <button class="admin-btn" type="button" @click="load">刷新</button>
     </div>
     <p v-if="msg" class="admin-msg err">{{ msg }}</p>
@@ -154,9 +217,13 @@ async function remove(row) {
         </thead>
         <tbody>
           <tr
-            v-for="row in items"
+            v-for="row in filteredItems"
             :key="row.id"
-            :class="{ 'is-deleted-row': row.is_deleted }"
+            :class="{
+              'is-deleted-row': row.is_deleted,
+              'is-published-row': !row.is_deleted && row.status === 'published',
+              'is-draft-row': !row.is_deleted && row.status !== 'published',
+            }"
           >
             <td class="admin-cell-nowrap">{{ row.id }}</td>
             <td>
@@ -172,8 +239,23 @@ async function remove(row) {
               </div>
             </td>
             <td>
-              <span class="admin-badge" :class="{ published: row.status === 'published' }">
-                {{ row.is_deleted ? '已删' : row.status === 'published' ? '上架' : '下架' }}
+              <span
+                class="admin-badge"
+                :class="
+                  row.is_deleted
+                    ? 'deleted'
+                    : row.status === 'published'
+                      ? 'published'
+                      : 'draft'
+                "
+              >
+                {{
+                  row.is_deleted
+                    ? '已删'
+                    : row.status === 'published'
+                      ? '上架'
+                      : '● 下架'
+                }}
               </span>
             </td>
             <td class="admin-cell-nowrap">{{ row.application_count }}</td>
@@ -208,8 +290,10 @@ async function remove(row) {
               <span v-else class="admin-muted">已软删</span>
             </td>
           </tr>
-          <tr v-if="!items.length">
-            <td colspan="7" class="admin-muted">暂无岗位</td>
+          <tr v-if="!filteredItems.length">
+            <td colspan="7" class="admin-muted">
+              {{ items.length ? '没有匹配的岗位' : '暂无岗位' }}
+            </td>
           </tr>
         </tbody>
       </table>

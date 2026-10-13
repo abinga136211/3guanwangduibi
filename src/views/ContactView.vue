@@ -10,6 +10,30 @@ const submitting = ref(false)
 const msg = ref({ show: false, text: '', ok: true })
 const { config: siteConfig } = useSiteConfig({ intervalMs: 2000 })
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function pickLocalized(item, field) {
+  const lang = locale.language === 'en' || locale.language === 'tw' ? locale.language : 'zh'
+  return (
+    item?.[`${field}_${lang}`] ||
+    item?.[`${field}_zh`] ||
+    item?.[`${field}_en`] ||
+    ''
+  )
+}
+
+const contactItems = computed(() =>
+  (siteConfig.value.items || []).map((item) => {
+    const value = String(pickLocalized(item, 'value') || '').trim()
+    return {
+      id: item.id,
+      name: pickLocalized(item, 'name'),
+      value,
+      isEmail: EMAIL_RE.test(value),
+    }
+  }),
+)
+
 const FM = {
   zh: {
     err: '请完整填写带 * 的必填项，并确保邮箱格式正确。',
@@ -57,7 +81,7 @@ async function onSubmit(e) {
     }
   })
   const email = form.querySelector('#email')
-  if (email?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+  if (email?.value && !EMAIL_RE.test(email.value)) {
     ok = false
     email.style.borderColor = 'var(--red-500)'
   }
@@ -125,10 +149,15 @@ async function onSubmit(e) {
 <div class="contact-layout">
 <aside class="contact-aside">
 <div class="contact-block">
-<span class="contact-kicker" data-en="Customer Support" data-zh="客服支持" data-tw="客服支持">客服支持</span>
-<div class="contact-row">
-<span class="contact-label" data-en="Email" data-zh="邮箱" data-tw="郵箱">邮箱</span>
-<a class="contact-value" :href="'mailto:' + siteConfig.customer_email">{{ siteConfig.customer_email }}</a>
+<span class="contact-kicker" data-en="Contact Details" data-zh="联系方式" data-tw="聯繫方式">联系方式</span>
+<div v-for="item in contactItems" :key="item.id" class="contact-row">
+<span class="contact-label">{{ item.name }}</span>
+<a
+  v-if="item.isEmail"
+  class="contact-value"
+  :href="'mailto:' + item.value"
+>{{ item.value }}</a>
+<span v-else class="contact-value contact-value--wrap">{{ item.value }}</span>
 </div>
 <div class="contact-row">
 <span class="contact-label" data-en="Service Hours" data-zh="服务时间" data-tw="服務時間">服务时间</span>
@@ -142,18 +171,6 @@ async function onSubmit(e) {
 <div class="contact-row">
 <span class="contact-label" data-en="Service Method" data-zh="服务方式" data-tw="服務方式">服务方式</span>
 <span class="contact-value" data-en="Chinese / English Email &amp; Online Communication" data-zh="中文 / 英文邮件与在线沟通" data-tw="中文 / 英文郵件與在線溝通">中文 / 英文邮件与在线沟通</span>
-</div>
-</div>
-
-<div class="contact-block">
-<span class="contact-kicker" data-en="Business Cooperation" data-zh="商务合作" data-tw="商務合作">商务合作</span>
-<div class="contact-row">
-<span class="contact-label" data-en="Partnership Email" data-zh="合作邮箱" data-tw="合作郵箱">合作邮箱</span>
-<a class="contact-value" :href="'mailto:' + siteConfig.partnership_email">{{ siteConfig.partnership_email }}</a>
-</div>
-<div class="contact-row">
-<span class="contact-label" data-en="Office Address" data-zh="办公地址" data-tw="辦公地址">办公地址</span>
-<span class="contact-value contact-value--wrap">{{ siteConfig.office_address }}</span>
 </div>
 </div>
 

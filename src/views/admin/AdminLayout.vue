@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { apiFetch } from '@/api/client'
+import { apiFetch, clearAdminToken } from '@/api/client'
 import '@/assets/styles/admin.css'
 
 const router = useRouter()
@@ -11,6 +11,7 @@ async function logout() {
   } catch {
     /* ignore */
   }
+  clearAdminToken()
   router.push({ name: 'admin-login' })
 }
 </script>

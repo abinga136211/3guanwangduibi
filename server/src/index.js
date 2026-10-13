@@ -17,7 +17,7 @@ import tablesAdminRouter from './routes/tables.js'
 
 loadEnvFile()
 
-const PORT = Number(process.env.PORT || 3001)
+const PORT = Number(process.env.PORT || 3003)
 
 initDb()
 seedJobsIfEmpty()

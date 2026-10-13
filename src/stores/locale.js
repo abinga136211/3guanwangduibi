@@ -39,6 +39,11 @@ const TITLES = {
     tw: '加入我們 | ADG PAY',
     en: 'Join Us | ADG PAY',
   },
+  notFound: {
+    zh: '页面未找到 | ADG PAY',
+    tw: '頁面未找到 | ADG PAY',
+    en: 'Page Not Found | ADG PAY',
+  },
 }
 
 const NAV_LABELS = {

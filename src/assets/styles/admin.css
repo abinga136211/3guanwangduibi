@@ -84,7 +84,7 @@
 }
 .admin-table {
   width: 100%;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
   font-size: 0.9rem;
   table-layout: auto;
@@ -106,8 +106,82 @@
   top: 0;
   z-index: 1;
 }
+.admin-table tbody td {
+  background-color: #fff;
+}
 .admin-table tbody tr:hover td {
-  background: var(--bg-soft, #fff6f5);
+  background-color: var(--red-50, #fff5f4);
+}
+/* 未读 / 下架：高对比暖橙，左侧加粗色条 */
+.admin-table tbody tr.is-unread-row td,
+.admin-table tbody tr.is-draft-row td {
+  background-color: #ffedd5;
+  color: #9a3412;
+}
+.admin-table tbody tr.is-unread-row td:first-child,
+.admin-table tbody tr.is-draft-row td:first-child {
+  box-shadow: inset 4px 0 0 #ea580c;
+}
+.admin-table tbody tr.is-unread-row:hover td,
+.admin-table tbody tr.is-draft-row:hover td {
+  background-color: #fed7aa;
+}
+.admin-table tbody tr.is-unread-row .admin-stack strong,
+.admin-table tbody tr.is-draft-row .admin-stack strong,
+.admin-table tbody tr.is-draft-row td > strong {
+  color: #7c2d12;
+  font-weight: 700;
+}
+.admin-table tbody tr.is-unread-row .admin-stack span,
+.admin-table tbody tr.is-unread-row .admin-stack small,
+.admin-table tbody tr.is-unread-row .admin-cell-clamp,
+.admin-table tbody tr.is-draft-row .admin-stack span,
+.admin-table tbody tr.is-draft-row .admin-stack small {
+  color: #9a3412;
+}
+.admin-table tbody tr.is-unread-row .admin-badge.unread,
+.admin-table tbody tr.is-draft-row .admin-badge.draft {
+  background: #ea580c;
+  color: #fff;
+  border-color: #c2410c;
+  box-shadow: none;
+  font-size: 0.78rem;
+  padding: 0.28rem 0.65rem;
+}
+/* 已读 / 上架：冷静浅绿，文字弱化 */
+.admin-table tbody tr.is-read-row td,
+.admin-table tbody tr.is-published-row td {
+  background-color: #f0fdf4;
+  color: #64748b;
+}
+.admin-table tbody tr.is-read-row td:first-child,
+.admin-table tbody tr.is-published-row td:first-child {
+  box-shadow: inset 4px 0 0 #16a34a;
+}
+.admin-table tbody tr.is-read-row:hover td,
+.admin-table tbody tr.is-published-row:hover td {
+  background-color: #dcfce7;
+}
+.admin-table tbody tr.is-read-row .admin-stack strong,
+.admin-table tbody tr.is-published-row .admin-stack strong,
+.admin-table tbody tr.is-published-row td > strong {
+  color: #64748b;
+  font-weight: 500;
+}
+.admin-table tbody tr.is-read-row .admin-stack span,
+.admin-table tbody tr.is-read-row .admin-stack small,
+.admin-table tbody tr.is-read-row .admin-cell-clamp,
+.admin-table tbody tr.is-published-row .admin-stack span,
+.admin-table tbody tr.is-published-row .admin-stack small {
+  color: #94a3b8;
+}
+.admin-table tbody tr.is-read-row .admin-badge.read,
+.admin-table tbody tr.is-published-row .admin-badge.published {
+  background: #16a34a;
+  color: #fff;
+  border-color: #15803d;
+  font-size: 0.78rem;
+  padding: 0.28rem 0.65rem;
 }
 .admin-table td {
   color: var(--gray-800, #1e293b);
@@ -234,6 +308,12 @@
   color: var(--green-500, #16a34a);
   border-color: #86efac;
 }
+.admin-badge.draft {
+  background: #fff7ed;
+  color: #c2410c;
+  border-color: var(--amber-500, #f59e0b);
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2);
+}
 .admin-btn-mark-read {
   background: var(--green-500, #16a34a);
   border-color: var(--green-500, #16a34a);
@@ -338,6 +418,32 @@
   flex: 1;
   min-width: 0.5rem;
 }
+.admin-toolbar-input,
+.admin-toolbar-select {
+  border: 1px solid var(--gray-300, #cbd5e1);
+  border-radius: var(--radius-sm, 8px);
+  padding: 0.4rem 0.7rem;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--gray-800, #1e293b);
+  background: #fff;
+  box-sizing: border-box;
+}
+.admin-toolbar-input {
+  min-width: 200px;
+  flex: 1 1 200px;
+  max-width: 320px;
+}
+.admin-toolbar-input:focus,
+.admin-toolbar-select:focus {
+  outline: none;
+  border-color: var(--red-400, #f04438);
+  box-shadow: 0 0 0 3px rgba(225, 37, 27, 0.12);
+}
+.admin-toolbar-select {
+  min-width: 120px;
+  cursor: pointer;
+}
 .admin-muted {
   color: var(--gray-500, #64748b);
   font-size: 0.85rem;
@@ -404,10 +510,17 @@
 .admin-table-scroll {
   overflow: auto;
   max-width: 100%;
-  margin: 0 -0.25rem;
-  padding: 0 0.25rem;
+  margin: 0;
+  padding: 0;
   border: 1px solid var(--red-100, #fceae9);
   border-radius: var(--radius-sm, 8px);
+}
+.is-deleted-row td {
+  opacity: 0.55;
+  background-color: var(--gray-50, #f8fafc) !important;
+}
+.is-deleted-row:hover td {
+  background-color: var(--gray-100, #f1f5f9) !important;
 }
 .admin-table--dense th,
 .admin-table--dense td {
@@ -432,10 +545,6 @@
   vertical-align: bottom;
   color: var(--gray-600, #475569);
 }
-.is-deleted-row {
-  opacity: 0.55;
-  background: var(--gray-50, #f8fafc);
-}
 .admin-check {
   display: inline-flex;
   align-items: center;
@@ -453,6 +562,72 @@
   border: 1px solid var(--red-100, #fceae9);
   font-size: 0.78rem;
   margin-right: 0.25rem;
+}
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(15, 23, 42, 0.45);
+}
+.admin-modal {
+  width: min(560px, 100%);
+  max-height: min(90vh, 720px);
+  overflow: auto;
+  background: #fff;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid var(--red-100, #fceae9);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+  padding: 1.25rem 1.35rem 1.5rem;
+}
+.admin-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.admin-modal-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--gray-900, #0f172a);
+}
+.admin-modal-close {
+  border: none;
+  background: transparent;
+  color: var(--gray-500, #64748b);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1rem 0.35rem;
+}
+.admin-modal-close:hover {
+  color: var(--gray-800, #1e293b);
+}
+.admin-lang-group {
+  margin: 0 0 0.85rem;
+  padding: 0.85rem 1rem 0.35rem;
+  border: 1px solid var(--red-100, #fceae9);
+  border-radius: var(--radius-sm, 8px);
+  background: var(--gray-50, #f8fafc);
+}
+.admin-lang-group legend {
+  padding: 0 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--red-700, #b91c1c);
+}
+.admin-lang-group label {
+  margin-bottom: 0.75rem;
+}
+.admin-modal .admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 @media (max-width: 900px) {
   .admin-top {

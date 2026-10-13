@@ -1,69 +1,146 @@
 import { getDb, nowIso } from '../db/index.js'
-import { DEFAULT_CONFIG } from '../defaults/config.js'
+import { DEFAULT_CONFIG_ITEMS } from '../defaults/config.js'
 
-function pickFilled(value, fallback) {
-  const v = typeof value === 'string' ? value.trim() : ''
-  return v || fallback
+const PUBLIC_FIELDS = [
+  'id',
+  'name_zh',
+  'name_en',
+  'name_tw',
+  'value_zh',
+  'value_en',
+  'value_tw',
+  'sort_order',
+]
+
+function trimField(value) {
+  return typeof value === 'string' ? value.trim() : ''
 }
 
-/** Merge DB row with hardcoded defaults (empty fields fall back). */
-export function resolveConfig(row) {
-  if (!row) return { ...DEFAULT_CONFIG, source: 'defaults' }
-  return {
-    customer_email: pickFilled(row.customer_email, DEFAULT_CONFIG.customer_email),
-    partnership_email: pickFilled(row.partnership_email, DEFAULT_CONFIG.partnership_email),
-    office_address: pickFilled(row.office_address, DEFAULT_CONFIG.office_address),
-    updated_at: row.updated_at || null,
-    source: 'database',
-  }
+function toPublicItem(row) {
+  const out = {}
+  for (const key of PUBLIC_FIELDS) out[key] = row[key]
+  return out
 }
 
-export function getPublicConfig() {
+export function listPublicConfigItems() {
   try {
-    const row = getDb().prepare('SELECT * FROM system_config WHERE id = 1').get()
-    return resolveConfig(row)
-  } catch {
-    return { ...DEFAULT_CONFIG, source: 'defaults' }
-  }
-}
-
-export function getAdminConfig() {
-  const row = getDb().prepare('SELECT * FROM system_config WHERE id = 1').get()
-  if (!row) {
-    return {
-      customer_email: '',
-      partnership_email: '',
-      office_address: '',
-      updated_at: null,
-      effective: resolveConfig(null),
+    const rows = getDb()
+      .prepare(
+        `SELECT * FROM system_config_items
+         WHERE is_deleted = 0
+         ORDER BY sort_order ASC, id ASC`,
+      )
+      .all()
+    if (!rows.length) {
+      return DEFAULT_CONFIG_ITEMS.map((item, i) => ({
+        id: -(i + 1),
+        ...item,
+      }))
     }
-  }
-  return {
-    customer_email: row.customer_email,
-    partnership_email: row.partnership_email,
-    office_address: row.office_address,
-    updated_at: row.updated_at,
-    effective: resolveConfig(row),
+    return rows.map(toPublicItem)
+  } catch {
+    return DEFAULT_CONFIG_ITEMS.map((item, i) => ({
+      id: -(i + 1),
+      ...item,
+    }))
   }
 }
 
-export function upsertConfig({ customer_email, partnership_email, office_address }) {
-  const updated_at = nowIso()
+export function listAdminConfigItems({ includeDeleted = false } = {}) {
+  const sql = includeDeleted
+    ? `SELECT * FROM system_config_items ORDER BY sort_order ASC, id ASC`
+    : `SELECT * FROM system_config_items WHERE is_deleted = 0 ORDER BY sort_order ASC, id ASC`
+  return getDb().prepare(sql).all()
+}
+
+export function getAdminConfigItem(id) {
+  return getDb()
+    .prepare('SELECT * FROM system_config_items WHERE id = ? AND is_deleted = 0')
+    .get(id)
+}
+
+function normalizeBody(body = {}) {
+  const name_zh = trimField(body.name_zh)
+  const name_en = trimField(body.name_en)
+  const name_tw = trimField(body.name_tw)
+  const value_zh = trimField(body.value_zh)
+  const value_en = trimField(body.value_en)
+  const value_tw = trimField(body.value_tw)
+
+  if (!name_zh || !name_en || !name_tw) {
+    return { error: '名称需填写中文、英文、繁体' }
+  }
+  if (!value_zh || !value_en || !value_tw) {
+    return { error: '内容需填写中文、英文、繁体' }
+  }
+
+  const sort_order = Number.isFinite(Number(body.sort_order))
+    ? Number(body.sort_order)
+    : 0
+
+  return {
+    name_zh,
+    name_en,
+    name_tw,
+    value_zh,
+    value_en,
+    value_tw,
+    sort_order,
+  }
+}
+
+export function createConfigItem(body) {
+  const data = normalizeBody(body)
+  if (data.error) return data
+
+  const ts = nowIso()
+  const result = getDb()
+    .prepare(
+      `INSERT INTO system_config_items (
+         name_zh, name_en, name_tw, value_zh, value_en, value_tw,
+         sort_order, is_deleted, created_at, updated_at
+       ) VALUES (
+         @name_zh, @name_en, @name_tw, @value_zh, @value_en, @value_tw,
+         @sort_order, 0, @created_at, @updated_at
+       )`,
+    )
+    .run({ ...data, created_at: ts, updated_at: ts })
+
+  return getDb()
+    .prepare('SELECT * FROM system_config_items WHERE id = ?')
+    .get(result.lastInsertRowid)
+}
+
+export function updateConfigItem(id, body) {
+  const existing = getAdminConfigItem(id)
+  if (!existing) return { error: 'Not found', status: 404 }
+
+  const data = normalizeBody({ ...existing, ...body })
+  if (data.error) return data
+
+  const ts = nowIso()
   getDb()
     .prepare(
-      `INSERT INTO system_config (id, customer_email, partnership_email, office_address, updated_at)
-       VALUES (1, @customer_email, @partnership_email, @office_address, @updated_at)
-       ON CONFLICT(id) DO UPDATE SET
-         customer_email = excluded.customer_email,
-         partnership_email = excluded.partnership_email,
-         office_address = excluded.office_address,
-         updated_at = excluded.updated_at`,
+      `UPDATE system_config_items SET
+         name_zh=@name_zh, name_en=@name_en, name_tw=@name_tw,
+         value_zh=@value_zh, value_en=@value_en, value_tw=@value_tw,
+         sort_order=@sort_order, updated_at=@updated_at
+       WHERE id=@id`,
     )
-    .run({
-      customer_email: String(customer_email ?? '').trim(),
-      partnership_email: String(partnership_email ?? '').trim(),
-      office_address: String(office_address ?? '').trim(),
-      updated_at,
-    })
-  return getAdminConfig()
+    .run({ ...data, updated_at: ts, id })
+
+  return getDb().prepare('SELECT * FROM system_config_items WHERE id = ?').get(id)
+}
+
+export function softDeleteConfigItem(id) {
+  const existing = getAdminConfigItem(id)
+  if (!existing) return { error: 'Not found', status: 404 }
+
+  getDb()
+    .prepare(
+      'UPDATE system_config_items SET is_deleted = 1, updated_at = ? WHERE id = ?',
+    )
+    .run(nowIso(), id)
+
+  return { ok: true }
 }

@@ -10,16 +10,18 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  base: '/Joanna/',
+  base: '/3guanwangduibi/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   server: {
+    port: 5180,
+    strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: `http://localhost:${process.env.VITE_DEV_API_PORT || process.env.PORT || 3003}`,
         changeOrigin: true,
       },
     },

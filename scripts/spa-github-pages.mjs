@@ -1,6 +1,6 @@
 /**
  * GitHub Pages has no SPA fallback. Copy index.html → 404.html so
- * deep links like /Joanna/about serve the app instead of a 404 page.
+ * deep links like /3guanwangduibi/about serve the app instead of a 404 page.
  */
 import fs from 'node:fs'
 import path from 'node:path'

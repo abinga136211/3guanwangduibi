@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { apiFetch } from '@/api/client'
+import { apiFetch, setAdminToken } from '@/api/client'
 import '@/assets/styles/admin.css'
 
 const router = useRouter()
@@ -23,10 +23,11 @@ async function onSubmit(e) {
   error.value = ''
   loading.value = true
   try {
-    await apiFetch('/api/admin/login', {
+    const data = await apiFetch('/api/admin/login', {
       method: 'POST',
       body: { password: password.value },
     })
+    if (data?.token) setAdminToken(data.token)
     router.push({ name: 'admin-tables' })
   } catch (err) {
     error.value = err.message || '登录失败'

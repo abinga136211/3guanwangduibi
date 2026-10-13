@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-会同时启动 Vite 前端与 Node API（默认 `http://localhost:3001`）。前端通过 Vite 代理访问 `/api`。
+会同时启动 Vite 前端与 Node API（默认 `http://localhost:3003`）。前端通过 Vite 代理访问 `/api`。
 
 仅前端：`npm run dev:web`  
 仅后端：`npm run dev:server`

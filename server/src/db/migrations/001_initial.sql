@@ -8,6 +8,23 @@ CREATE TABLE IF NOT EXISTS system_config (
   updated_at TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS system_config_items (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name_zh TEXT NOT NULL DEFAULT '',
+  name_en TEXT NOT NULL DEFAULT '',
+  name_tw TEXT NOT NULL DEFAULT '',
+  value_zh TEXT NOT NULL DEFAULT '',
+  value_en TEXT NOT NULL DEFAULT '',
+  value_tw TEXT NOT NULL DEFAULT '',
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  is_deleted INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_config_items_sort
+  ON system_config_items(is_deleted, sort_order, id);
+
 CREATE TABLE IF NOT EXISTS inquiries (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   ip TEXT,

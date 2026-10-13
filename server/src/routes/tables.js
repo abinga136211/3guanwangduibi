@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { getDb } from '../db/index.js'
 import { requireAuth } from '../middleware/auth.js'
-import { getAdminConfig } from '../services/configService.js'
+import { listAdminConfigItems } from '../services/configService.js'
 
 const router = Router()
 
@@ -9,8 +9,7 @@ router.get('/tables', requireAuth, (req, res) => {
   const includeDeleted = req.query.include_deleted !== '0'
   const db = getDb()
 
-  const config = getAdminConfig()
-  const configRow = db.prepare('SELECT * FROM system_config WHERE id = 1').get() || null
+  const configItems = listAdminConfigItems({ includeDeleted })
 
   const inquiriesSql = includeDeleted
     ? 'SELECT * FROM inquiries ORDER BY id DESC'
@@ -36,7 +35,7 @@ router.get('/tables', requireAuth, (req, res) => {
   res.json({
     include_deleted: includeDeleted,
     summary: {
-      system_config: configRow ? 1 : 0,
+      system_config: configItems.length,
       inquiries: inquiries.length,
       jobs: jobs.length,
       applications: applications.length,
@@ -54,25 +53,18 @@ router.get('/tables', requireAuth, (req, res) => {
       system_config: {
         columns: [
           'id',
-          'customer_email',
-          'partnership_email',
-          'office_address',
+          'name_zh',
+          'name_en',
+          'name_tw',
+          'value_zh',
+          'value_en',
+          'value_tw',
+          'sort_order',
+          'is_deleted',
+          'created_at',
           'updated_at',
         ],
-        rows: configRow
-          ? [configRow]
-          : [
-              {
-                id: null,
-                customer_email: '',
-                partnership_email: '',
-                office_address: '',
-                updated_at: null,
-                _note: '库中尚无配置行，官网使用硬编码兜底',
-                _effective: config.effective,
-              },
-            ],
-        effective: config.effective,
+        rows: configItems,
       },
       inquiries: {
         columns: [

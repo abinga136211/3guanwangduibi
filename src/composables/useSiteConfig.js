@@ -1,17 +1,16 @@
 import { ref } from 'vue'
 import { apiFetch } from '@/api/client'
-import { DEFAULT_SITE_CONFIG } from '@/data/siteConfigDefaults'
+import { DEFAULT_SITE_CONFIG_ITEMS } from '@/data/siteConfigDefaults'
 import { useAutoRefresh } from '@/composables/useAutoRefresh'
 
-const config = ref({ ...DEFAULT_SITE_CONFIG })
+const config = ref({ items: [...DEFAULT_SITE_CONFIG_ITEMS] })
 
 async function fetchConfig() {
   try {
     const data = await apiFetch('/api/config')
+    const items = Array.isArray(data.items) ? data.items : []
     config.value = {
-      customer_email: data.customer_email || DEFAULT_SITE_CONFIG.customer_email,
-      partnership_email: data.partnership_email || DEFAULT_SITE_CONFIG.partnership_email,
-      office_address: data.office_address || DEFAULT_SITE_CONFIG.office_address,
+      items: items.length ? items : [...DEFAULT_SITE_CONFIG_ITEMS],
     }
   } catch {
     /* keep last known / defaults */
